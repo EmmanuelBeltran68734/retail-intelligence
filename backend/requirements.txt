@@ -1,5 +1,16 @@
+
 fastapi>=0.115
 uvicorn[standard]>=0.30
 sqlalchemy>=2.0
+alembic
 psycopg[binary]>=3.2
 pydantic-settings>=2.4
+python-jose[cryptography]
+passlib[bcrypt]
+python-multipart
+pandas
+openpyxl
+pandera
+pytest
+pytest-cov
+httpx
