@@ -1,6 +1,8 @@
 # Contrato de la API · RF-01 a RF-07
 
-Versión 0.1 · 16 oct 2026 · responsable: Ema
+Versión 0.2 · 16 oct 2026 · responsable: Ema
+
+> **Cambios de la 0.2:** la plantilla, los roles, los estados de la carga y los clientes quedan alineados con el Anexo B, la tabla 12 (historias) y la tabla 18 (diccionario de datos) del documento del Avance 3.
 
 Este documento dice qué recibe y qué devuelve cada ruta del backend. Sofía usa los ejemplos como datos falsos mientras la ruta no exista. Bianca usa los mismos nombres de campos en sus funciones de validación e indicadores. **Si una ruta cambia, se cambia primero aquí y se avisa en la reunión.**
 
@@ -11,7 +13,7 @@ Este documento dice qué recibe y qué devuelve cada ruta del backend. Sofía us
 - **Nombres:** en español, en minúscula y con guion bajo (`ticket_promedio`). Las fechas van como `AAAA-MM-DD`, los montos en pesos como número sin formato (`125000.5`) y los porcentajes como número de 0 a 100.
 - **Sesión:** las rutas marcadas con 🔒 necesitan el encabezado `Authorization: Bearer <token>`. El token se obtiene al registrarse o al iniciar sesión y dura 8 horas.
 - **Aislamiento entre comercios:** el backend saca el comercio del token. El frontend **nunca** envía `comercio_id`. Pedir algo de otro comercio responde `404`, como si no existiera.
-- **Roles:** `administrador` (dueño del comercio, puede todo) y `encargado` (puede cargar ventas y ver el tablero, pero no administrar usuarios). Las rutas solo para administrador están marcadas con 👑.
+- **Roles (tabla 18):** `propietario` (dueño del comercio, puede todo) y `encargado` (puede cargar ventas, pero no administra usuarios ni ve clientes, como pide la HU-02). El rol `administrador` de la tabla 18 queda para el equipo y no se usa en Proyecto I. Las rutas solo para el propietario están marcadas con 👑.
 - **Errores:** siempre con esta forma, y el `mensaje` se puede mostrar tal cual en pantalla:
 
 ```json
@@ -45,7 +47,7 @@ Este documento dice qué recibe y qué devuelve cada ruta del backend. Sofía us
 | 12 | 🔒 `DELETE /cargas/{id}` | P04 | RF-02 | 2 |
 | 13 | 🔒 `GET /catalogo/categorias` | P06 (filtros) | RF-03 | 2 |
 | 14 | 🔒 `GET /catalogo/productos` | P05, P07 | RF-03 | 2 |
-| 15 | 🔒 `GET /catalogo/clientes` | P06 (filtros) | RF-03 | 2 |
+| 15 | 🔒👑 `GET /catalogo/clientes` | P06 (filtros) | RF-03 | 2 |
 | 16 | 🔒 `GET /indicadores/resumen` | P02, P06 | RF-06 | 3 |
 | 17 | 🔒 `GET /indicadores/ventas` | P02, P06 | RF-05 | 3 |
 | 18 | 🔒 `GET /indicadores/abc` | P07 | RF-07 | 4 |
@@ -56,7 +58,7 @@ Este documento dice qué recibe y qué devuelve cada ruta del backend. Sofía us
 
 ### 1. `POST /auth/registro`
 
-Crea el comercio y su primer usuario, que queda como administrador. Responde ya con sesión iniciada.
+Crea el comercio y su primer usuario, que queda como propietario. Responde ya con sesión iniciada.
 
 Recibe:
 
@@ -79,7 +81,7 @@ Devuelve `201`:
     "id": 1,
     "nombre": "Marta Pérez",
     "correo": "marta@ejemplo.com",
-    "rol": "administrador",
+    "rol": "propietario",
     "comercio": { "id": 1, "nombre": "Tienda Doña Marta", "ciudad": "Cartagena" }
   }
 }
@@ -109,14 +111,14 @@ Lista las personas del comercio (P14 · Mi negocio).
 
 ```json
 [
-  { "id": 1, "nombre": "Marta Pérez", "correo": "marta@ejemplo.com", "rol": "administrador", "activo": true },
+  { "id": 1, "nombre": "Marta Pérez", "correo": "marta@ejemplo.com", "rol": "propietario", "activo": true },
   { "id": 2, "nombre": "Luis Gómez", "correo": "luis@ejemplo.com", "rol": "encargado", "activo": true }
 ]
 ```
 
 ### 5. 🔒👑 `POST /usuarios`
 
-Agrega a una persona como encargado. La contraseña temporal se la entrega el administrador; en Proyecto I no se envían correos.
+Agrega a una persona como encargado. La contraseña temporal se la entrega el propietario; en Proyecto I no se envían correos.
 
 Recibe:
 
@@ -128,7 +130,7 @@ Devuelve `201` con el usuario creado (misma forma que un elemento de la lista). 
 
 ### 6. 🔒👑 `PATCH /usuarios/{id}`
 
-Activa o desactiva a un encargado. Un administrador no se puede desactivar a sí mismo (`400 no_permitido`).
+Activa o desactiva a un encargado. El propietario no se puede desactivar a sí mismo (`400 no_permitido`).
 
 Recibe `{ "activo": false }` y devuelve el usuario actualizado.
 
@@ -136,31 +138,33 @@ Recibe `{ "activo": false }` y devuelve el usuario actualizado.
 
 ## RF-02, RF-03 y RF-04 · Carga de ventas y catálogo
 
-### La plantilla de ventas
-
-> ⚠️ **Por confirmar con el Anexo B del documento.** Estos son los nombres propuestos. Si el Anexo B dice otra cosa, manda el Anexo B y se corrige aquí y en el archivo de prueba de Bianca.
+### La plantilla de ventas (Anexo B, tabla 5)
 
 | Columna | Obligatoria | Tipo | Ejemplo |
 |---|---|---|---|
-| `fecha` | Sí | Fecha `AAAA-MM-DD` (también se acepta `DD/MM/AAAA`) | `2026-09-14` |
-| `numero_ticket` | Sí | Texto | `F-00231` |
+| `fecha` | Sí | Fecha `AAAA-MM-DD` | `2026-09-14` |
+| `id_ticket` | Sí | Texto | `F-00231` |
 | `codigo_producto` | Sí | Texto | `ARZ-500` |
 | `nombre_producto` | Sí | Texto | `Arroz Diana 500 g` |
 | `categoria` | Sí | Texto | `Granos` |
 | `cantidad` | Sí | Número mayor que 0 | `2` |
-| `precio_unitario` | Sí | Número mayor o igual a 0, en pesos | `3200` |
-| `codigo_cliente` | No | Texto | `C-014` |
-| `nombre_cliente` | No | Texto | `Juan Ruiz` |
+| `precio_unitario` | Sí | Número mayor que 0, en pesos | `3200` |
+| `descuento` | No | Número mayor o igual a 0, en pesos | `0` |
+| `id_cliente` | No | Texto seudonimizado (nunca nombre ni cédula) | `C-014` |
+| `medio_pago` | No | `efectivo`, `tarjeta`, `transferencia` o `credito` (fiado) | `efectivo` |
 
-Una fila es la venta de un producto. Si un ticket tiene tres productos, son tres filas con el mismo `numero_ticket`.
+- Una fila es un producto dentro de un ticket. Si un ticket tiene tres productos, son tres filas con el mismo `id_ticket` y la misma `fecha`.
+- En la base de datos, el ticket se guarda en `venta` y cada fila en `detalle_venta` (tabla 18).
+- **Columnas de más:** se aceptan y se ignoran, y la respuesta dice cuáles fueron (HU-04).
+- **Datos mínimos recomendados:** 6 meses de histórico para tendencias y ABC.
 
 ### 7. `GET /cargas/plantilla?formato=csv`
 
-Descarga la plantilla vacía con los encabezados y dos filas de ejemplo. `formato` puede ser `csv` (por defecto) o `xlsx`. No necesita sesión, para que la guía (P13) la pueda ofrecer.
+Descarga la plantilla con los encabezados del Anexo B y tres filas de ejemplo (HU-03). `formato` puede ser `csv` (por defecto) o `xlsx`. No necesita sesión, para que la guía (P13) la pueda ofrecer.
 
 ### 8. 🔒 `POST /cargas`
 
-Sube el archivo y lo revisa. **No guarda las ventas todavía**: deja la carga en estado `revisada` para que la persona vea los errores en P04 y decida.
+Sube el archivo y lo revisa. **No guarda las ventas todavía**: deja la carga en estado `recibida` (si no hay errores) o `con_errores`, para que la persona los vea en P04 y decida.
 
 Recibe `multipart/form-data` con el campo `archivo` (`.csv`, `.xlsx` o `.xls`, máximo 5 MB).
 
@@ -170,11 +174,12 @@ Devuelve `201`:
 {
   "id": 12,
   "nombre_archivo": "ventas_septiembre.xlsx",
-  "estado": "revisada",
+  "estado": "con_errores",
   "creada_en": "2026-10-26T15:42:10-05:00",
   "filas_totales": 1250,
   "filas_validas": 1238,
   "filas_con_error": 12,
+  "columnas_ignoradas": ["vendedor", "caja"],
   "periodo": { "desde": "2026-09-01", "hasta": "2026-09-30" },
   "errores": [
     {
@@ -185,11 +190,11 @@ Devuelve `201`:
       "sugerencia": "Revisa si fue una devolución; las devoluciones no se cargan en esta versión."
     },
     {
-      "fila": 152,
+      "fila": 15,
       "columna": "fecha",
-      "valor": "31/09/2026",
-      "mensaje": "Esa fecha no existe.",
-      "sugerencia": "Septiembre tiene 30 días."
+      "valor": "31/02/2026",
+      "mensaje": "Fila 15: la fecha 31/02/2026 no existe.",
+      "sugerencia": "Escríbala como AAAA-MM-DD."
     }
   ]
 }
@@ -197,11 +202,11 @@ Devuelve `201`:
 
 - `fila` cuenta como en Excel: la fila 1 son los encabezados, así que la primera venta es la fila 2.
 - Los textos de `mensaje` y `sugerencia` los define Bianca en sus reglas de calidad (RF-04).
-- Si faltan columnas obligatorias, el archivo entero se rechaza con `422 columnas_faltantes` y `"faltan": ["fecha", "cantidad"]`.
+- Si faltan columnas obligatorias, el archivo entero se rechaza (estado `rechazada`) con `422 columnas_faltantes` y `"faltan": ["fecha", "cantidad"]`.
 
 ### 9. 🔒 `GET /cargas`
 
-Historial de cargas del comercio, de la más reciente a la más antigua (P03). Cada elemento tiene la misma forma que la respuesta anterior, pero sin `errores`. El campo `estado` puede ser `revisada`, `confirmada` o `descartada`.
+Historial de cargas del comercio, de la más reciente a la más antigua (P03). Cada elemento tiene la misma forma que la respuesta anterior, pero sin `errores`. El campo `estado` puede ser `recibida`, `con_errores`, `validada` o `rechazada` (tabla 18).
 
 ### 10. 🔒 `GET /cargas/{id}`
 
@@ -209,14 +214,14 @@ Detalle de una carga con todos sus errores (misma forma que la respuesta de `POS
 
 ### 11. 🔒 `POST /cargas/{id}/confirmar`
 
-Guarda **solo las filas válidas**, crea en el catálogo los productos, categorías y clientes nuevos, y deja la carga como `confirmada` (P05). Recibe un cuerpo vacío.
+Guarda **solo las filas válidas**, crea en el catálogo los productos, categorías y clientes nuevos (HU-06), y deja la carga como `validada` (P05). Recibe un cuerpo vacío.
 
 Devuelve `200`:
 
 ```json
 {
   "id": 12,
-  "estado": "confirmada",
+  "estado": "validada",
   "ventas_guardadas": 1238,
   "filas_descartadas": 12,
   "periodo": { "desde": "2026-09-01", "hasta": "2026-09-30" },
@@ -231,11 +236,11 @@ Devuelve `200`:
 }
 ```
 
-Error: `409 carga_ya_confirmada`. Si una venta ya existía (mismo ticket, producto y fecha), no se duplica: se cuenta en `filas_descartadas`.
+Error: `409 carga_ya_validada`. Si un ticket ya existía (mismo `id_ticket` y `fecha` en el comercio), sus filas no se duplican: se cuentan en `filas_descartadas`.
 
 ### 12. 🔒 `DELETE /cargas/{id}`
 
-Descarta una carga `revisada` sin guardar nada. Devuelve `204`. Error: `409 carga_ya_confirmada`.
+Descarta una carga `recibida` o `con_errores` sin guardar nada y la deja como `rechazada`. Devuelve `204`. Error: `409 carga_ya_validada`.
 
 ### 13 a 15. 🔒 Catálogo
 
@@ -251,10 +256,10 @@ Descarta una carga `revisada` sin guardar nada. Devuelve `204`. Error: `409 carg
 [ { "id": 41, "codigo": "ARZ-500", "nombre": "Arroz Diana 500 g", "categoria": { "id": 3, "nombre": "Granos" } } ]
 ```
 
-`GET /catalogo/clientes?buscar=juan`:
+`GET /catalogo/clientes?buscar=C-01` (👑, solo el propietario; los clientes van seudonimizados):
 
 ```json
-[ { "id": 7, "codigo": "C-014", "nombre": "Juan Ruiz" } ]
+[ { "id": 7, "codigo": "C-014" } ]
 ```
 
 Los filtros (`categoria_id`, `buscar`) son opcionales.
@@ -334,7 +339,7 @@ Tabla de P07 (RF-07). Criterio: aporte a las ventas en pesos. A hasta el 80 % ac
 
 ## Pendientes de acordar en la reunión
 
-1. Confirmar las columnas de la plantilla contra el Anexo B.
-2. Confirmar los cortes del ABC (80/95) y el número de productos de la concentración (10).
-3. Confirmar el período por defecto del tablero (últimos 30 días con ventas).
+1. Confirmar los cortes del ABC (80/95) y el número de productos de la concentración (10).
+2. Confirmar el período por defecto del tablero (últimos 30 días con ventas).
+3. Confirmar qué ve el encargado en Proyecto I: el plan dice que carga archivos; falta decidir si ve el tablero.
 4. Sofía: revisar que cada pantalla tenga los campos que necesita; si falta algo, se agrega aquí antes de programarlo.
