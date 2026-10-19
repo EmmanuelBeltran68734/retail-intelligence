@@ -11,6 +11,15 @@ class Configuracion(BaseSettings):
     db_name: str = "postgres"
     db_user: str = "postgres"
     db_password: str = ""
+    # "require" para Supabase; "disable" para el PostgreSQL local.
+    db_sslmode: str = "require"
+
+    # Firma de los tokens de sesión. En producción se cambia por una clave larga y secreta.
+    secret_key: str = "cambiar-esta-clave-en-produccion"
+    token_minutos: int = 480  # 8 horas
+
+    # Origen del frontend de Sofía (Vite) para permitir llamadas desde el navegador.
+    cors_origenes: str = "http://localhost:5173"
 
     # Si se define, reemplaza a los datos de arriba (útil para pruebas con SQLite).
     database_url: str | None = None
