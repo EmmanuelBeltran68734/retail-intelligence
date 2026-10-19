@@ -1,15 +1,28 @@
 """Punto de entrada de la API de Retail Intelligence."""
 from fastapi import Depends, FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy import text
 from sqlalchemy.orm import Session
 
+from app.config import config
 from app.db import obtener_sesion
+from app.errores import registrar_manejadores
+from app.rutas import auth
 
 app = FastAPI(
     title="Retail Intelligence API",
     description="Backend del proyecto: usuarios, carga de ventas, catálogo, indicadores y ABC (RF-01 a RF-07).",
-    version="0.1.0",
+    version="0.2.0",
 )
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[o.strip() for o in config.cors_origenes.split(",")],
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+registrar_manejadores(app)
+app.include_router(auth.router)
 
 
 @app.get("/salud", tags=["salud"])

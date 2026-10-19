@@ -18,8 +18,8 @@ def _crear_motor():
         port=config.db_port,
         database=config.db_name,
     )
-    # Supabase exige conexión cifrada (SSL).
-    return create_engine(url, pool_pre_ping=True, connect_args={"sslmode": "require"})
+    # Supabase exige conexión cifrada (SSL); el PostgreSQL local normalmente no la tiene.
+    return create_engine(url, pool_pre_ping=True, connect_args={"sslmode": config.db_sslmode})
 
 
 motor = _crear_motor()
