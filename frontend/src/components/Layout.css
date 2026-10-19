@@ -1,0 +1,222 @@
+/* Estilos del marco de la aplicación, tomados del prototipo */
+.wrap {
+  padding: 18px 16px;
+}
+
+.app {
+  max-width: 1360px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 244px minmax(0, 1fr);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  overflow: hidden;
+  min-height: calc(100vh - 36px);
+}
+
+/* Menú lateral */
+.side {
+  background: var(--card);
+  border-right: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 0 12px 16px;
+}
+
+/* Franja de toldo: mango y azul tinta */
+.awning {
+  height: 12px;
+  margin: 0 -12px 14px;
+  background: repeating-linear-gradient(90deg, var(--mango) 0 22px, var(--ink) 22px 44px);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--f-display);
+  font-weight: 800;
+  color: var(--ink);
+  font-size: 1.02rem;
+  padding: 0 6px 14px;
+  white-space: nowrap;
+}
+
+.brand i {
+  width: 30px;
+  height: 30px;
+  border-radius: 9px;
+  background: var(--ink);
+  display: grid;
+  place-items: center;
+  color: var(--paper);
+  font-style: normal;
+  font-size: 0.82rem;
+}
+
+.nav-h {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  padding: 12px 10px 4px;
+}
+
+.side a.nav {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: 9px;
+  font-size: 0.93rem;
+  color: var(--fg);
+  text-decoration: none;
+}
+
+.side a.nav svg {
+  width: 18px;
+  height: 18px;
+  flex: none;
+  color: var(--muted);
+}
+
+.side a.nav:hover {
+  background: var(--paper);
+}
+
+.side a.nav:focus-visible {
+  outline: 2px solid var(--mango);
+}
+
+/* NavLink agrega la clase "active" a la opción de la pantalla actual */
+.side a.nav.active {
+  background: var(--paper);
+  font-weight: 700;
+  box-shadow: inset 3px 0 0 var(--mango);
+}
+
+.side a.nav.active svg {
+  color: var(--ink);
+}
+
+.store {
+  margin-top: auto;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 12px 10px;
+  border-top: 1px solid var(--line);
+}
+
+.store small {
+  display: block;
+  color: var(--muted);
+}
+
+.av {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--mango);
+  color: #2a1a00;
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  flex: none;
+}
+
+/* Área principal */
+.main {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.top {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 18px 28px 6px;
+}
+
+.top .sp {
+  flex: 1;
+}
+
+.chip-ex {
+  font-size: 0.7rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  background: var(--warn-bg);
+  color: var(--warn);
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-weight: 700;
+}
+
+/* Botón de modo claro / oscuro */
+.btn-tema {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: var(--card);
+  color: var(--ink);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  padding: 0;
+  flex: none;
+}
+
+.btn-tema svg {
+  width: 18px;
+  height: 18px;
+}
+
+.btn-tema:hover {
+  background: var(--paper);
+}
+
+.btn-tema:focus-visible {
+  outline: 2px solid var(--mango);
+  outline-offset: 2px;
+}
+
+.content {
+  padding: 8px 28px 32px;
+  display: grid;
+  gap: 18px;
+  align-content: start;
+}
+
+/* Pantallas pequeñas: el menú pasa arriba */
+@media (max-width: 900px) {
+  .app {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+  }
+  .side {
+    border-right: none;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 10px;
+  }
+  .side nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+  .side nav > div {
+    display: contents;
+  }
+  .nav-h,
+  .store {
+    display: none;
+  }
+  .top,
+  .content {
+    padding-inline: 16px;
+  }
+}
