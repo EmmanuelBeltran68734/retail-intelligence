@@ -36,3 +36,23 @@ class UsuarioSalida(BaseModel):
 class SesionSalida(BaseModel):
     token: str
     usuario: UsuarioSalida
+
+
+# --- HU-02 · equipo del comercio ---
+
+class MiembroSalida(BaseModel):
+    id: uuid.UUID
+    nombre: str
+    correo: str
+    rol: str
+    activo: bool
+
+
+class NuevoEncargadoEntrada(BaseModel):
+    nombre: str = Field(min_length=2, max_length=120)
+    correo: EmailStr
+    contrasena_temporal: str
+
+
+class CambioActivoEntrada(BaseModel):
+    activo: bool
