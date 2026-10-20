@@ -29,7 +29,7 @@
 .awning {
   height: 12px;
   margin: 0 -12px 14px;
-  background: repeating-linear-gradient(90deg, var(--mango) 0 22px, var(--ink) 22px 44px);
+  background: repeating-linear-gradient(90deg, var(--mango) 0 22px, var(--toldo-2) 22px 44px);
 }
 
 .brand {
@@ -113,6 +113,37 @@
 .store small {
   display: block;
   color: var(--muted);
+}
+
+.store-txt {
+  min-width: 0;
+}
+
+.store-txt b,
+.store-txt small {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.btn-salir {
+  font: inherit;
+  font-size: 0.86rem;
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: var(--muted);
+  text-align: left;
+  padding: 4px 10px;
+  text-decoration: underline;
+}
+
+.btn-salir:hover {
+  color: var(--fg);
+}
+
+.btn-salir:focus-visible {
+  outline: 2px solid var(--mango);
 }
 
 .av {

@@ -1,0 +1,291 @@
+/* P01 · Inicio de sesión: panel azul tinta a la izquierda y formulario a la derecha.
+   Los colores salen de index.css (--panel, --accion, --campo-borde…), así se adaptan solos al modo oscuro. */
+.login {
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  min-height: 100vh;
+  background: var(--paper);
+}
+
+/* ---------- Panel de bienvenida ---------- */
+.login-izq {
+  background: var(--panel);
+  color: var(--panel-fg);
+  padding: 0 48px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.login-izq .awning {
+  margin: 0 -48px 26px;
+  height: 18px;
+  /* Sobre el azul tinta se marca el borde inferior para que el toldo no se pierda */
+  box-shadow: inset 0 -2px 0 rgb(255 255 255 / 0.08);
+}
+
+.login-brand {
+  color: var(--panel-fg);
+  padding: 0;
+}
+
+.login-brand i {
+  background: var(--mango);
+  color: #2a1a00;
+}
+
+.login-izq h1 {
+  color: var(--panel-fg);
+  font-size: 2.3rem;
+  max-width: 16ch;
+}
+
+.login-izq p {
+  max-width: 46ch;
+  opacity: 0.92;
+  font-size: 1.05rem;
+  margin: 0;
+}
+
+.quote {
+  margin: auto 0 0;
+  border-left: 3px solid var(--mango);
+  padding-left: 14px;
+  font-size: 1.05rem;
+  font-style: italic;
+  max-width: 44ch;
+}
+
+.quote small {
+  display: block;
+  font-style: normal;
+  color: var(--mango);
+  font-weight: 700;
+  margin-top: 6px;
+}
+
+/* ---------- Formulario ---------- */
+.login-der {
+  position: relative;
+  display: grid;
+  place-items: center;
+  padding: 40px;
+}
+
+.login-tema {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+}
+
+.login-caja {
+  width: 100%;
+  max-width: 380px;
+  display: grid;
+  gap: 22px;
+}
+
+.login-form {
+  display: grid;
+  gap: 14px;
+}
+
+.login-titulo {
+  font-size: 1.6rem;
+}
+
+.nota {
+  font-size: 0.84rem;
+}
+
+/* Selector "Entrar | Crear cuenta" con una marca que se desliza */
+.segmento {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 4px;
+  border-radius: 12px;
+  background: var(--card);
+  border: 1px solid var(--line);
+}
+
+.segmento button {
+  position: relative;
+  z-index: 1;
+  font: inherit;
+  font-weight: 700;
+  font-size: 0.92rem;
+  padding: 9px 10px;
+  border: none;
+  border-radius: 9px;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.segmento button[aria-pressed='true'] {
+  color: var(--accion-fg);
+}
+
+.segmento button:focus-visible {
+  outline: 2px solid var(--mango);
+  outline-offset: 2px;
+}
+
+.segmento-marca {
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  left: 4px;
+  width: calc(50% - 4px);
+  border-radius: 9px;
+  background: var(--accion);
+  transition: transform 0.25s ease;
+}
+
+.segmento.derecha .segmento-marca {
+  transform: translateX(100%);
+}
+
+/* Campo de contraseña con el botón del ojo adentro */
+.clave {
+  position: relative;
+  display: grid;
+}
+
+.clave input {
+  padding-right: 48px;
+}
+
+.clave-ver {
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  translate: 0 -50%;
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.clave-ver:hover {
+  color: var(--fg);
+  background: var(--paper);
+}
+
+.clave-ver:focus-visible {
+  outline: 2px solid var(--mango);
+}
+
+.clave-ver svg {
+  width: 20px;
+  height: 20px;
+}
+
+.ayuda.alerta {
+  color: var(--warn);
+  font-weight: 700;
+}
+
+/* Botón principal: azul tinta en claro, mango en oscuro */
+.btn-accion {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: var(--accion);
+  border-color: var(--accion);
+  color: var(--accion-fg);
+  transition:
+    transform 0.15s,
+    box-shadow 0.15s;
+}
+
+.btn-accion:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgb(0 0 0 / 0.18);
+}
+
+.btn-accion:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+/* Circulito que gira mientras se envía */
+.girando {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  animation: girar 0.7s linear infinite;
+}
+
+@keyframes girar {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.prueba {
+  display: grid;
+  gap: 10px;
+  justify-items: start;
+}
+
+/* Animaciones suaves: solo si la persona no pidió reducir el movimiento */
+@media (prefers-reduced-motion: no-preference) {
+  .login-form {
+    animation: aparecer 0.25s ease both;
+  }
+  .login-izq h1,
+  .login-izq p {
+    animation: aparecer 0.4s ease both;
+  }
+  .login-izq p {
+    animation-delay: 0.08s;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .segmento-marca,
+  .btn-accion {
+    transition: none;
+  }
+}
+
+@keyframes aparecer {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
+
+/* ---------- Celular ---------- */
+@media (max-width: 900px) {
+  .login {
+    grid-template-columns: 1fr;
+  }
+  .login-izq {
+    padding: 0 20px 24px;
+  }
+  .login-izq .awning {
+    margin: 0 -20px 18px;
+  }
+  .login-izq h1 {
+    font-size: 1.8rem;
+  }
+  .quote {
+    margin-top: 6px;
+    font-size: 0.95rem;
+  }
+  .login-der {
+    padding: 56px 16px 32px;
+  }
+}
