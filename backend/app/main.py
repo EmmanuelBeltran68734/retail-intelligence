@@ -7,7 +7,7 @@ from sqlalchemy.orm import Session
 from app.config import config
 from app.db import obtener_sesion
 from app.errores import registrar_manejadores
-from app.rutas import auth
+from app.rutas import auth, usuarios
 
 app = FastAPI(
     title="Retail Intelligence API",
@@ -23,6 +23,7 @@ app.add_middleware(
 )
 registrar_manejadores(app)
 app.include_router(auth.router)
+app.include_router(usuarios.router)
 
 
 @app.get("/salud", tags=["salud"])
