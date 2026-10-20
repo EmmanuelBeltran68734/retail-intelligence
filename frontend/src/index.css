@@ -2,6 +2,12 @@
    Todas las pantallas usan estas variables: si cambia un color, se cambia solo aquí. */
 :root {
   --ink: #1d3557; /* azul tinta: marca, títulos, ícono activo */
+  --panel: #1d3557; /* fondo del panel de bienvenida (P01) */
+  --panel-fg: #f7f8f5; /* texto sobre ese panel */
+  --toldo-2: #1d3557; /* rayas azules del toldo: siempre azul tinta */
+  --accion: #1d3557; /* botón principal de P01 */
+  --accion-fg: #f7f8f5;
+  --campo-borde: #c9d1d8; /* borde de los campos de texto */
   --ink-2: #3d5a80;
   --mango: #e9a23b; /* toldo de la tienda: acentos y foco */
   --bg: #eef0ec; /* fondo general */
@@ -29,6 +35,12 @@
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme='light']) {
     --ink: #a7c6ec;
+    --panel: #1d3557;
+    --panel-fg: #e8edf2;
+    --toldo-2: #1d3557;
+    --accion: #f0b45a; /* en oscuro, el botón principal pasa a mango para que resalte */
+    --accion-fg: #2a1a00;
+    --campo-borde: #3b4a5d;
     --ink-2: #86a9d6;
     --mango: #f0b45a;
     --bg: #0c1117;
@@ -48,6 +60,12 @@
 }
 
 :root[data-theme='dark'] {
+  --panel: #1d3557;
+  --panel-fg: #e8edf2;
+  --toldo-2: #1d3557;
+  --accion: #f0b45a; /* en oscuro, el botón principal pasa a mango para que resalte */
+  --accion-fg: #2a1a00;
+  --campo-borde: #3b4a5d;
   --ink: #a7c6ec;
   --ink-2: #86a9d6;
   --mango: #f0b45a;
@@ -108,4 +126,216 @@ h2 {
   border: 1px solid var(--line);
   border-radius: var(--r);
   padding: 18px 20px;
+}
+
+/* ---------- Piezas que comparten varias pantallas (tomadas del prototipo) ---------- */
+
+h3 {
+  font-family: var(--f-display);
+  font-size: 1rem;
+  margin: 0;
+}
+
+.sin-margen {
+  margin: 0;
+}
+
+.grid2 {
+  display: grid;
+  grid-template-columns: minmax(0, 1.65fr) minmax(0, 1fr);
+  gap: 18px;
+  align-items: start;
+}
+
+.stack {
+  display: grid;
+  gap: 18px;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.row.between {
+  justify-content: space-between;
+}
+
+.card {
+  display: grid;
+  gap: 12px;
+  align-content: start;
+}
+
+.scroll {
+  overflow-x: auto;
+}
+
+/* Botones */
+.btn {
+  font: inherit;
+  cursor: pointer;
+  text-align: center;
+  font-weight: 700;
+  padding: 11px 18px;
+  border-radius: 11px;
+  border: 1.5px solid var(--ink);
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.btn.alt {
+  background: transparent;
+  color: var(--ink);
+}
+
+.btn.sm {
+  padding: 6px 12px;
+  font-size: 0.88rem;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: progress;
+}
+
+.btn:focus-visible {
+  outline: 3px solid var(--mango);
+  outline-offset: 2px;
+}
+
+/* Etiquetas de rol */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.pill.a {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.pill.b {
+  background: var(--mango);
+  color: #2a1a00;
+}
+
+.pill.c {
+  background: var(--line);
+  color: var(--fg);
+}
+
+/* Tablas */
+.tbl {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.tbl th,
+.tbl td {
+  text-align: left;
+  padding: 9px 8px;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
+
+.tbl th {
+  color: var(--muted);
+  font-weight: 700;
+  font-size: 0.74rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.tbl tr.inactivo td {
+  opacity: 0.55;
+}
+
+/* Campos de formulario */
+.field {
+  display: grid;
+  gap: 5px;
+}
+
+.field label {
+  font-size: 0.88rem;
+  font-weight: 700;
+}
+
+.field input {
+  font: inherit;
+  padding: 12px;
+  border-radius: 11px;
+  border: 1.5px solid var(--campo-borde);
+  background: var(--card);
+  color: var(--fg);
+  min-width: 0;
+}
+
+.field input:focus-visible {
+  outline: 2px solid var(--mango);
+  border-color: var(--ink);
+}
+
+.ayuda {
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+.form-invitar {
+  display: grid;
+  gap: 12px;
+  padding: 14px;
+  border: 1px dashed var(--line);
+  border-radius: 12px;
+  background: var(--paper);
+}
+
+/* Mensajes */
+.aviso {
+  margin: 0;
+  padding: 10px 12px;
+  border-radius: 10px;
+  font-size: 0.9rem;
+}
+
+.aviso.error {
+  background: var(--bad-bg);
+  color: var(--bad);
+}
+
+.aviso.exito {
+  background: var(--good-bg);
+  color: var(--good);
+}
+
+.aviso.info {
+  background: var(--warn-bg);
+  color: var(--warn);
+  font-size: 0.84rem;
+}
+
+.aviso code {
+  font-size: 0.82rem;
+}
+
+.cargando {
+  padding: 40px;
+  text-align: center;
+  color: var(--muted);
+}
+
+@media (max-width: 900px) {
+  .grid2 {
+    grid-template-columns: 1fr;
+  }
 }

@@ -1,5 +1,7 @@
 import { NavLink, Outlet } from 'react-router-dom'
 import { NAV } from '../navegacion.js'
+import { useSesion } from '../sesion/contexto.js'
+import { USAR_DATOS_FALSOS } from '../api/cliente.js'
 import Icono from './Icono.jsx'
 import BotonTema from './BotonTema.jsx'
 import './Layout.css'
@@ -7,6 +9,9 @@ import './Layout.css'
 // Marco de la aplicación: menú lateral + barra superior + contenido de cada pantalla.
 // <Outlet /> es el lugar donde React Router pinta la pantalla de la ruta actual.
 export default function Layout() {
+  const { usuario, salir } = useSesion()
+  const inicial = usuario.nombre.trim().charAt(0).toUpperCase()
+
   return (
     <div className="wrap">
       <div className="app">
@@ -30,23 +35,26 @@ export default function Layout() {
             ))}
           </nav>
 
-          {/* Datos de ejemplo: en la semana 1 vienen del usuario que inició sesión */}
+          {/* Quién inició sesión y su tienda (ruta 3: GET /auth/yo) */}
           <div className="store">
-            <div className="av">M</div>
-            <div>
-              <b>Marta</b>
-              <small>Tienda Doña Marta</small>
+            <div className="av">{inicial}</div>
+            <div className="store-txt">
+              <b>{usuario.nombre}</b>
+              <small>{usuario.comercio.nombre}</small>
             </div>
           </div>
+          <button type="button" className="btn-salir" onClick={salir}>
+            Salir
+          </button>
         </aside>
 
         <div className="main">
           <div className="top">
             <span className="sp" />
-            <span className="chip-ex">Datos de ejemplo</span>
+            {USAR_DATOS_FALSOS && <span className="chip-ex">Datos de ejemplo</span>}
             <BotonTema />
-            <div className="av" title="Marta">
-              M
+            <div className="av" title={usuario.nombre}>
+              {inicial}
             </div>
           </div>
           <main className="content">
