@@ -1,7 +1,9 @@
 # Contrato de la API · RF-01 a RF-07
 
-Versión 0.2 · 16 oct 2026 · responsable: Ema
+Versión 0.3 · 20 oct 2026 · responsable: Ema
 
+> **Cambios de la 0.3:** formatos de archivo aceptados en `POST /cargas` (sin `.xls`). Las rutas de carga y catálogo ya están programadas (semana 2).
+>
 > **Cambios de la 0.2:** la plantilla, los roles, los estados de la carga y los clientes quedan alineados con el Anexo B, la tabla 12 (historias) y la tabla 18 (diccionario de datos) del documento del Avance 3.
 
 Este documento dice qué recibe y qué devuelve cada ruta del backend. Sofía usa los ejemplos como datos falsos mientras la ruta no exista. Bianca usa los mismos nombres de campos en sus funciones de validación e indicadores. **Si una ruta cambia, se cambia primero aquí y se avisa en la reunión.**
@@ -166,7 +168,7 @@ Descarga la plantilla con los encabezados del Anexo B y tres filas de ejemplo (H
 
 Sube el archivo y lo revisa. **No guarda las ventas todavía**: deja la carga en estado `recibida` (si no hay errores) o `con_errores`, para que la persona los vea en P04 y decida.
 
-Recibe `multipart/form-data` con el campo `archivo` (`.csv`, `.xlsx` o `.xls`, máximo 5 MB).
+Recibe `multipart/form-data` con el campo `archivo` (`.csv` o `.xlsx`, máximo 5 MB). El CSV puede venir separado por comas o por punto y coma, y los encabezados se aceptan con tildes o mayúsculas («Categoría» = `categoria`). Un `.xls` antiguo responde `422 formato_no_soportado` con la indicación de guardarlo como `.xlsx`.
 
 Devuelve `201`:
 
