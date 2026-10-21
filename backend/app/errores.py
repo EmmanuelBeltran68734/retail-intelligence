@@ -9,8 +9,8 @@ from fastapi.responses import JSONResponse
 
 
 class ErrorApi(Exception):
-    def __init__(self, estado: int, error: str, mensaje: str):
-        self.estado, self.error, self.mensaje = estado, error, mensaje
+    def __init__(self, estado: int, error: str, mensaje: str, **extra):
+        self.estado, self.error, self.mensaje, self.extra = estado, error, mensaje, extra
 
 
 def _nombre_campo(error: dict) -> str:
@@ -48,7 +48,7 @@ def traducir(error: dict) -> str:
 def registrar_manejadores(app: FastAPI) -> None:
     @app.exception_handler(ErrorApi)
     async def _error_api(_: Request, exc: ErrorApi):
-        return JSONResponse(status_code=exc.estado, content={"error": exc.error, "mensaje": exc.mensaje})
+        return JSONResponse(status_code=exc.estado, content={"error": exc.error, "mensaje": exc.mensaje, **exc.extra})
 
     @app.exception_handler(RequestValidationError)
     async def _datos_invalidos(_: Request, exc: RequestValidationError):
