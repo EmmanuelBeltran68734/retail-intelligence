@@ -18,8 +18,9 @@ class Configuracion(BaseSettings):
     secret_key: str = "cambiar-esta-clave-en-produccion"
     token_minutos: int = 480  # 8 horas
 
-    # Origen del frontend de Sofía (Vite) para permitir llamadas desde el navegador.
-    cors_origenes: str = "http://localhost:5173"
+    # Orígenes del frontend de Sofía (Vite) que pueden llamar a la API desde el navegador.
+    # Se aceptan las dos formas de abrir la app en local; se separan con comas.
+    cors_origenes: str = "http://localhost:5173,http://127.0.0.1:5173"
 
     # Si se define, reemplaza a los datos de arriba (útil para pruebas con SQLite).
     database_url: str | None = None
