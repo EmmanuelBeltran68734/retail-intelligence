@@ -1,7 +1,9 @@
 # Contrato de la API · RF-01 a RF-07
 
-Versión 0.3 · 20 oct 2026 · responsable: Ema
+Versión 0.4 · 21 oct 2026 · responsable: Ema
 
+> **Cambios de la 0.4:** detalles de las rutas de indicadores ya programadas (semana 3): campo `sin_datos` siempre presente, período anterior = mes anterior cuando se pide un mes completo, puntos de `dia_semana`, `producto` y `cliente`, y clientes solo para el propietario.
+>
 > **Cambios de la 0.3:** formatos de archivo aceptados en `POST /cargas` (sin `.xls`). Las rutas de carga y catálogo ya están programadas (semana 2).
 >
 > **Cambios de la 0.2:** la plantilla, los roles, los estados de la carga y los clientes quedan alineados con el Anexo B, la tabla 12 (historias) y la tabla 18 (diccionario de datos) del documento del Avance 3.
@@ -278,7 +280,9 @@ Estas tres rutas aceptan los mismos filtros, todos opcionales:
 | `categoria_id` | `3` | Todas |
 | `cliente_id` | `7` | Todos |
 
-Los cálculos los hacen las funciones de Bianca (pandas). El backend solo filtra por comercio, se las pasa y entrega el resultado. Si el comercio todavía no tiene ventas, las tres rutas responden `200` con `"sin_datos": true` y la pantalla muestra una invitación a cargar el primer archivo.
+Los cálculos están en `backend/app/servicios/indicadores.py` (pandas); Bianca puede mejorarlos sin cambiar lo que reciben y devuelven. El backend siempre filtra por el comercio del token. Todas las respuestas traen `sin_datos`: si el comercio todavía no tiene ventas, responden `200` con `"sin_datos": true` y la pantalla muestra una invitación a cargar el primer archivo.
+
+El filtro `cliente_id` y `agrupar=cliente` son solo para el propietario: el encargado recibe `403 sin_permiso` (HU-02).
 
 ### 16. 🔒 `GET /indicadores/resumen`
 
@@ -286,12 +290,13 @@ Tarjetas de P02 y P06 (RF-06). El campo `frase` es la explicación en lenguaje d
 
 ```json
 {
+  "sin_datos": false,
   "periodo": { "desde": "2026-09-01", "hasta": "2026-09-30" },
-  "periodo_anterior": { "desde": "2026-08-02", "hasta": "2026-08-31" },
-  "ventas_totales": { "valor": 18452300, "frase": "Este mes vendiste $18,5 millones." },
+  "periodo_anterior": { "desde": "2026-08-01", "hasta": "2026-08-31" },
+  "ventas_totales": { "valor": 18452300, "frase": "En septiembre vendiste $18,5 millones." },
   "transacciones": { "valor": 1430, "frase": "Hiciste 1.430 ventas." },
   "ticket_promedio": { "valor": 12904, "frase": "En promedio, cada cliente gastó $12.904." },
-  "crecimiento": { "valor": 8.4, "frase": "Vendiste 8,4 % más que el mes anterior." },
+  "crecimiento": { "valor": 8.4, "frase": "Vendiste 8,4 % más que en agosto." },
   "concentracion": {
     "valor": 62.5,
     "top_productos": 10,
@@ -300,7 +305,9 @@ Tarjetas de P02 y P06 (RF-06). El campo `frase` es la explicación en lenguaje d
 }
 ```
 
-`crecimiento.valor` es `null` si no hay datos del período anterior.
+- **Período anterior:** si se pide un mes completo, es el mes calendario anterior; si no, el mismo número de días justo antes (y la frase dice «que los 30 días anteriores»).
+- `crecimiento.valor` es `null` si no hay ventas en el período anterior.
+- `concentracion.top_productos` es 10, o menos si el comercio vendió menos productos en el período.
 
 ### 17. 🔒 `GET /indicadores/ventas?agrupar=semana`
 
@@ -308,7 +315,9 @@ Series para los gráficos de P02 y P06 (RF-05). `agrupar` puede ser `dia`, `sema
 
 ```json
 {
+  "sin_datos": false,
   "agrupar": "semana",
+  "periodo": { "desde": "2026-09-01", "hasta": "2026-09-30" },
   "puntos": [
     { "etiqueta": "1–7 sep", "inicio": "2026-09-01", "ventas": 4120500, "transacciones": 318 },
     { "etiqueta": "8–14 sep", "inicio": "2026-09-08", "ventas": 4388000, "transacciones": 341 }
@@ -316,7 +325,9 @@ Series para los gráficos de P02 y P06 (RF-05). `agrupar` puede ser `dia`, `sema
 }
 ```
 
-Con `agrupar=categoria`, cada punto trae `id` en lugar de `inicio`; por ejemplo, `{ "etiqueta": "Granos", "id": 3, "ventas": 5210000, "transacciones": 802 }`.
+- Las semanas son bloques de 7 días contados desde `desde` (1–7 sep, 8–14 sep…); los días y las semanas sin ventas salen con 0.
+- Con `agrupar=categoria`, `producto` o `cliente`, cada punto trae `id` en lugar de `inicio` y van de mayor a menor venta; por ejemplo, `{ "etiqueta": "Granos", "id": 3, "ventas": 5210000, "transacciones": 802 }`. En `cliente`, la etiqueta es el código seudonimizado.
+- Con `agrupar=dia_semana` salen siempre 7 puntos, de lunes a domingo, con `orden` (1 a 7) en lugar de `inicio`.
 
 ### 18. 🔒 `GET /indicadores/abc`
 
