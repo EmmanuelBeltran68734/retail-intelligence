@@ -7,17 +7,45 @@ import * as falsos from './datosFalsos.js'
 export const USAR_DATOS_FALSOS = import.meta.env.VITE_DATOS_FALSOS !== 'false'
 const BASE = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000/api'
 
+// ---------- Aviso de "sesión terminada" ----------
+// Si una ruta que usa el token responde 401 (el token venció o ya no sirve),
+// se avisa a quien esté escuchando (ProveedorSesion), que cierra la sesión y vuelve a P01.
+// Así este archivo no necesita saber nada de React.
+let alTerminar = null
+
+// ProveedorSesion se registra aquí. Devuelve una función para dejar de escuchar.
+export function alTerminarSesion(funcion) {
+  alTerminar = funcion
+  return () => {
+    if (alTerminar === funcion) alTerminar = null
+  }
+}
+
+// Envuelve las rutas con sesión. Login y registro no pasan por aquí:
+// en esas, un 401 solo significa "correo o contraseña incorrectos".
+async function conSesion(token, llamada) {
+  try {
+    return await llamada()
+  } catch (e) {
+    if (e?.status === 401 && token && alTerminar) alTerminar(e)
+    throw e
+  }
+}
+
 // Llamada real al backend. Si responde con error, lanza { status, error, mensaje } como dice el contrato.
+// El cuerpo puede ser un objeto (se envía como JSON) o un FormData (para subir archivos, ruta 8).
 async function pedir(metodo, ruta, { token, cuerpo } = {}) {
+  const esArchivo = cuerpo instanceof FormData
   let respuesta
   try {
     respuesta = await fetch(BASE + ruta, {
       method: metodo,
       headers: {
-        'Content-Type': 'application/json',
+        // Con FormData no se pone Content-Type: el navegador lo arma con el "boundary" correcto
+        ...(cuerpo && !esArchivo ? { 'Content-Type': 'application/json' } : {}),
         ...(token ? { Authorization: `Bearer ${token}` } : {}),
       },
-      body: cuerpo ? JSON.stringify(cuerpo) : undefined,
+      body: cuerpo ? (esArchivo ? cuerpo : JSON.stringify(cuerpo)) : undefined,
     })
   } catch {
     const e = new Error('No pudimos conectarnos con el servidor. Revisa tu internet e intenta de nuevo.')
@@ -40,28 +68,34 @@ async function pedir(metodo, ruta, { token, cuerpo } = {}) {
 
 // ---------- RF-01 · Usuarios y acceso ----------
 
-// 1. POST /auth/registro
+// 1. POST /auth/registro (sin sesión)
 export const registrar = (datos) =>
   USAR_DATOS_FALSOS ? falsos.registro(datos) : pedir('POST', '/auth/registro', { cuerpo: datos })
 
-// 2. POST /auth/login
+// 2. POST /auth/login (sin sesión)
 export const iniciarSesion = (datos) =>
   USAR_DATOS_FALSOS ? falsos.login(datos) : pedir('POST', '/auth/login', { cuerpo: datos })
 
 // 3. GET /auth/yo
 export const obtenerUsuarioActual = (token) =>
-  USAR_DATOS_FALSOS ? falsos.yo(token) : pedir('GET', '/auth/yo', { token })
+  conSesion(token, () => (USAR_DATOS_FALSOS ? falsos.yo(token) : pedir('GET', '/auth/yo', { token })))
 
 // 4. GET /usuarios
 export const listarUsuarios = (token) =>
-  USAR_DATOS_FALSOS ? falsos.listarUsuarios(token) : pedir('GET', '/usuarios', { token })
+  conSesion(token, () =>
+    USAR_DATOS_FALSOS ? falsos.listarUsuarios(token) : pedir('GET', '/usuarios', { token }),
+  )
 
 // 5. POST /usuarios
 export const crearUsuario = (token, datos) =>
-  USAR_DATOS_FALSOS ? falsos.crearUsuario(token, datos) : pedir('POST', '/usuarios', { token, cuerpo: datos })
+  conSesion(token, () =>
+    USAR_DATOS_FALSOS ? falsos.crearUsuario(token, datos) : pedir('POST', '/usuarios', { token, cuerpo: datos }),
+  )
 
 // 6. PATCH /usuarios/{id}
 export const cambiarUsuario = (token, id, datos) =>
-  USAR_DATOS_FALSOS
-    ? falsos.cambiarUsuario(token, id, datos)
-    : pedir('PATCH', `/usuarios/${id}`, { token, cuerpo: datos })
+  conSesion(token, () =>
+    USAR_DATOS_FALSOS
+      ? falsos.cambiarUsuario(token, id, datos)
+      : pedir('PATCH', `/usuarios/${id}`, { token, cuerpo: datos }),
+  )
