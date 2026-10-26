@@ -1,4 +1,5 @@
-// Datos falsos que imitan al backend de Emmanuel (docs/api-contrato.md, versión 0.2).
+// Datos falsos que imitan al backend de Emmanuel (docs/api-contrato.md).
+// Las rutas de carga de ventas (7 a 12) están en cargasFalsas.js y usan las ayudas que se exportan aquí.
 // Mientras las rutas reales no existan, las pantallas leen de aquí.
 // Las respuestas y los errores tienen EXACTAMENTE la misma forma que el contrato.
 
@@ -14,7 +15,7 @@ const INICIAL = {
 }
 
 // Se guardan en el navegador para que no se pierdan al recargar la página
-function leer() {
+export function leer() {
   try {
     const guardado = localStorage.getItem(CLAVE)
     if (guardado) return JSON.parse(guardado)
@@ -24,7 +25,7 @@ function leer() {
   return structuredClone(INICIAL)
 }
 
-function guardar(db) {
+export function guardar(db) {
   try {
     localStorage.setItem(CLAVE, JSON.stringify(db))
   } catch {
@@ -33,7 +34,7 @@ function guardar(db) {
 }
 
 // Imita un error del backend: { status, error, mensaje }
-function fallo(status, error, mensaje) {
+export function fallo(status, error, mensaje) {
   const e = new Error(mensaje)
   e.status = status
   e.error = error
@@ -42,7 +43,7 @@ function fallo(status, error, mensaje) {
 }
 
 // Imita el tiempo que tarda el servidor en responder
-const esperar = () => new Promise((r) => setTimeout(r, 350))
+export const esperar = () => new Promise((r) => setTimeout(r, 350))
 
 // Lo que el backend devuelve de un usuario (nunca la contraseña)
 function publico(u) {
@@ -56,7 +57,7 @@ function conComercio(db, u) {
 // El token falso solo guarda el id del usuario
 const crearToken = (u) => `token-falso.${u.id}`
 
-function usuarioDelToken(db, token) {
+export function usuarioDelToken(db, token) {
   const id = Number(String(token || '').split('.')[1])
   const u = db.usuarios.find((x) => x.id === id)
   if (!u) throw fallo(401, 'sin_sesion', 'Tu sesión terminó. Vuelve a entrar.')

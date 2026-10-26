@@ -1,0 +1,195 @@
+/* Estilos de P03 Cargar ventas, P04 Revisión, P05 Carga confirmada y P13 Guía de la plantilla.
+   Los colores salen de index.css, así funcionan en modo claro y oscuro. */
+
+/* Enlaces que se ven como botones */
+a.btn {
+  display: inline-block;
+  text-decoration: none;
+}
+
+/* Pasos 1 · 2 · 3 */
+.pasos {
+  display: flex;
+  gap: 8px;
+  font-size: 0.85rem;
+  color: var(--muted);
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pasos li + li::before {
+  content: '›';
+  margin-right: 8px;
+}
+
+.pasos [aria-current='step'] {
+  color: var(--ink);
+  font-weight: 700;
+}
+
+/* Zona para arrastrar el archivo */
+.drop {
+  position: relative;
+  border: 2px dashed var(--ink-2);
+  border-radius: var(--r);
+  padding: 34px 20px;
+  text-align: center;
+  display: grid;
+  gap: 10px;
+  background: var(--card);
+  cursor: pointer;
+  transition:
+    background 0.15s,
+    border-color 0.15s;
+}
+
+.drop:hover,
+.drop.encima {
+  background: var(--paper);
+  border-color: var(--mango);
+}
+
+.drop:focus-within {
+  outline: 3px solid var(--mango);
+  outline-offset: 2px;
+}
+
+.drop.ocupado {
+  cursor: progress;
+  opacity: 0.75;
+}
+
+.drop input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.drop-titulo {
+  font-family: var(--f-display);
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: var(--ink);
+}
+
+.drop .sub {
+  margin: 0 auto;
+}
+
+.drop .btn {
+  justify-self: center;
+}
+
+/* Circulito de carga */
+.girando {
+  width: 34px;
+  height: 34px;
+  justify-self: center;
+  border-radius: 50%;
+  border: 3px solid var(--line);
+  border-top-color: var(--mango);
+  animation: girar 0.8s linear infinite;
+}
+
+@keyframes girar {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .girando {
+    animation-duration: 2.5s;
+  }
+}
+
+/* Historial */
+.tbl tr.clic {
+  cursor: pointer;
+}
+
+.tbl tr.clic:hover td {
+  background: var(--paper);
+}
+
+.enlace {
+  font: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  color: var(--ink);
+  font-weight: 700;
+  text-decoration: underline;
+  cursor: pointer;
+  text-align: left;
+}
+
+.enlace:focus-visible {
+  outline: 3px solid var(--mango);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Errores de P04 */
+.err {
+  display: grid;
+  gap: 3px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: var(--bad-bg);
+}
+
+.err .w {
+  font-weight: 700;
+  color: var(--bad);
+  font-size: 0.86rem;
+}
+
+.err .fix {
+  font-size: 0.9rem;
+  color: var(--fg);
+}
+
+.err .fix::before {
+  content: '→ ';
+  color: var(--bad);
+}
+
+.err code,
+.columna {
+  font-family: ui-monospace, Consolas, monospace;
+  font-size: 0.85em;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 1px 6px;
+}
+
+.kpi .val.bien {
+  color: var(--good);
+}
+
+.kpi .val.mal {
+  color: var(--bad);
+}
+
+.kpi .val.medio {
+  color: var(--warn);
+}
+
+.acciones {
+  display: grid;
+  gap: 10px;
+}
+
+/* P05 */
+.cifra-total {
+  font-family: var(--f-display);
+  font-size: 2rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}

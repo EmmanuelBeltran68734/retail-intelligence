@@ -334,8 +334,118 @@ h3 {
   color: var(--muted);
 }
 
+/* ---------- Semana 2: piezas del prototipo para P03, P04, P05 y P13 ---------- */
+
+.grid3 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.grid4 {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+/* Etiquetas de estado */
+.pill.good {
+  background: var(--good-bg);
+  color: var(--good);
+}
+
+.pill.warn {
+  background: var(--warn-bg);
+  color: var(--warn);
+}
+
+.pill.bad {
+  background: var(--bad-bg);
+  color: var(--bad);
+}
+
+/* Cifras grandes con su etiqueta */
+.kpi .lab {
+  font-size: 0.74rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.kpi .val {
+  font-family: var(--f-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  margin-top: 2px;
+}
+
+.kpi .exp {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+/* Tarjeta de consejo (amarilla) y de éxito (verde) */
+.card.tip {
+  background: var(--warn-bg);
+  border: none;
+}
+
+.card.tip h2 {
+  color: var(--warn);
+  font-size: 1rem;
+}
+
+.card.tip .sub {
+  color: var(--fg);
+}
+
+.card.ok {
+  background: var(--good-bg);
+  border: none;
+}
+
+.card.ok h1 {
+  color: var(--good);
+}
+
+.card.ok .sub {
+  color: var(--fg);
+}
+
+/* Números alineados a la derecha en tablas */
+.tbl td.n,
+.tbl th.n {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.lista {
+  margin: 0;
+  padding-left: 18px;
+  display: grid;
+  gap: 4px;
+}
+
+@media (max-width: 1000px) {
+  .grid4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .grid3 {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
 @media (max-width: 900px) {
   .grid2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .grid3,
+  .grid4 {
     grid-template-columns: 1fr;
   }
 }
