@@ -3,6 +3,7 @@
 // Cuando el backend de Emmanuel esté listo, se pone VITE_DATOS_FALSOS=false en el archivo .env
 // y las pantallas no cambian, porque las respuestas tienen la misma forma.
 import * as falsos from './datosFalsos.js'
+import * as cargasFalsas from './cargasFalsas.js'
 
 export const USAR_DATOS_FALSOS = import.meta.env.VITE_DATOS_FALSOS !== 'false'
 const BASE = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000/api'
@@ -61,6 +62,8 @@ async function pedir(metodo, ruta, { token, cuerpo } = {}) {
     e.status = respuesta.status
     e.error = datos?.error || 'error_desconocido'
     e.mensaje = e.message
+    // Datos extra de algunos errores, por ejemplo "faltan" en 422 columnas_faltantes (ruta 8)
+    if (datos?.faltan) e.faltan = datos.faltan
     throw e
   }
   return datos
@@ -98,4 +101,59 @@ export const cambiarUsuario = (token, id, datos) =>
     USAR_DATOS_FALSOS
       ? falsos.cambiarUsuario(token, id, datos)
       : pedir('PATCH', `/usuarios/${id}`, { token, cuerpo: datos }),
+  )
+
+// ---------- RF-02, RF-03 y RF-04 · Carga de ventas ----------
+
+// 7. GET /cargas/plantilla?formato=csv|xlsx (sin sesión). Devuelve el archivo (Blob) para descargarlo.
+export async function descargarPlantilla(formato = 'csv') {
+  if (USAR_DATOS_FALSOS) return cargasFalsas.plantilla(formato)
+  let respuesta
+  try {
+    respuesta = await fetch(`${BASE}/cargas/plantilla?formato=${formato}`)
+  } catch {
+    const e = new Error('No pudimos conectarnos con el servidor. Revisa tu internet e intenta de nuevo.')
+    e.status = 0
+    e.error = 'sin_conexion'
+    e.mensaje = e.message
+    throw e
+  }
+  if (!respuesta.ok) {
+    const e = new Error('No pudimos descargar la plantilla. Intenta de nuevo.')
+    e.status = respuesta.status
+    e.error = 'error_desconocido'
+    e.mensaje = e.message
+    throw e
+  }
+  return respuesta.blob()
+}
+
+// 8. POST /cargas (multipart, campo "archivo")
+export function subirCarga(token, archivo) {
+  return conSesion(token, () => {
+    if (USAR_DATOS_FALSOS) return cargasFalsas.subir(token, archivo)
+    const formulario = new FormData()
+    formulario.append('archivo', archivo)
+    return pedir('POST', '/cargas', { token, cuerpo: formulario })
+  })
+}
+
+// 9. GET /cargas
+export const listarCargas = (token) =>
+  conSesion(token, () => (USAR_DATOS_FALSOS ? cargasFalsas.listar(token) : pedir('GET', '/cargas', { token })))
+
+// 10. GET /cargas/{id}
+export const verCarga = (token, id) =>
+  conSesion(token, () => (USAR_DATOS_FALSOS ? cargasFalsas.ver(token, id) : pedir('GET', `/cargas/${id}`, { token })))
+
+// 11. POST /cargas/{id}/confirmar
+export const confirmarCarga = (token, id) =>
+  conSesion(token, () =>
+    USAR_DATOS_FALSOS ? cargasFalsas.confirmar(token, id) : pedir('POST', `/cargas/${id}/confirmar`, { token }),
+  )
+
+// 12. DELETE /cargas/{id}
+export const descartarCarga = (token, id) =>
+  conSesion(token, () =>
+    USAR_DATOS_FALSOS ? cargasFalsas.descartar(token, id) : pedir('DELETE', `/cargas/${id}`, { token }),
   )
