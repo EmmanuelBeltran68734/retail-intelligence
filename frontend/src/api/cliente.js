@@ -4,6 +4,7 @@
 // y las pantallas no cambian, porque las respuestas tienen la misma forma.
 import * as falsos from './datosFalsos.js'
 import * as cargasFalsas from './cargasFalsas.js'
+import * as indicadoresFalsos from './indicadoresFalsos.js'
 
 export const USAR_DATOS_FALSOS = import.meta.env.VITE_DATOS_FALSOS !== 'false'
 const BASE = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000/api'
@@ -156,4 +157,36 @@ export const confirmarCarga = (token, id) =>
 export const descartarCarga = (token, id) =>
   conSesion(token, () =>
     USAR_DATOS_FALSOS ? cargasFalsas.descartar(token, id) : pedir('DELETE', `/cargas/${id}`, { token }),
+  )
+
+// ---------- RF-03, RF-05 y RF-06 · Catálogo e indicadores ----------
+
+// Arma "?desde=...&hasta=..." solo con los filtros que tienen valor
+function consulta(filtros) {
+  const partes = Object.entries(filtros)
+    .filter(([, v]) => v !== undefined && v !== null && v !== '')
+    .map(([k, v]) => `${encodeURIComponent(k)}=${encodeURIComponent(v)}`)
+  return partes.length ? `?${partes.join('&')}` : ''
+}
+
+// 13. GET /catalogo/categorias
+export const listarCategorias = (token) =>
+  conSesion(token, () =>
+    USAR_DATOS_FALSOS ? indicadoresFalsos.categorias(token) : pedir('GET', '/catalogo/categorias', { token }),
+  )
+
+// 16. GET /indicadores/resumen?desde&hasta&categoria_id&cliente_id
+export const resumenIndicadores = (token, filtros = {}) =>
+  conSesion(token, () =>
+    USAR_DATOS_FALSOS
+      ? indicadoresFalsos.resumenFalso(token, filtros)
+      : pedir('GET', `/indicadores/resumen${consulta(filtros)}`, { token }),
+  )
+
+// 17. GET /indicadores/ventas?agrupar=dia|semana|mes|dia_semana|categoria|producto|cliente (+ los mismos filtros y limite)
+export const serieVentas = (token, agrupar, filtros = {}) =>
+  conSesion(token, () =>
+    USAR_DATOS_FALSOS
+      ? indicadoresFalsos.ventasFalsas(token, agrupar, filtros)
+      : pedir('GET', `/indicadores/ventas${consulta({ agrupar, ...filtros })}`, { token }),
   )

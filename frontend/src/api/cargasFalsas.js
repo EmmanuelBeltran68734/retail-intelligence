@@ -174,6 +174,7 @@ function base(db) {
   db.cargas ||= []
   db.siguienteCarga ||= 1
   db.catalogo ||= { productos: {}, categorias: [], clientes: [], tickets: [] }
+  db.ventas ||= []
   return db
 }
 
@@ -327,7 +328,10 @@ export async function confirmar(token, id) {
       cat.clientes.push(f.id_cliente)
       clientes++
     }
-    total += f.cantidad * f.precio_unitario - f.descuento
+    const importe = f.cantidad * f.precio_unitario - f.descuento
+    total += importe
+    // Se guarda la venta para que la vean P02 y P06 (indicadoresFalsos.js)
+    db.ventas.push([f.fecha, `${f.id_ticket}|${f.fecha}`, f.codigo_producto, f.nombre_producto, f.categoria, importe, f.id_cliente || null])
     fechas.push(f.fecha)
     guardadas++
   }

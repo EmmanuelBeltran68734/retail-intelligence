@@ -1,0 +1,603 @@
+/* Estilos de P02 Inicio y P06 Tablero (tomados del prototipo).
+   Los colores salen de index.css, así funcionan en modo claro y oscuro. */
+
+a.btn {
+  display: inline-block;
+  text-decoration: none;
+}
+
+/* Texto solo para lectores de pantalla */
+.oculto {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* Tarjeta azul grande de P02 */
+.card.hero {
+  background: var(--ink);
+  color: var(--paper);
+  border: none;
+}
+
+.hero .lab {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  opacity: 0.85;
+}
+
+.hero .big {
+  font-family: var(--f-display);
+  font-size: 2.6rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.05;
+}
+
+.hero .say {
+  margin: 0;
+  font-size: 1.05rem;
+  max-width: 60ch;
+}
+
+/* Filtros de P06 */
+.tablero-cabeza {
+  align-items: flex-start;
+}
+
+.filtros {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.seg {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.seg button {
+  font: inherit;
+  cursor: pointer;
+  padding: 6px 13px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  font-size: 0.86rem;
+  background: var(--card);
+  color: var(--fg);
+}
+
+.seg button[aria-pressed='true'] {
+  background: var(--ink);
+  color: var(--paper);
+  border-color: var(--ink);
+}
+
+.seg button:focus-visible,
+.selector select:focus-visible {
+  outline: 3px solid var(--mango);
+  outline-offset: 2px;
+}
+
+.selector select {
+  font: inherit;
+  font-size: 0.9rem;
+  padding: 6px 10px;
+  border-radius: 10px;
+  border: 1px solid var(--line);
+  background: var(--card);
+  color: var(--fg);
+}
+
+.periodo-actual {
+  font-size: 0.9rem;
+}
+
+.actualizando {
+  opacity: 0.6;
+  transition: opacity 0.2s;
+}
+
+/* Gráficos de Recharts */
+.grafico {
+  width: 100%;
+  min-width: 0;
+}
+
+.grafico .recharts-cartesian-axis-tick-value {
+  fill: var(--muted);
+  font-family: var(--f-body);
+}
+
+.grafico .grafico-rejilla line {
+  stroke: var(--line);
+}
+
+.grafico .barra {
+  fill: var(--ink-2);
+}
+
+.grafico .barra.destacada {
+  fill: var(--mango);
+}
+
+.grafico .grafico-cursor {
+  fill: var(--line);
+  opacity: 0.5;
+}
+
+.grafico-detalle {
+  display: grid;
+  gap: 2px;
+  background: var(--card);
+  color: var(--fg);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 8px 12px;
+  font-size: 0.86rem;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+}
+
+.grafico-detalle small {
+  color: var(--muted);
+}
+
+/* Barras horizontales por categoría */
+.barras-h {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+}
+
+.barras-h li {
+  display: grid;
+  gap: 4px;
+}
+
+.hbar {
+  display: block;
+  margin-top: 6px;
+  height: 10px;
+  border-radius: 5px;
+  background: var(--line);
+  overflow: hidden;
+}
+
+.hbar span {
+  display: block;
+  height: 100%;
+  background: var(--ink-2);
+}
+
+.hbar.m span {
+  background: var(--mango);
+}
+
+/* Columnas por día de la semana (cada una es un botón) */
+.dias-zona {
+  position: relative;
+}
+
+.dias-semana {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 8px;
+  align-items: start;
+}
+
+.dias-semana button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0 0 4px;
+  width: 100%;
+  display: grid;
+  gap: 6px;
+  justify-items: center;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.dias-semana button:hover .columna-dia span,
+.dias-semana button:focus-visible .columna-dia span {
+  filter: brightness(1.15);
+}
+
+.dias-semana button:focus-visible {
+  outline: 3px solid var(--mango);
+  outline-offset: 2px;
+}
+
+.dias-semana button[aria-pressed='true'] .columna-dia {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
+
+.columna-dia {
+  width: 100%;
+  max-width: 48px;
+  height: 140px;
+  display: flex;
+  align-items: flex-end;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.columna-dia span {
+  display: block;
+  width: 100%;
+  background: var(--ink-2);
+  border-radius: 6px 6px 0 0;
+  transition: filter 0.15s;
+}
+
+.dias-semana li.dia-mejor .columna-dia span {
+  background: var(--mango);
+}
+
+.dias-semana .dia {
+  font-size: 0.82rem;
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.dias-semana li.dia-mejor .dia {
+  color: var(--fg);
+}
+
+.dias-semana .monto {
+  font-size: 0.74rem;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* Línea de promedio sobre las columnas (que miden 140px de alto) */
+.dias-promedio {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 0;
+  border-top: 1.5px dashed var(--muted);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.dias-promedio span {
+  position: absolute;
+  left: 0;
+  top: -18px;
+  font-size: 0.72rem;
+  color: var(--muted);
+  background: var(--card);
+  padding: 0 4px;
+}
+
+.detalle-dia {
+  margin: 0;
+  font-size: 0.92rem;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: var(--paper);
+}
+
+@media (max-width: 560px) {
+  .hero .big {
+    font-size: 2rem;
+  }
+
+  .dias-semana .monto {
+    display: none;
+  }
+}
+
+/* ---------- Gráficos interactivos ---------- */
+
+.seg-sm button {
+  padding: 4px 11px;
+  font-size: 0.8rem;
+}
+
+.enlace {
+  font: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  color: var(--ink);
+  font-weight: 700;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.enlace:focus-visible {
+  outline: 3px solid var(--mango);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.grafico-ventas {
+  display: grid;
+  gap: 10px;
+}
+
+.grafico-controles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 16px;
+  align-items: center;
+}
+
+.interruptor {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.86rem;
+  cursor: pointer;
+}
+
+.interruptor input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--ink);
+}
+
+.leyenda {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+  font-size: 0.84rem;
+  color: var(--muted);
+}
+
+.leyenda li {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.muestra {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  display: inline-block;
+}
+
+.muestra.actual {
+  background: var(--ink-2);
+}
+
+.muestra.anterior {
+  background: var(--grafico-anterior);
+}
+
+.muestra.promedio {
+  width: 18px;
+  height: 0;
+  border-radius: 0;
+  border-top: 2px dashed var(--muted);
+}
+
+.hero .pill {
+  justify-self: start;
+}
+
+:root {
+  --grafico-anterior: #b8c2cc;
+}
+
+:root[data-theme='dark'] {
+  --grafico-anterior: #4c5a6b;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --grafico-anterior: #4c5a6b;
+  }
+}
+
+.grafico .barra {
+  transition: filter 0.15s;
+}
+
+.grafico .barra:hover {
+  filter: brightness(1.15);
+}
+
+.grafico .barra.elegida {
+  stroke: var(--fg);
+  stroke-width: 2px;
+}
+
+.grafico .barra-anterior,
+.grafico .barra-anterior path {
+  fill: var(--grafico-anterior);
+}
+
+.grafico .etiqueta-max {
+  fill: var(--fg);
+  font-weight: 700;
+  font-size: 12px;
+}
+
+.grafico .linea-promedio {
+  stroke: var(--muted);
+  stroke-width: 1.5px;
+}
+
+.grafico .texto-promedio {
+  fill: var(--muted);
+  font-size: 11px;
+}
+
+.grafico-detalle strong {
+  font-size: 1.05rem;
+}
+
+.grafico-detalle .detalle-anterior {
+  border-top: 1px solid var(--line);
+  padding-top: 4px;
+  margin-top: 2px;
+}
+
+.grafico-detalle .detalle-pista {
+  font-style: italic;
+}
+
+.detalle-fijo {
+  display: grid;
+  gap: 6px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: var(--paper);
+  border-left: 4px solid var(--mango);
+}
+
+.detalle-fijo .detalle-titulo {
+  display: block;
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+.detalle-fijo strong {
+  font-family: var(--f-display);
+  font-size: 1.35rem;
+}
+
+.detalle-fijo ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+  font-size: 0.88rem;
+}
+
+/* Filas de categorías y productos */
+.fila-barra {
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  width: 100%;
+  background: none;
+  border: 0;
+  padding: 6px 8px;
+  margin: -6px -8px;
+  border-radius: 10px;
+  cursor: pointer;
+  display: block;
+  box-sizing: content-box;
+}
+
+.fila-barra:hover {
+  background: var(--paper);
+}
+
+.fila-barra:focus-visible {
+  outline: 3px solid var(--mango);
+}
+
+.fila-arriba {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: baseline;
+}
+
+.fila-nombre {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.fila-valor {
+  font-size: 0.86rem;
+  color: var(--muted);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.fila-valor b {
+  color: var(--fg);
+}
+
+.puesto {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--line);
+  display: inline-grid;
+  place-items: center;
+  font-size: 0.74rem;
+  font-weight: 700;
+  flex: none;
+}
+
+.top-productos li:first-child .puesto {
+  background: var(--mango);
+  color: #2a1a00;
+}
+
+.top-productos small {
+  font-size: 0.78rem;
+}
+
+.medidor {
+  height: 8px;
+  border-radius: 4px;
+  background: var(--line);
+  overflow: hidden;
+}
+
+.medidor span {
+  display: block;
+  height: 100%;
+  background: var(--ink-2);
+}
+
+/* Mini tendencia en la tarjeta de ventas */
+.tendencia {
+  margin-top: 2px;
+}
+
+.tendencia .tendencia-linea {
+  stroke: var(--ink-2);
+}
+
+.tendencia .tendencia-linea path,
+.tendencia path.recharts-curve {
+  stroke: var(--ink-2);
+}
+
+.tendencia .tendencia-fin,
+.tendencia .tendencia-activo {
+  fill: var(--mango);
+  stroke: var(--card);
+  stroke-width: 2px;
+}
+
+.grafico-cursor-linea {
+  stroke: var(--line);
+}
+
+.kpi .pill {
+  justify-self: start;
+  margin-top: 4px;
+}
