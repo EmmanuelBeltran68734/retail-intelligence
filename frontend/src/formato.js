@@ -30,7 +30,9 @@ export function periodoTexto(periodo) {
   const hasta = partes(periodo?.hasta)
   if (!desde || !hasta) return ''
   if (periodo.desde === periodo.hasta) return `el ${fechaLarga(periodo.desde)}`
-  const inicio = desde.a === hasta.a ? `${desde.d} de ${MESES[desde.m - 1]}` : fechaLarga(periodo.desde)
+  // Mismo mes: "del 1 al 30 de septiembre de 2026"; mismo año: "del 1 de abril al 30 de septiembre de 2026"
+  const mismoMes = desde.a === hasta.a && desde.m === hasta.m
+  const inicio = mismoMes ? `${desde.d}` : desde.a === hasta.a ? `${desde.d} de ${MESES[desde.m - 1]}` : fechaLarga(periodo.desde)
   return `del ${inicio} al ${fechaLarga(periodo.hasta)}`
 }
 
@@ -56,4 +58,33 @@ export function periodoCorto(periodo) {
 // 1 -> "1 fila", 3 -> "3 filas"
 export function plural(cantidad, singular, pluralTexto = singular + 's') {
   return `${numero(cantidad)} ${cantidad === 1 ? singular : pluralTexto}`
+}
+
+// "2026-09-01" -> "septiembre"; con año: "septiembre de 2026"
+export function nombreMes(texto, conAnio = false) {
+  const p = partes(texto)
+  if (!p) return ''
+  return conAnio ? `${MESES[p.m - 1]} de ${p.a}` : MESES[p.m - 1]
+}
+
+// Para los ejes de los gráficos: 4120500 -> "$4,1 M"; 85000 -> "$85 mil"
+export function pesosCortos(valor) {
+  const n = Number(valor) || 0
+  if (Math.abs(n) >= 1_000_000) return `$${(n / 1_000_000).toLocaleString('es-CO', { maximumFractionDigits: 1 })} M`
+  if (Math.abs(n) >= 1_000) return `$${Math.round(n / 1_000).toLocaleString('es-CO')} mil`
+  return pesos(n)
+}
+
+// 62.5 -> "62,5 %"
+export function porcentaje(valor) {
+  return `${(Number(valor) || 0).toLocaleString('es-CO', { maximumFractionDigits: 1 })} %`
+}
+
+const DIAS = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado']
+
+// "2026-09-26" -> "sábado 26"
+export function diaYNumero(texto) {
+  const p = partes(texto)
+  if (!p) return ''
+  return `${DIAS[new Date(Date.UTC(p.a, p.m - 1, p.d)).getUTCDay()]} ${p.d}`
 }

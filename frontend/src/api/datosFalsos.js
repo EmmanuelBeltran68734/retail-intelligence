@@ -87,6 +87,11 @@ export async function registro({ comercio, ciudad, nombre, correo, contrasena })
   }
   // En los datos falsos hay un solo comercio: el registro lo reemplaza
   db.comercio = { id: 1, nombre: comercio, ciudad: ciudad || '' }
+  // Una tienda nueva empieza sin ventas: P02 y P06 invitan a cargar el primer archivo
+  db.ventasDemo = false
+  db.ventas = []
+  db.cargas = []
+  db.catalogo = { productos: {}, categorias: [], clientes: [], tickets: [] }
   const nuevo = { id: db.siguienteId++, nombre, correo, rol: 'propietario', activo: true, contrasena }
   db.usuarios.push(nuevo)
   guardar(db)
