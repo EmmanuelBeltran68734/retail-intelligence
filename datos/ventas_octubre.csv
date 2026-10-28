@@ -1,0 +1,41 @@
+﻿fecha,id_ticket,codigo_producto,nombre_producto,categoria,cantidad,precio_unitario,descuento,id_cliente,medio_pago
+2026-10-06,OCT-0001,ARZ-500,Arroz Diana 500 g,Granos,1,3200,0,C-047,tarjeta
+2026-10-06,OCT-0001,LEC-1L,Leche entera 1 L,Lácteos,2,4500,0,C-047,tarjeta
+2026-10-06,OCT-0002,LEC-1L,Leche entera 1 L,Lácteos,2,4500,0,C-014,tarjeta
+2026-10-06,OCT-0003,LEC-1L,Leche entera 1 L,Lácteos,3,4500,0,,efectivo
+2026-10-06,OCT-0004,GAS-15,Gaseosa 1.5 L,Bebidas,3,4800,0,,efectivo
+2026-10-07,OCT-0005,GAS-15,Gaseosa 1.5 L,Bebidas,1,4800,0,C-014,efectivo
+2026-10-07,OCT-0006,PAN-TAJ,Pan tajado,Panadería,3,6800,0,C-021,transferencia
+2026-10-07,OCT-0006,LEC-1L,Leche entera 1 L,Lácteos,3,4500,0,C-021,transferencia
+2026-10-07,OCT-0007,GAS-15,Gaseosa 1.5 L,Bebidas,2,4800,0,C-047,tarjeta
+2026-10-32,OCT-0008,GAS-15,Gaseosa 1.5 L,Bebidas,2,4800,0,C-014,efectivo
+2026-10-08,OCT-0009,AGU-600,Agua 600 ml,Bebidas,2,2000,0,,transferencia
+2026-10-08,OCT-0009,HUE-30,Huevos x30,Lácteos,1,18500,0,,transferencia
+2026-10-08,OCT-0010,HUE-30,Huevos x30,Lácteos,3,18500,0,C-021,tarjeta
+2026-10-08,OCT-0011,HUE-30,Huevos x30,Lácteos,3,18500,0,,transferencia
+2026-10-08,OCT-0011,LEC-1L,Leche entera 1 L,Lácteos,1,4500,0,,transferencia
+2026-10-08,OCT-0012,PAN-TAJ,Pan tajado,Panadería,2,6800,0,,tarjeta
+2026-10-08,OCT-0012,PAP-150,Papas fritas 150 g,Snacks,1,3500,0,,tarjeta
+2026-10-09,OCT-0013,CAF-250,Café 250 g,Granos,3,9800,0,C-014,transferencia
+2026-10-09,OCT-0013,AGU-600,Agua 600 ml,Bebidas,3,2000,0,C-014,transferencia
+2026-10-09,OCT-0014,HUE-30,Huevos x30,Lácteos,2,18500,0,,efectivo
+2026-10-09,OCT-0015,AGU-600,Agua 600 ml,Bebidas,-1,2000,0,C-014,efectivo
+2026-10-09,OCT-0015,PAP-150,Papas fritas 150 g,Snacks,3,3500,0,C-014,efectivo
+2026-10-09,OCT-0016,CAF-250,Café 250 g,Granos,1,9800,0,C-047,efectivo
+2026-10-09,OCT-0016,LEC-1L,Leche entera 1 L,Lácteos,2,4500,0,C-047,efectivo
+2026-10-10,OCT-0017,PAN-TAJ,Pan tajado,Panadería,3,6800,0,C-014,tarjeta
+2026-10-10,OCT-0017,GAS-15,Gaseosa 1.5 L,Bebidas,2,4800,0,C-014,tarjeta
+2026-10-10,OCT-0018,PAN-TAJ,Pan tajado,Panadería,2,6800,0,,efectivo
+2026-10-10,OCT-0019,PAP-150,Papas fritas 150 g,Snacks,3,3500,0,,transferencia
+2026-10-10,OCT-0020,PAP-150,Papas fritas 150 g,Snacks,1,3500,0,C-047,efectivo
+2026-10-10,OCT-0020,PAN-TAJ,Pan tajado,Panadería,1,6800,0,C-047,efectivo
+2026-10-11,OCT-0021,GAS-15,Gaseosa 1.5 L,Bebidas,1,4800,0,C-021,tarjeta
+2026-10-11,OCT-0022,HUE-30,Huevos x30,Lácteos,1,18500,0,,tarjeta
+2026-10-11,OCT-0022,PAN-TAJ,Pan tajado,Panadería,2,6800,0,,tarjeta
+2026-10-11,OCT-0023,ARZ-500,Arroz Diana 500 g,Granos,2,3200,0,C-047,transferencia
+2026-10-11,OCT-0024,PAP-150,Papas fritas 150 g,Snacks,1,3500,0,,efectivo
+2026-10-11,OCT-0024,AGU-600,Agua 600 ml,Bebidas,3,2000,0,,efectivo
+2026-10-12,OCT-0025,LEC-1L,Leche entera 1 L,Lácteos,1,4500,0,,efectivo
+2026-10-12,OCT-0026,CAF-250,Café 250 g,Granos,3,9800,0,,tarjeta
+2026-10-12,OCT-0027,PAN-TAJ,Pan tajado,Panadería,3,6800,0,C-014,efectivo
+2026-10-12,OCT-0028,LEC-1L,Leche entera 1 L,Lácteos,1,4500,0,C-014,transferencia
