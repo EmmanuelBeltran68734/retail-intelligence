@@ -160,7 +160,7 @@ def validar(df: pd.DataFrame) -> dict:
                         valores["fecha"],
                         f"Fila {fila}: la fecha "
                         f"{valores['fecha']} no existe.",
-                        "Revisa la fecha y utiliza el formato AAAA-MM-DD.",
+                        "Escríbala como AAAA-MM-DD.",
                     )
                 else:
                     error(
