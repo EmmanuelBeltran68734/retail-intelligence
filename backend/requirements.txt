@@ -14,3 +14,5 @@ pandera
 pytest
 pytest-cov
 httpx2
+statsmodels>=0.15
+matplotlib>=3.11

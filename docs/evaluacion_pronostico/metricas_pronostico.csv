@@ -1,0 +1,9 @@
+﻿categoria,MAE_Holt_Winters,MAPE_Holt_Winters,MAE_Base,MAPE_Base,mejor_segun_MAE
+TOTAL,337388.72,6.73,375550.0,7.82,Holt-Winters
+Aseo,133450.97,20.67,81000.0,11.92,Metodo base
+Bebidas,175826.55,24.11,148700.0,20.95,Metodo base
+Enlatados,100533.53,22.17,141450.0,31.01,Holt-Winters
+Granos,102465.52,13.21,101362.5,12.59,Metodo base
+Lácteos,113963.31,10.24,87162.5,9.04,Metodo base
+Panadería,191791.97,41.68,166225.0,31.64,Metodo base
+Snacks,53369.69,15.25,60162.5,17.94,Holt-Winters
