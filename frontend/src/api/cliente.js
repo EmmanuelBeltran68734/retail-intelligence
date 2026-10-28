@@ -190,3 +190,9 @@ export const serieVentas = (token, agrupar, filtros = {}) =>
       ? indicadoresFalsos.ventasFalsas(token, agrupar, filtros)
       : pedir('GET', `/indicadores/ventas${consulta({ agrupar, ...filtros })}`, { token }),
   )
+
+// 18. GET /indicadores/abc?desde&hasta&categoria_id (HU-08): productos A, B y C para P07
+export const productosClave = (token, filtros = {}) =>
+  conSesion(token, () =>
+    USAR_DATOS_FALSOS ? indicadoresFalsos.abcFalso(token, filtros) : pedir('GET', `/indicadores/abc${consulta(filtros)}`, { token }),
+  )
