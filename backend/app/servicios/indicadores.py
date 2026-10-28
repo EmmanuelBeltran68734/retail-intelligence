@@ -1,13 +1,13 @@
-"""Indicadores del tablero (RF-05, RF-06).
+"""Indicadores del tablero (RF-05, RF-06) y clasificación ABC (RF-07).
 
 INTERFAZ CON EL MÓDULO DE BIANCA
 --------------------------------
 El backend arma un DataFrame con una fila por producto vendido y llama a
-`resumen(...)` y `serie(...)`. Bianca puede mejorar los cálculos y las frases
+`resumen(...)`, `serie(...)` y `abc(...)`. Bianca puede mejorar los cálculos y las frases
 mientras las funciones reciban y devuelvan lo mismo.
 
 Columnas del DataFrame:
-    fecha (date), id_venta (int), id_producto (int), producto (str),
+    fecha (date), id_venta (int), id_producto (int), codigo (str), producto (str),
     id_categoria (int), categoria (str), id_cliente (int|None), cliente (str|None),
     importe (float) = cantidad * precio_unitario - descuento
 """
@@ -164,3 +164,53 @@ def serie(df: pd.DataFrame, agrupar: str, desde: date, hasta: date, limite: int 
     return [{"etiqueta": fila[columnas[1]], "id": int(fila[columnas[0]]),
              "ventas": round(float(fila["ventas"]), 2), "transacciones": int(fila["transacciones"])}
             for _, fila in g.iterrows()]
+
+
+# --- Clasificación ABC (RF-07 · HU-08) ----------------------------------------
+
+CORTES = {"A": 80, "B": 95}
+CONSEJOS = {
+    "A": "Nunca dejes que se agoten: son los que sostienen tu negocio.",
+    "B": "Revísalos cada semana.",
+    "C": "Piensa si vale la pena seguir pidiéndolos.",
+}
+
+
+def abc(df: pd.DataFrame) -> dict:
+    """Clasifica los productos por su aporte a las ventas en pesos.
+
+    Se ordenan de mayor a menor venta. Un producto es A si lo acumulado ANTES de él
+    no llega al 80 %, B si no llega al 95 % y C en otro caso. Así el producto que
+    cruza el corte entra en el grupo de arriba y el primero siempre es A.
+    """
+    vacio = {"criterio": "ventas", "cortes": CORTES,
+             "resumen": [{"grupo": g, "productos": 0, "porcentaje_ventas": 0.0, "consejo": CONSEJOS[g]} for g in "ABC"],
+             "productos": []}
+    if df.empty:
+        return vacio
+    g = (df.groupby(["id_producto", "codigo", "producto", "categoria"])["importe"].sum()
+         .reset_index().sort_values(["importe", "producto"], ascending=[False, True]))
+    total = float(g["importe"].sum())
+    if total <= 0:
+        return vacio
+
+    productos, acumulado = [], 0.0
+    for _, fila in g.iterrows():
+        porcentaje = float(fila["importe"]) / total * 100
+        grupo = "A" if acumulado < CORTES["A"] else "B" if acumulado < CORTES["B"] else "C"
+        acumulado += porcentaje
+        productos.append({
+            "id": int(fila["id_producto"]), "codigo": fila["codigo"], "nombre": fila["producto"],
+            "categoria": fila["categoria"], "ventas": round(float(fila["importe"]), 2),
+            "porcentaje": round(porcentaje, 2), "porcentaje_acumulado": round(min(acumulado, 100.0), 2), "grupo": grupo,
+        })
+
+    resumen_grupos = []
+    for grupo in "ABC":
+        del_grupo = [p for p in productos if p["grupo"] == grupo]
+        resumen_grupos.append({
+            "grupo": grupo, "productos": len(del_grupo),
+            "porcentaje_ventas": round(sum(p["ventas"] for p in del_grupo) / total * 100, 1),
+            "consejo": CONSEJOS[grupo],
+        })
+    return {"criterio": "ventas", "cortes": CORTES, "resumen": resumen_grupos, "productos": productos}
