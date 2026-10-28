@@ -1,4 +1,4 @@
-"""RF-05, RF-06 · HU-07: indicadores del tablero, siempre filtrados por el comercio del token."""
+"""RF-05, RF-06, RF-07 · HU-07 y HU-08: indicadores y ABC, siempre filtrados por el comercio del token."""
 from datetime import date, timedelta
 from typing import Literal
 
@@ -15,7 +15,7 @@ from app.servicios import indicadores
 
 router = APIRouter(prefix="/api/indicadores", tags=["indicadores"])
 
-COLUMNAS = ["fecha", "id_venta", "id_producto", "producto", "id_categoria", "categoria", "id_cliente", "cliente", "importe"]
+COLUMNAS = ["fecha", "id_venta", "id_producto", "codigo", "producto", "id_categoria", "categoria", "id_cliente", "cliente", "importe"]
 
 
 def _ventas(sesion: Session, id_comercio, desde: date, hasta: date,
@@ -23,7 +23,7 @@ def _ventas(sesion: Session, id_comercio, desde: date, hasta: date,
     """Una fila por producto vendido. El filtro por comercio va SIEMPRE: así un comercio no ve los datos de otro."""
     importe = DetalleVenta.cantidad * DetalleVenta.precio_unitario - DetalleVenta.descuento
     consulta = (
-        select(Venta.fecha, Venta.id_venta, Producto.id_producto, Producto.nombre, Categoria.id_categoria,
+        select(Venta.fecha, Venta.id_venta, Producto.id_producto, Producto.codigo, Producto.nombre, Categoria.id_categoria,
                Categoria.nombre, Venta.id_cliente, Cliente.codigo_seudonimo, importe)
         .join(DetalleVenta, DetalleVenta.id_venta == Venta.id_venta)
         .join(Producto, Producto.id_producto == DetalleVenta.id_producto)
@@ -45,10 +45,10 @@ def _periodo(sesion: Session, id_comercio, desde: date | None, hasta: date | Non
     """Si no se envían fechas: los últimos 30 días con ventas. Devuelve None si el comercio no tiene ventas."""
     if desde and hasta and desde > hasta:
         raise ErrorApi(400, "periodo_invalido", "La fecha «desde» no puede ser posterior a «hasta».")
+    ultima = sesion.scalar(select(func.max(Venta.fecha)).where(Venta.id_comercio == id_comercio))
+    if ultima is None:
+        return None  # el comercio todavía no tiene ventas: sin_datos
     if hasta is None:
-        ultima = sesion.scalar(select(func.max(Venta.fecha)).where(Venta.id_comercio == id_comercio))
-        if ultima is None:
-            return None
         hasta = max(ultima, desde) if desde else ultima
     if desde is None:
         desde = hasta - timedelta(days=29)
@@ -106,3 +106,22 @@ def ventas(
     df = _ventas(sesion, usuario.id_comercio, desde, hasta, categoria_id, cliente_id)
     return {"sin_datos": False, "agrupar": agrupar, "periodo": {"desde": desde, "hasta": hasta},
             "puntos": indicadores.serie(df, agrupar, desde, hasta, limite)}
+
+
+@router.get("/abc", summary="Productos clave: clasificación ABC (HU-08)")
+def clasificacion_abc(
+    desde: date | None = None,
+    hasta: date | None = None,
+    categoria_id: int | None = None,
+    cliente_id: int | None = None,
+    usuario: Usuario = Depends(usuario_actual),
+    sesion: Session = Depends(obtener_sesion),
+):
+    """Grupos A, B y C con el porcentaje acumulado de ventas y un consejo por grupo (P07)."""
+    _control_clientes(usuario, cliente_id)
+    periodo = _periodo(sesion, usuario.id_comercio, desde, hasta)
+    if periodo is None:
+        return {"sin_datos": True}
+    desde, hasta = periodo
+    df = _ventas(sesion, usuario.id_comercio, desde, hasta, categoria_id, cliente_id)
+    return {"sin_datos": False, "periodo": {"desde": desde, "hasta": hasta}, **indicadores.abc(df)}

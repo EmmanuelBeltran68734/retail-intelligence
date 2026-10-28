@@ -1,7 +1,9 @@
 # Contrato de la API · RF-01 a RF-07
 
-Versión 0.4 · 21 oct 2026 · responsable: Ema
+Versión 0.5 · 26 oct 2026 · responsable: Ema
 
+> **Cambios de la 0.5:** la ruta del ABC (`/indicadores/abc`) ya está programada: se agregan `sin_datos` y `periodo`, y se precisa cómo se asigna el grupo al producto que cruza un corte. `sin_datos` es `true` siempre que el comercio no tenga ventas, aunque se envíen fechas.
+>
 > **Cambios de la 0.4:** detalles de las rutas de indicadores ya programadas (semana 3): campo `sin_datos` siempre presente, período anterior = mes anterior cuando se pide un mes completo, puntos de `dia_semana`, `producto` y `cliente`, y clientes solo para el propietario.
 >
 > **Cambios de la 0.3:** formatos de archivo aceptados en `POST /cargas` (sin `.xls`). Las rutas de carga y catálogo ya están programadas (semana 2).
@@ -331,10 +333,15 @@ Series para los gráficos de P02 y P06 (RF-05). `agrupar` puede ser `dia`, `sema
 
 ### 18. 🔒 `GET /indicadores/abc`
 
-Tabla de P07 (RF-07). Criterio: aporte a las ventas en pesos. A hasta el 80 % acumulado, B hasta el 95 % y C el resto.
+Tabla de P07 (RF-07 · HU-08). Acepta los mismos filtros que las otras rutas de indicadores. Criterio: aporte a las ventas en pesos.
+
+- Los productos van de mayor a menor venta. Un producto es **A** si lo acumulado **antes** de él no llega al 80 %, **B** si no llega al 95 % y **C** en otro caso. Así el producto que cruza un corte queda en el grupo de arriba, y el primero siempre es A.
+- `porcentaje` y `porcentaje_acumulado` van de 0 a 100 con dos decimales; `resumen[].porcentaje_ventas` con uno.
 
 ```json
 {
+  "sin_datos": false,
+  "periodo": { "desde": "2026-09-01", "hasta": "2026-09-30" },
   "criterio": "ventas",
   "cortes": { "A": 80, "B": 95 },
   "resumen": [
