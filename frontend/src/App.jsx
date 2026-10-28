@@ -10,12 +10,14 @@ import CargaLista from './pages/CargaLista.jsx'
 import GuiaPlantilla from './pages/GuiaPlantilla.jsx'
 import Inicio from './pages/Inicio.jsx'
 import Tablero from './pages/Tablero.jsx'
+import ProductosClave from './pages/ProductosClave.jsx'
 import { PANTALLAS } from './navegacion.js'
 
 // Pantallas que ya están hechas. Las demás muestran "En construcción" hasta su semana.
 const LISTAS = {
   '/inicio': <Inicio />,
   '/tablero': <Tablero />,
+  '/productos-clave': <ProductosClave />,
   '/cargar': <CargarVentas />,
   '/guia-plantilla': <GuiaPlantilla />,
   '/mi-negocio': <MiNegocio />,

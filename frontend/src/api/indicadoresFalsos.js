@@ -88,6 +88,7 @@ function ventasDeLaTienda(db) {
     fecha,
     id_venta,
     id_producto: idProducto.get(codigo),
+    codigo,
     producto,
     id_categoria: idCategoria.get(categoria),
     categoria,
@@ -300,4 +301,54 @@ export async function ventasFalsas(token, como = 'semana', filtros = {}) {
     periodo: { desde, hasta },
     puntos: serie(filtrar(filas, desde, hasta, filtros), como, desde, hasta, filtros.limite || 10),
   }
+}
+
+// 18. GET /indicadores/abc (HU-08). Misma regla que indicadores.abc() en Python:
+// de mayor a menor venta; A si lo acumulado ANTES del producto no llega al 80 %, B si no llega al 95 %, C el resto.
+const CORTES = { A: 80, B: 95 }
+const CONSEJOS = {
+  A: 'Nunca dejes que se agoten: son los que sostienen tu negocio.',
+  B: 'Revísalos cada semana.',
+  C: 'Piensa si vale la pena seguir pidiéndolos.',
+}
+
+export async function abcFalso(token, filtros = {}) {
+  await esperar()
+  const db = leer()
+  usuarioDelToken(db, token)
+  const filas = ventasDeLaTienda(db)
+  const p = periodo(filas, filtros.desde, filtros.hasta)
+  if (!p) return { sin_datos: true }
+  const [desde, hasta] = p
+  const lista = [...agrupar(filtrar(filas, desde, hasta, filtros), (f) => f.id_producto).values()].sort(
+    (a, b) => b.ventas - a.ventas,
+  )
+  const total = lista.reduce((s, x) => s + x.ventas, 0)
+  let antes = 0
+  const productos = lista.map(({ ventas, fila }) => {
+    const parte = total ? (ventas / total) * 100 : 0
+    const grupo = antes < CORTES.A ? 'A' : antes < CORTES.B ? 'B' : 'C'
+    antes += parte
+    return {
+      id: fila.id_producto,
+      codigo: fila.codigo,
+      nombre: fila.producto,
+      categoria: fila.categoria,
+      ventas: redondear(ventas),
+      porcentaje: redondear(parte),
+      porcentaje_acumulado: redondear(antes),
+      grupo,
+    }
+  })
+  const resumenGrupos = ['A', 'B', 'C'].map((grupo) => {
+    const delGrupo = productos.filter((x) => x.grupo === grupo)
+    const ventas = delGrupo.reduce((s, x) => s + x.ventas, 0)
+    return {
+      grupo,
+      productos: delGrupo.length,
+      porcentaje_ventas: total ? Math.round((ventas / total) * 1000) / 10 : 0,
+      consejo: CONSEJOS[grupo],
+    }
+  })
+  return { sin_datos: false, periodo: { desde, hasta }, criterio: 'ventas', cortes: CORTES, resumen: resumenGrupos, productos }
 }
