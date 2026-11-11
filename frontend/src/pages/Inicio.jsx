@@ -6,6 +6,7 @@ import { useMesesConVentas } from '../indicadores/meses.js'
 import GraficoVentas from '../components/GraficoVentas.jsx'
 import Cambio from '../components/Cambio.jsx'
 import SinVentas from '../components/SinVentas.jsx'
+import TarjetaPronostico from '../components/TarjetaPronostico.jsx'
 import { finDeMes, periodoAnterior, sumarDias } from '../fechas.js'
 import { diaYNumero, fechaCorta, nombreMes, numero, periodoTexto, pesos, porcentaje } from '../formato.js'
 import './Tablero.css'
@@ -142,6 +143,8 @@ export default function Inicio() {
               <div className="exp">de todo lo que vendes sale de ellos.</div>
             </div>
           </div>
+
+          <TarjetaPronostico token={token} />
 
           <div className="row">
             <Link className="btn" to="/tablero">

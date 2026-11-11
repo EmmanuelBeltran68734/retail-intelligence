@@ -196,3 +196,10 @@ export const productosClave = (token, filtros = {}) =>
   conSesion(token, () =>
     USAR_DATOS_FALSOS ? indicadoresFalsos.abcFalso(token, filtros) : pedir('GET', `/indicadores/abc${consulta(filtros)}`, { token }),
   )
+
+// 19. GET /indicadores/pronostico (RF-09) — PENDIENTE DE CONFIRMAR CON EMMANUEL: la ruta y el formato todavía no existen
+// en el backend. Mientras tanto, en modo real P02 muestra "todavía no disponible" si la ruta responde con error.
+export const pronosticoVentas = (token) =>
+  conSesion(token, () =>
+    USAR_DATOS_FALSOS ? indicadoresFalsos.pronosticoFalso(token) : pedir('GET', '/indicadores/pronostico', { token }),
+  )
