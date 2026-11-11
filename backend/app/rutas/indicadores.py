@@ -11,7 +11,7 @@ from app.db import obtener_sesion
 from app.dependencias import usuario_actual
 from app.errores import ErrorApi
 from app.modelos import Categoria, Cliente, DetalleVenta, Producto, Usuario, Venta
-from app.servicios import indicadores
+from app.servicios import indicadores, pronostico_tablero
 
 router = APIRouter(prefix="/api/indicadores", tags=["indicadores"])
 
@@ -125,3 +125,28 @@ def clasificacion_abc(
     desde, hasta = periodo
     df = _ventas(sesion, usuario.id_comercio, desde, hasta, categoria_id, cliente_id)
     return {"sin_datos": False, "periodo": {"desde": desde, "hasta": hasta}, **indicadores.abc(df)}
+
+
+@router.get("/pronostico", summary="Pronóstico de ventas de las próximas semanas (Holt-Winters)")
+def pronostico_ventas(
+    semanas: int = Query(4, ge=1, le=8),
+    categoria_id: int | None = None,
+    usuario: Usuario = Depends(usuario_actual),
+    sesion: Session = Depends(obtener_sesion),
+):
+    """Total del comercio y cada categoría: valor pronosticado por semana con rango bajo–alto,
+    y el error del modelo frente al método base (promedio de las 4 semanas anteriores)."""
+    primera, ultima = sesion.execute(
+        select(func.min(Venta.fecha), func.max(Venta.fecha)).where(Venta.id_comercio == usuario.id_comercio)
+    ).one()
+    if ultima is None:
+        return {"sin_datos": True}
+    hasta = pronostico_tablero.ultima_semana_completa(ultima)
+    df = _ventas(sesion, usuario.id_comercio, primera, hasta, categoria_id, None)
+    return {
+        "sin_datos": False,
+        "modelo": "Holt-Winters (ciclo de 4 semanas)",
+        "historia": {"desde": primera, "hasta": hasta},
+        "semanas": semanas,
+        **pronostico_tablero.calcular(df, semanas, incluir_total=categoria_id is None, hasta=hasta),
+    }

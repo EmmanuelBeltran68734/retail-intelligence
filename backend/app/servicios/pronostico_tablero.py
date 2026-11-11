@@ -91,8 +91,14 @@ def _serie(df: pd.DataFrame, nombre: str, id_categoria: int | None, semanas: int
             "error": error, "mejor": mejor, "frase": frase}
 
 
-def calcular(df: pd.DataFrame, semanas: int, incluir_total: bool) -> dict:
-    """df: una fila por producto vendido con fecha, id_categoria, categoria e importe."""
+def calcular(df: pd.DataFrame, semanas: int, incluir_total: bool, hasta: date | None = None) -> dict:
+    """df: una fila por producto vendido con fecha, id_categoria, categoria e importe.
+    Solo se usan semanas completas: todo lo posterior a `hasta` se descarta. Si no se envía `hasta`,
+    se toma el último lunes desde la venta más reciente (la semana a medias no entra)."""
+    if not df.empty:
+        if hasta is None:
+            hasta = ultima_semana_completa(max(df["fecha"]))
+        df = df[df["fecha"] <= hasta]
     grupos = []
     if incluir_total:
         grupos.append(("Total del comercio", None, df))

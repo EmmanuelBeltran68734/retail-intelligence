@@ -1,7 +1,9 @@
 # Contrato de la API · RF-01 a RF-07
 
-Versión 0.5 · 26 oct 2026 · responsable: Ema
+Versión 0.6 · 28 oct 2026 · responsable: Ema
 
+> **Cambios de la 0.6:** nueva ruta 19, `GET /indicadores/pronostico`, que usa el pronóstico Holt-Winters de Bianca (`app/servicios/pronostico.py`) y agrega el rango bajo–alto y el error del modelo frente al método base.
+>
 > **Cambios de la 0.5:** la ruta del ABC (`/indicadores/abc`) ya está programada: se agregan `sin_datos` y `periodo`, y se precisa cómo se asigna el grupo al producto que cruza un corte. `sin_datos` es `true` siempre que el comercio no tenga ventas, aunque se envíen fechas.
 >
 > **Cambios de la 0.4:** detalles de las rutas de indicadores ya programadas (semana 3): campo `sin_datos` siempre presente, período anterior = mes anterior cuando se pide un mes completo, puntos de `dia_semana`, `producto` y `cliente`, y clientes solo para el propietario.
@@ -57,6 +59,7 @@ Este documento dice qué recibe y qué devuelve cada ruta del backend. Sofía us
 | 16 | 🔒 `GET /indicadores/resumen` | P02, P06 | RF-06 | 3 |
 | 17 | 🔒 `GET /indicadores/ventas` | P02, P06 | RF-05 | 3 |
 | 18 | 🔒 `GET /indicadores/abc` | P07 | RF-07 | 4 |
+| 19 | 🔒 `GET /indicadores/pronostico` | P06 (avance) | Avance 5 | 4 |
 
 ---
 
@@ -352,6 +355,40 @@ Tabla de P07 (RF-07 · HU-08). Acepta los mismos filtros que las otras rutas de 
   "productos": [
     { "id": 41, "codigo": "ARZ-500", "nombre": "Arroz Diana 500 g", "categoria": "Granos", "ventas": 1840000, "porcentaje": 9.97, "porcentaje_acumulado": 9.97, "grupo": "A" }
   ]
+}
+```
+
+---
+
+### 19. 🔒 `GET /indicadores/pronostico`
+
+Pronóstico de ventas de las próximas semanas para el total del comercio y cada categoría. Lo pueden ver el propietario y el encargado.
+
+- Parámetros: `semanas` (1 a 8, por defecto 4) y `categoria_id` (opcional: solo esa categoría, sin el total).
+- Modelo: la función `pronosticar` de Bianca (Holt-Winters con tendencia y ciclo de 4 semanas; semanas que terminan el lunes). Se usa toda la historia del comercio hasta la **última semana completa**; la semana a medias se descarta.
+- Error: se apartan las últimas 4 semanas, se pronostican con lo anterior y se comparan con lo vendido de verdad. `mae_*` es el error promedio en pesos por semana y `mape_*` el error promedio en porcentaje. El **método base** repite el promedio de las 4 semanas anteriores a la prueba. `mejor` dice cuál se equivocó menos.
+- Rango: `bajo` = valor − `mae_modelo` (nunca menor que 0) y `alto` = valor + `mae_modelo`.
+- Se necesitan al menos 12 semanas (8 para entrenar y 4 para medir el error). Las categorías con menos historia van en `omitidas`; si no queda ninguna serie, llega `mensaje`.
+
+```json
+{
+  "sin_datos": false,
+  "modelo": "Holt-Winters (ciclo de 4 semanas)",
+  "historia": { "desde": "2026-04-01", "hasta": "2026-09-28" },
+  "semanas": 4,
+  "series": [
+    {
+      "categoria": "Total del comercio",
+      "id_categoria": null,
+      "pronostico": [
+        { "semana_fin": "2026-10-05", "valor": 4634523.5, "bajo": 4298135.25, "alto": 4970911.75 }
+      ],
+      "error": { "semanas_evaluadas": 4, "mae_modelo": 336388.25, "mae_base": 375550.0, "mape_modelo": 6.7, "mape_base": 7.8 },
+      "mejor": "modelo",
+      "frase": "En las últimas 4 semanas el pronóstico se equivocó en promedio $336.388 por semana, menos que repetir el promedio reciente ($375.550)."
+    }
+  ],
+  "omitidas": []
 }
 ```
 
