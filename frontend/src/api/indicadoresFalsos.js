@@ -352,3 +352,76 @@ export async function abcFalso(token, filtros = {}) {
   })
   return { sin_datos: false, periodo: { desde, hasta }, criterio: 'ventas', cortes: CORTES, resumen: resumenGrupos, productos }
 }
+
+// 19. GET /indicadores/pronostico — PENDIENTE DE CONFIRMAR CON EMMANUEL (la ruta todavía no existe).
+// Formato propuesto por Sofía: id_ejecucion, version_modelo, series (una por categoría con su modelo,
+// confianza, frase y 4 semanas con valor, bajo y alto) y mensaje.
+// OJO: estas cifras NO son el pronóstico de Bianca. Solo sirven para ver y probar la tarjeta en modo ejemplo:
+// cada semana es el promedio de las últimas 4 semanas completas, con un margen de ±12 %.
+const SEMANAS_MINIMAS = 8 // pendiente de confirmar con Bianca: semanas de historia que necesita el modelo
+
+function semanasCompletas(filas) {
+  if (!filas.length) return { lunes: null, semanas: [] }
+  const ultima = filas.reduce((m, f) => (f.fecha > m ? f.fecha : m), filas[0].fecha)
+  const primera = filas.reduce((m, f) => (f.fecha < m ? f.fecha : m), filas[0].fecha)
+  const diaSemana = (new Date(`${ultima}T00:00:00Z`).getUTCDay() + 6) % 7 // 0 = lunes
+  // La última semana completa termina el domingo anterior (o el mismo día, si la última venta fue un domingo)
+  const domingo = diaSemana === 6 ? ultima : sumarDias(ultima, -(diaSemana + 1))
+  const semanas = []
+  for (let fin = domingo; sumarDias(fin, -6) >= primera; fin = sumarDias(fin, -7)) {
+    const inicio = sumarDias(fin, -6)
+    semanas.unshift(filas.filter((f) => f.fecha >= inicio && f.fecha <= fin).reduce((s, f) => s + f.importe, 0))
+  }
+  return { lunes: sumarDias(domingo, 1), semanas }
+}
+
+function serieDeEjemplo(categoria, filas, modelo_nombre, confianza, frase) {
+  const { lunes, semanas } = semanasCompletas(filas)
+  const base = semanas.slice(-4).reduce((s, v) => s + v, 0) / 4
+  const redondo = (n) => Math.round(n / 1000) * 1000
+  return {
+    categoria,
+    modelo_nombre,
+    confianza,
+    frase,
+    pronostico: [0, 1, 2, 3].map((i) => ({
+      semana_inicio: sumarDias(lunes, 7 * i),
+      semana_fin: sumarDias(lunes, 7 * i + 6),
+      valor: redondo(base),
+      bajo: redondo(base * 0.88),
+      alto: redondo(base * 1.12),
+    })),
+  }
+}
+
+export async function pronosticoFalso(token) {
+  await esperar()
+  const db = leer()
+  usuarioDelToken(db, token)
+  const filas = ventasDeLaTienda(db)
+  const { semanas } = semanasCompletas(filas)
+  if (semanas.length < SEMANAS_MINIMAS) {
+    return {
+      sin_datos: true,
+      id_ejecucion: null,
+      version_modelo: null,
+      series: [],
+      mensaje: `Para pronosticar necesitamos al menos ${SEMANAS_MINIMAS} semanas completas de ventas y llevas ${semanas.length}. Sigue subiendo tus ventas cada semana.`,
+    }
+  }
+  const delaCategoria = (nombre) => filas.filter((f) => f.categoria === nombre)
+  return {
+    sin_datos: false,
+    id_ejecucion: 7,
+    version_modelo: { version: '1.1.0' },
+    series: [
+      serieDeEjemplo('Total del comercio', filas, 'Holt-Winters', 'alta',
+        'Usamos Holt-Winters porque tus ventas siguen un patrón que se repite cada semana, y fue el que menos se equivocó con tus ventas pasadas.'),
+      serieDeEjemplo('Bebidas', delaCategoria('Bebidas'), 'Promedio de las últimas semanas', 'media',
+        'Para Bebidas usamos el promedio de las últimas semanas: con tan pocos datos por categoría, fue más confiable que un modelo más complejo.'),
+      serieDeEjemplo('Snacks', delaCategoria('Snacks'), 'Promedio de las últimas semanas', 'baja',
+        'Snacks cambia mucho de una semana a otra, así que este cálculo puede fallar más. Tómalo solo como una idea.'),
+    ],
+    mensaje: null,
+  }
+}
