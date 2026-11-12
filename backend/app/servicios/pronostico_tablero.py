@@ -12,7 +12,9 @@ import pandas as pd
 from app.servicios.pronostico import pronosticar
 
 SEMANAS_PRUEBA = 4  # semanas que se apartan para medir el error
-MINIMO_SEMANAS = 8 + SEMANAS_PRUEBA  # el modelo necesita 8 semanas (dos ciclos de 4) más las de prueba
+MINIMO_SEMANAS = 8 + SEMANAS_PRUEBA
+CONFIANZA_ALTA = 15.0   # MAPE (%) del método elegido
+CONFIANZA_MEDIA = 25.0  # el modelo necesita 8 semanas (dos ciclos de 4) más las de prueba
 
 
 def ultima_semana_completa(ultima_venta: date) -> date:
@@ -73,22 +75,42 @@ def _serie(df: pd.DataFrame, nombre: str, id_categoria: int | None, semanas: int
     if len(serie) < MINIMO_SEMANAS:
         return {"omitida": True, "categoria": nombre, "id_categoria": id_categoria, "semanas_con_historia": len(serie)}
     error = _evaluar(df, serie)
-    margen = error["mae_modelo"]
-    puntos = [
-        {"semana_fin": semana, "valor": valor, "bajo": round(max(0.0, valor - margen), 2), "alto": round(valor + margen, 2)}
-        for semana, valor in _modelo(df, semanas)
-    ]
-    mejor = "modelo" if error["mae_modelo"] <= error["mae_base"] else "base"
+    # O4 · Regla de elección: se usa el método que menos se equivocó (MAE) en las últimas 4 semanas;
+    # si empatan, el más sencillo (el promedio). El rango es ± el error de ese método.
+    mejor = "modelo" if error["mae_modelo"] < error["mae_base"] else "base"
     if mejor == "modelo":
-        frase = (f"En las últimas {SEMANAS_PRUEBA} semanas el pronóstico se equivocó en promedio "
+        valores = _modelo(df, semanas)
+        margen, mape = error["mae_modelo"], error["mape_modelo"]
+        modelo_nombre = "Holt-Winters"
+        frase = (f"Usamos Holt-Winters porque en las últimas {SEMANAS_PRUEBA} semanas se equivocó en promedio "
                  f"{_pesos(error['mae_modelo'])} por semana, menos que repetir el promedio reciente "
                  f"({_pesos(error['mae_base'])}).")
     else:
-        frase = (f"En las últimas {SEMANAS_PRUEBA} semanas, repetir el promedio reciente se equivocó menos "
-                 f"({_pesos(error['mae_base'])} por semana) que el pronóstico ({_pesos(error['mae_modelo'])}). "
-                 "Tómalo solo como referencia.")
-    return {"categoria": nombre, "id_categoria": id_categoria, "pronostico": puntos,
+        promedio = round(float(serie.iloc[-SEMANAS_PRUEBA:].mean()), 2)
+        ultima = serie.index[-1]
+        valores = [((ultima + pd.Timedelta(weeks=i + 1)).strftime("%Y-%m-%d"), promedio) for i in range(semanas)]
+        margen, mape = error["mae_base"], error["mape_base"]
+        modelo_nombre = f"Promedio de las últimas {SEMANAS_PRUEBA} semanas"
+        frase = (f"Usamos el promedio de las últimas {SEMANAS_PRUEBA} semanas porque se equivocó menos "
+                 f"({_pesos(error['mae_base'])} por semana) que Holt-Winters ({_pesos(error['mae_modelo'])}).")
+    confianza = _confianza(mape)
+    if confianza == "baja":
+        frase += " Estas ventas cambian mucho de una semana a otra: tómalo solo como una idea."
+    puntos = [
+        {"semana_inicio": (pd.Timestamp(semana) - pd.Timedelta(days=6)).strftime("%Y-%m-%d"), "semana_fin": semana,
+         "valor": valor, "bajo": round(max(0.0, valor - margen), 2), "alto": round(valor + margen, 2)}
+        for semana, valor in valores
+    ]
+    return {"categoria": nombre, "id_categoria": id_categoria, "modelo": "holt_winters" if mejor == "modelo" else "promedio",
+            "modelo_nombre": modelo_nombre, "confianza": confianza, "pronostico": puntos,
             "error": error, "mejor": mejor, "frase": frase}
+
+
+def _confianza(mape: float | None) -> str:
+    """Alta si el error del método elegido es de 15 % o menos; media hasta 25 % (la meta del proyecto); baja si es mayor."""
+    if mape is None or mape > CONFIANZA_MEDIA:
+        return "baja"
+    return "alta" if mape <= CONFIANZA_ALTA else "media"
 
 
 def calcular(df: pd.DataFrame, semanas: int, incluir_total: bool, hasta: date | None = None) -> dict:
