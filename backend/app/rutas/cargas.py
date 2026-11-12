@@ -47,7 +47,7 @@ def _avisos(sesion: Session, c: Carga) -> list[Aviso]:
     repetidos = len(del_archivo & guardadas)
     if repetidos:
         avisos.append(Aviso(
-            tipo="tickets_ya_guardados", cantidad=repetidos,
+            tipo="tickets_existentes", cantidad=repetidos,
             mensaje=(f"{repetidos} de los {len(del_archivo)} tickets de este archivo ya estaban guardados. "
                      "No se van a sumar otra vez.")))
     otras = len(guardadas - del_archivo)
@@ -63,7 +63,7 @@ def _avisos(sesion: Session, c: Carga) -> list[Aviso]:
 def _detalle(sesion: Session, c: Carga) -> CargaDetalle:
     errores = [ErrorFila(fila=e.fila, columna=e.campo, valor=e.valor, mensaje=e.mensaje, sugerencia=e.sugerencia)
                for e in c.errores]
-    return CargaDetalle(**_resumen(c), errores=errores, avisos=_avisos(sesion, c))
+    return CargaDetalle(**_resumen(c), errores=errores, advertencias=_avisos(sesion, c))
 
 
 def _carga_del_comercio(sesion: Session, id_carga: uuid.UUID, usuario: Usuario) -> Carga:
@@ -109,10 +109,10 @@ async def subir(
         select(Carga).where(Carga.id_comercio == usuario.id_comercio, Carga.huella == huella,
                             Carga.estado != "rechazada").order_by(Carga.fecha_carga.desc()))
     if anterior is not None:
-        raise ErrorApi(409, "archivo_repetido",
+        raise ErrorApi(409, "archivo_duplicado",
                        f"Este archivo ya lo subiste el {_fecha_texto(anterior.fecha_carga.date())} "
                        f"(«{anterior.nombre_archivo}»). Ábrelo desde el historial de cargas en vez de subirlo otra vez.",
-                       id_carga_anterior=str(anterior.id_carga), estado_anterior=anterior.estado)
+                       carga_id=str(anterior.id_carga), estado_anterior=anterior.estado)
 
     carga = Carga(id_comercio=usuario.id_comercio, id_usuario=usuario.id_usuario, nombre_archivo=nombre,
                   estado="recibida", filas_total=len(df), huella=huella)
