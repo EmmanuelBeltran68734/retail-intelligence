@@ -1,7 +1,12 @@
 # Contrato de la API · RF-01 a RF-07
 
-Versión 0.6 · 28 oct 2026 · responsable: Ema
+Versión 0.7 · 12 nov 2026 · responsable: Ema
 
+> **Cambios de la 0.7 (correcciones del docente):**
+> - O5: `POST /cargas` rechaza con `409 archivo_repetido` el mismo archivo subido dos veces (aunque cambie el nombre) y la revisión trae `avisos` (tickets ya guardados y fechas que se cruzan). `GET /indicadores/resumen` no calcula el crecimiento contra un período cargado a medias: `crecimiento.periodo_incompleto`.
+> - O3: `GET /indicadores/pronostico` trae `ejecucion` (número, versión y parámetros del modelo, huella de los datos y cargas de origen). Cada resultado queda guardado en `ejecucion_modelo`.
+> - O2: rutas nuevas 20 a 23: plantilla, carga e historial de conteos de existencias, y `GET /indicadores/agotamientos`, que nunca dice «se agotó» sin un conteo en cero.
+>
 > **Cambios de la 0.6:** nueva ruta 19, `GET /indicadores/pronostico`, que usa el pronóstico Holt-Winters de Bianca (`app/servicios/pronostico.py`) y agrega el rango bajo–alto y el error del modelo frente al método base.
 >
 > **Cambios de la 0.5:** la ruta del ABC (`/indicadores/abc`) ya está programada: se agregan `sin_datos` y `periodo`, y se precisa cómo se asigna el grupo al producto que cruza un corte. `sin_datos` es `true` siempre que el comercio no tenga ventas, aunque se envíen fechas.
@@ -59,7 +64,11 @@ Este documento dice qué recibe y qué devuelve cada ruta del backend. Sofía us
 | 16 | 🔒 `GET /indicadores/resumen` | P02, P06 | RF-06 | 3 |
 | 17 | 🔒 `GET /indicadores/ventas` | P02, P06 | RF-05 | 3 |
 | 18 | 🔒 `GET /indicadores/abc` | P07 | RF-07 | 4 |
-| 19 | 🔒 `GET /indicadores/pronostico` | P06 (avance) | Avance 5 | 4 |
+| 19 | 🔒 `GET /indicadores/pronostico` | P02 (tarjeta) | RF-09 (mínimo) | 4 |
+| 20 | `GET /inventario/plantilla` | Inventario | O2 | 6 |
+| 21 | 🔒 `POST /inventario` | Inventario | O2 | 6 |
+| 22 | 🔒 `GET /inventario` | Inventario | O2 | 6 |
+| 23 | 🔒 `GET /indicadores/agotamientos` | Inventario, P08 | O2 | 6 |
 
 ---
 
@@ -213,6 +222,26 @@ Devuelve `201`:
 - Los textos de `mensaje` y `sugerencia` los define Bianca en sus reglas de calidad (RF-04).
 - Si faltan columnas obligatorias, el archivo entero se rechaza (estado `rechazada`) con `422 columnas_faltantes` y `"faltan": ["fecha", "cantidad"]`.
 
+**Archivo repetido (O5).** Se guarda la huella SHA-256 del contenido. Si el comercio ya subió ese mismo archivo (aunque tenga otro nombre) y la carga no se descartó, responde `409`:
+
+```json
+{
+  "error": "archivo_repetido",
+  "mensaje": "Este archivo ya lo subiste el 11/11/2026 («ventas_prueba.csv»). Ábrelo desde el historial de cargas en vez de subirlo otra vez.",
+  "id_carga_anterior": "f39eadf4-…",
+  "estado_anterior": "validada"
+}
+```
+
+**Avisos (O5).** `POST /cargas` y `GET /cargas/{id}` traen `avisos` mientras la carga espera confirmación. No impiden guardar.
+
+```json
+"avisos": [
+  { "tipo": "tickets_ya_guardados", "cantidad": 2, "mensaje": "2 de los 3 tickets de este archivo ya estaban guardados. No se van a sumar otra vez." },
+  { "tipo": "fechas_cruzadas", "cantidad": 40, "mensaje": "Ya tienes 40 ventas guardadas entre el 01/09/2026 y el 30/09/2026 con otros números de ticket. Si este archivo repite esos días, las ventas se contarían dos veces." }
+]
+```
+
 ### 9. 🔒 `GET /cargas`
 
 Historial de cargas del comercio, de la más reciente a la más antigua (P03). Cada elemento tiene la misma forma que la respuesta anterior, pero sin `errores`. El campo `estado` puede ser `recibida`, `con_errores`, `validada` o `rechazada` (tabla 18).
@@ -314,6 +343,8 @@ Tarjetas de P02 y P06 (RF-06). El campo `frase` es la explicación en lenguaje d
 - `crecimiento.valor` es `null` si no hay ventas en el período anterior.
 - `concentracion.top_productos` es 10, o menos si el comercio vendió menos productos en el período.
 
+**Período incompleto (O5).** Si las ventas cargadas empiezan después del primer día del período anterior, o terminan antes del último día del período actual, no se calcula el crecimiento: `crecimiento.valor` es `null`, `crecimiento.periodo_incompleto` es `true` y la frase explica por qué (por ejemplo: «No comparamos con agosto porque tus ventas cargadas empiezan el 20 de agosto: ese período está incompleto.»).
+
 ### 17. 🔒 `GET /indicadores/ventas?agrupar=semana`
 
 Series para los gráficos de P02 y P06 (RF-05). `agrupar` puede ser `dia`, `semana`, `mes`, `dia_semana`, `categoria`, `producto` o `cliente`. Con `producto` y `cliente` se puede enviar `limite` (por defecto 10).
@@ -389,6 +420,65 @@ Pronóstico de ventas de las próximas semanas para el total del comercio y cada
     }
   ],
   "omitidas": []
+}
+```
+
+**Trazabilidad (O3).** Cada respuesta trae `ejecucion`. La huella es el SHA-256 de las ventas semanales por categoría que entraron al modelo, más `semanas` y `categoria_id`. Si la huella y la versión no cambiaron, se devuelve la misma ejecución guardada (`reutilizada: true`); al cargar una semana nueva, cambia la huella y se crea otra.
+
+```json
+"ejecucion": {
+  "numero": 1,
+  "version_modelo": "holt_winters_semanal 1.0",
+  "parametros": { "tendencia": "add", "estacionalidad": "add", "periodos_estacionales": 4, "semanas_prueba": 4, "minimo_semanas": 12, "metodo_base": "promedio de las 4 semanas anteriores a la prueba", "rango": "valor ± MAE del modelo" },
+  "huella_datos": "3f9c…(64 caracteres)",
+  "cargas_de_origen": 1,
+  "creada_en": "2026-11-12T01:20:00Z",
+  "reutilizada": false
+}
+```
+
+---
+
+## O2 · Inventario y agotamientos
+
+### 20. `GET /inventario/plantilla`
+
+CSV con las columnas `fecha` (AAAA-MM-DD), `codigo_producto` (el mismo de las ventas) y `existencias` (unidades contadas; 0 si no hay).
+
+### 21. 🔒 `POST /inventario`
+
+Recibe `archivo` (`.csv` o `.xlsx`). Guarda las filas correctas y devuelve los errores por fila (fecha inválida, producto que no está en el catálogo del comercio, existencias negativas o que no son número). Si ya había un conteo del mismo producto en la misma fecha, lo reemplaza.
+
+```json
+{ "nombre_archivo": "conteo.csv", "conteos_guardados": 1, "conteos_actualizados": 0, "filas_con_error": 1,
+  "errores": [ { "fila": 3, "columna": "codigo_producto", "valor": "XXX", "mensaje": "Fila 3: el producto «XXX» no está en tu catálogo.", "sugerencia": "Usa el mismo código con el que aparece en tus ventas." } ] }
+```
+
+### 22. 🔒 `GET /inventario`
+
+Conteos guardados del comercio, del más reciente al más antiguo: `fecha`, `codigo`, `producto`, `existencias`.
+
+### 23. 🔒 `GET /indicadores/agotamientos`
+
+Productos que dejaron de venderse, con su tipo. Parámetro opcional `hasta` (por defecto, la última venta).
+
+- Solo cuentan los días en que el negocio vendió algo, dentro de los últimos 90 días.
+- Un producto (con al menos 3 días de venta) se marca si lleva al menos 3 de esos días sin venderse y al menos 3 veces lo que normalmente tarda entre una venta y otra. Los parámetros están en `app/servicios/agotamientos.py` y se ajustan con la regla final del frente de datos.
+- `confirmado` (confianza alta): un conteo en 0 después de la última venta. `con_existencias`: el conteo muestra unidades, no fue agotamiento. `posible` (confianza baja): no hay conteo.
+- Ningún mensaje dice «se agotó» si no hay un conteo en cero.
+
+```json
+{
+  "sin_datos": false,
+  "periodo": { "desde": "2026-07-03", "hasta": "2026-09-30" },
+  "regla": { "ventana_dias": 90, "dias_minimos": 3, "factor": 3, "minimo_dias_con_venta": 3, "descripcion": "…" },
+  "resumen": { "confirmado": 1, "posible": 1, "con_existencias": 0 },
+  "productos": [
+    { "producto": { "id": 4, "codigo": "LEC", "nombre": "Leche", "categoria": "Lácteos" },
+      "ultima_venta": "2026-09-20", "dias_sin_venta": 10, "se_vende_cada_dias": 1.0,
+      "tipo": "confirmado", "confianza": "alta", "evidencia": { "fecha": "2026-09-28", "existencias": 0.0 },
+      "mensaje": "Se agotó: el conteo del 28/09/2026 dice 0 unidades. No se vende desde el 20/09/2026." }
+  ]
 }
 ```
 

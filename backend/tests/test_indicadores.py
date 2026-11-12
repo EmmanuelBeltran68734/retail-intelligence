@@ -2,8 +2,9 @@
 from tests.conftest import registrar
 
 ENC = "fecha,id_ticket,codigo_producto,nombre_producto,categoria,cantidad,precio_unitario,descuento,id_cliente,medio_pago\n"
-# Agosto: 100.000. Septiembre: 108.000 (8 % más) en 3 tickets.
-AGOSTO = ENC + "2026-08-10,A-1,ARZ,Arroz,Granos,10,10000,0,C-1,efectivo\n"
+# Agosto: 100.000, cargado desde el día 1 (período completo). Septiembre: 108.000 (8 % más) en 3 tickets.
+AGOSTO = ENC + ("2026-08-01,A-0,ARZ,Arroz,Granos,5,10000,0,C-1,efectivo\n"
+                "2026-08-10,A-1,ARZ,Arroz,Granos,5,10000,0,C-1,efectivo\n")
 SEPTIEMBRE = ENC + (
     "2026-09-01,S-1,ARZ,Arroz,Granos,5,10000,0,C-1,efectivo\n"
     "2026-09-01,S-1,LEC,Leche,Lácteos,2,4000,0,C-1,efectivo\n"
@@ -44,7 +45,7 @@ def test_resumen_del_mes_como_en_la_hu07(cliente):
     assert r["ventas_totales"] == {"valor": 108000, "frase": "En septiembre vendiste $108.000."}
     assert r["transacciones"] == {"valor": 3, "frase": "Hiciste 3 ventas."}
     assert r["ticket_promedio"]["valor"] == 36000
-    assert r["crecimiento"] == {"valor": 8.0, "frase": "Vendiste 8 % más que en agosto."}
+    assert r["crecimiento"] == {"valor": 8.0, "frase": "Vendiste 8 % más que en agosto.", "periodo_incompleto": False}
     assert r["concentracion"]["top_productos"] == 3 and r["concentracion"]["valor"] == 100.0
 
 
@@ -109,3 +110,20 @@ def test_periodo_invalido(cliente):
     token = tienda_con_ventas(cliente)
     r = cliente.get("/api/indicadores/resumen?desde=2026-09-30&hasta=2026-09-01", headers=cab(token))
     assert r.status_code == 400 and r.json()["error"] == "periodo_invalido"
+
+
+def test_no_compara_contra_un_periodo_incompleto(cliente):
+    """O5: si las ventas cargadas empiezan a mitad del período anterior, no se calcula el crecimiento."""
+    token = registrar(cliente).json()["token"]
+    cargar(cliente, token, ENC + "2026-08-20,A-1,ARZ,Arroz,Granos,1,10000,0,,efectivo\n")
+    cargar(cliente, token, SEPTIEMBRE)
+    c = cliente.get("/api/indicadores/resumen?desde=2026-09-01&hasta=2026-09-30", headers=cab(token)).json()["crecimiento"]
+    assert c["valor"] is None and c["periodo_incompleto"] is True
+    assert c["frase"] == ("No comparamos con agosto porque tus ventas cargadas empiezan el 20 de agosto: "
+                          "ese período está incompleto.")
+
+
+def test_no_compara_si_el_periodo_actual_va_a_medias(cliente):
+    token = tienda_con_ventas(cliente)
+    c = cliente.get("/api/indicadores/resumen?desde=2026-09-01&hasta=2026-10-31", headers=cab(token)).json()["crecimiento"]
+    assert c["valor"] is None and c["periodo_incompleto"] is True

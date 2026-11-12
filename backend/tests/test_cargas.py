@@ -108,13 +108,46 @@ def test_confirmar_guarda_ventas_y_crea_catalogo(cliente):
 
 
 def test_un_ticket_repetido_no_se_duplica(cliente):
+    """Otro archivo que repite tickets ya guardados: la revisión lo avisa y al confirmar no se suman otra vez."""
     token = registrar(cliente).json()["token"]
     primera = subir(cliente, token, BUENO).json()["id"]
     cliente.post(f"/api/cargas/{primera}/confirmar", headers=cabecera(token))
-    segunda = subir(cliente, token, BUENO).json()["id"]
-    r = cliente.post(f"/api/cargas/{segunda}/confirmar", headers=cabecera(token)).json()
-    assert r["ventas_guardadas"] == 0 and r["filas_descartadas"] == 3
+    con_uno_nuevo = BUENO + "2026-09-16,F-3,LEC-1L,Leche entera 1 L,Lácteos,1,4500,0,,efectivo\n"
+    segunda = subir(cliente, token, con_uno_nuevo).json()
+    assert segunda["avisos"][0]["tipo"] == "tickets_ya_guardados" and segunda["avisos"][0]["cantidad"] == 2
+    assert segunda["avisos"][0]["mensaje"] == "2 de los 3 tickets de este archivo ya estaban guardados. No se van a sumar otra vez."
+    r = cliente.post(f"/api/cargas/{segunda['id']}/confirmar", headers=cabecera(token)).json()
+    assert r["ventas_guardadas"] == 1 and r["filas_descartadas"] == 3
     assert r["catalogo_nuevo"]["productos"] == []
+
+
+def test_el_mismo_archivo_no_se_sube_dos_veces(cliente):
+    """O5: el mismo contenido se rechaza aunque cambie el nombre; si la carga anterior se descartó, sí se acepta."""
+    token = registrar(cliente).json()["token"]
+    primera = subir(cliente, token, BUENO).json()["id"]
+    r = cliente.post("/api/cargas", headers=cabecera(token),
+                     files={"archivo": ("otro_nombre.csv", BUENO.encode(), "text/csv")})
+    assert r.status_code == 409 and r.json()["error"] == "archivo_repetido"
+    assert r.json()["id_carga_anterior"] == primera and "Ábrelo desde el historial" in r.json()["mensaje"]
+    assert len(cliente.get("/api/cargas", headers=cabecera(token)).json()) == 1
+    cliente.delete(f"/api/cargas/{primera}", headers=cabecera(token))
+    assert subir(cliente, token, BUENO).status_code == 201
+
+
+def test_aviso_de_fechas_que_se_cruzan(cliente):
+    token = registrar(cliente).json()["token"]
+    primera = subir(cliente, token, BUENO).json()["id"]
+    cliente.post(f"/api/cargas/{primera}/confirmar", headers=cabecera(token))
+    otros_tickets = ENCABEZADO + "2026-09-14,Z-9,ARZ-500,Arroz Diana 500 g,Granos,1,3200,0,,efectivo\n"
+    avisos = subir(cliente, token, otros_tickets).json()["avisos"]
+    assert [a["tipo"] for a in avisos] == ["fechas_cruzadas"] and avisos[0]["cantidad"] == 1
+
+
+def test_otro_comercio_puede_subir_el_mismo_archivo(cliente):
+    token_a = registrar(cliente, "marta@ejemplo.com", "Tienda Doña Marta").json()["token"]
+    token_b = registrar(cliente, "andres@ejemplo.com", "Minimercado Andrés").json()["token"]
+    assert subir(cliente, token_a, BUENO).status_code == 201
+    assert subir(cliente, token_b, BUENO).status_code == 201
 
 
 def test_descartar_y_aislamiento_entre_comercios(cliente):

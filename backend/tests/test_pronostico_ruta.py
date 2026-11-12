@@ -85,3 +85,30 @@ def test_semana_a_medias_no_entra_al_pronostico():
     a_medias = pd.concat([base, pd.DataFrame([{"fecha": date(2026, 8, 25), "id_categoria": 1,
                                                "categoria": "Granos", "importe": 5.0}])])
     assert pronostico_tablero.calcular(base, 4, True) == pronostico_tablero.calcular(a_medias, 4, True)
+
+
+def test_misma_data_misma_ejecucion_y_semana_nueva_otra(cliente):
+    """O3: dos llamadas seguidas dan el mismo número de ejecución; al cargar una semana nueva, cambia."""
+    token = registrar(cliente).json()["token"]
+    cargar(cliente, token, ventas_semanales())
+    primera = cliente.get(URL, headers=cab(token)).json()
+    segunda = cliente.get(URL, headers=cab(token)).json()
+    e1, e2 = primera["ejecucion"], segunda["ejecucion"]
+    assert e1["numero"] == e2["numero"] and e1["reutilizada"] is False and e2["reutilizada"] is True
+    assert e1["version_modelo"] == "holt_winters_semanal 1.0" and e1["parametros"]["periodos_estacionales"] == 4
+    assert len(e1["huella_datos"]) == 64 and e1["cargas_de_origen"] == 1
+    assert segunda["series"] == primera["series"]
+
+    # Una semana completa más (martes y el lunes siguiente cierra la semana).
+    nueva = ENC + "2026-08-25,N-1,ARZ,Arroz,Granos,1,130000,0,,efectivo\n2026-08-31,N-2,ARZ,Arroz,Granos,1,1000,0,,efectivo\n"
+    cargar(cliente, token, nueva)
+    tercera = cliente.get(URL, headers=cab(token)).json()
+    assert tercera["ejecucion"]["numero"] != e1["numero"] and tercera["ejecucion"]["cargas_de_origen"] == 2
+
+
+def test_otra_consulta_es_otra_ejecucion(cliente):
+    token = registrar(cliente).json()["token"]
+    cargar(cliente, token, ventas_semanales())
+    cuatro = cliente.get(URL, headers=cab(token)).json()["ejecucion"]["numero"]
+    dos = cliente.get(f"{URL}?semanas=2", headers=cab(token)).json()["ejecucion"]["numero"]
+    assert cuatro != dos

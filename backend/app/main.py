@@ -7,12 +7,12 @@ from sqlalchemy.orm import Session
 from app.config import config
 from app.db import obtener_sesion
 from app.errores import registrar_manejadores
-from app.rutas import auth, cargas, catalogo, indicadores, usuarios
+from app.rutas import auth, cargas, catalogo, indicadores, inventario, usuarios
 
 app = FastAPI(
     title="Retail Intelligence API",
     description="Backend del proyecto: usuarios, carga de ventas, catálogo, indicadores y ABC (RF-01 a RF-07).",
-    version="0.4.0",
+    version="0.6.0",
 )
 
 app.add_middleware(
@@ -27,6 +27,7 @@ app.include_router(usuarios.router)
 app.include_router(cargas.router)
 app.include_router(catalogo.router)
 app.include_router(indicadores.router)
+app.include_router(inventario.router)
 
 
 @app.get("/salud", tags=["salud"])
