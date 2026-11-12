@@ -1,0 +1,118 @@
+/* P15 · Inventario y agotamientos (O2). Cada tipo tiene su color y su palabra (no solo color):
+   rojo = agotado confirmado, amarillo = posible (sin conteo), verde = tenía existencias. */
+
+.agot-resumen {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  font-size: 0.86rem;
+}
+
+.agot-lista {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.agot {
+  display: grid;
+  gap: 6px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  border-left-width: 5px;
+  font-size: 0.92rem;
+}
+
+.agot.bad {
+  border-left-color: var(--bad);
+}
+
+.agot.warn {
+  border-left-color: var(--warn);
+}
+
+.agot.good {
+  border-left-color: var(--good);
+}
+
+.agot-arriba {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.agot-nombre {
+  font-weight: 700;
+  display: grid;
+}
+
+.agot-nombre small {
+  font-weight: 400;
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
+.agot-datos,
+.agot-regla {
+  font-size: 0.8rem;
+}
+
+/* Cuánto hay de cada producto */
+.pedir-lista {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+  gap: 10px;
+}
+
+.pedir {
+  display: grid;
+  gap: 8px;
+  align-content: start;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  border-left-width: 5px;
+}
+
+.pedir.bad {
+  border-left-color: var(--bad);
+}
+
+.pedir.good {
+  border-left-color: var(--good);
+}
+
+.pedir.c {
+  border-left-color: var(--line);
+}
+
+.pedir-nombre,
+.pedir-estado {
+  display: grid;
+  gap: 4px;
+}
+
+.pedir-nombre {
+  font-weight: 700;
+}
+
+.pedir-estado {
+  justify-items: start;
+}
+
+.pedir small {
+  font-weight: 400;
+  font-size: 0.76rem;
+  color: var(--muted);
+}

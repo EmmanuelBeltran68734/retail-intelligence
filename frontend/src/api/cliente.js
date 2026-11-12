@@ -5,6 +5,7 @@
 import * as falsos from './datosFalsos.js'
 import * as cargasFalsas from './cargasFalsas.js'
 import * as indicadoresFalsos from './indicadoresFalsos.js'
+import * as inventarioFalsos from './inventarioFalsos.js'
 
 export const USAR_DATOS_FALSOS = import.meta.env.VITE_DATOS_FALSOS !== 'false'
 const BASE = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000/api'
@@ -204,4 +205,51 @@ export const productosClave = (token, filtros = {}) =>
 export const pronosticoVentas = (token) =>
   conSesion(token, () =>
     USAR_DATOS_FALSOS ? indicadoresFalsos.pronosticoFalso(token) : pedir('GET', '/indicadores/pronostico', { token }),
+  )
+
+// ---------- O2 · Inventario y agotamientos (rutas 20 a 23, contrato 0.7) ----------
+
+// 20. GET /inventario/plantilla (sin sesión, como la plantilla de ventas)
+export async function descargarPlantillaInventario() {
+  if (USAR_DATOS_FALSOS) return inventarioFalsos.plantillaInventario()
+  let respuesta
+  try {
+    respuesta = await fetch(`${BASE}/inventario/plantilla`)
+  } catch {
+    const e = new Error('No pudimos conectarnos con el servidor. Revisa tu internet e intenta de nuevo.')
+    e.status = 0
+    e.error = 'sin_conexion'
+    e.mensaje = e.message
+    throw e
+  }
+  if (!respuesta.ok) {
+    const e = new Error('No pudimos descargar la plantilla. Intenta de nuevo.')
+    e.status = respuesta.status
+    e.error = 'error_desconocido'
+    e.mensaje = e.message
+    throw e
+  }
+  return respuesta.blob()
+}
+
+// 21. POST /inventario (multipart, campo "archivo"): guarda las filas correctas y devuelve los errores por fila
+export function subirConteo(token, archivo) {
+  return conSesion(token, () => {
+    if (USAR_DATOS_FALSOS) return inventarioFalsos.subirConteo(token, archivo)
+    const formulario = new FormData()
+    formulario.append('archivo', archivo)
+    return pedir('POST', '/inventario', { token, cuerpo: formulario })
+  })
+}
+
+// 22. GET /inventario: conteos guardados, del más reciente al más antiguo
+export const listarConteos = (token) =>
+  conSesion(token, () => (USAR_DATOS_FALSOS ? inventarioFalsos.listarConteos(token) : pedir('GET', '/inventario', { token })))
+
+// 23. GET /indicadores/agotamientos?hasta: productos que dejaron de venderse (confirmado, posible o con existencias)
+export const agotamientos = (token, filtros = {}) =>
+  conSesion(token, () =>
+    USAR_DATOS_FALSOS
+      ? inventarioFalsos.agotamientosFalsos(token, filtros)
+      : pedir('GET', `/indicadores/agotamientos${consulta(filtros)}`, { token }),
   )

@@ -220,7 +220,8 @@ a.btn {
   outline-offset: 2px;
 }
 
-.dias-semana button[aria-pressed='true'] .columna-dia {
+/* Día elegido: el recuadro va pegado a la barra (de su mismo alto), no a toda la columna */
+.dias-semana button[aria-pressed='true'] .columna-dia span {
   outline: 2px solid var(--ink);
   outline-offset: 2px;
 }
@@ -232,14 +233,13 @@ a.btn {
   display: flex;
   align-items: flex-end;
   border-radius: 8px;
-  overflow: hidden;
 }
 
 .columna-dia span {
   display: block;
   width: 100%;
   background: var(--ink-2);
-  border-radius: 6px 6px 0 0;
+  border-radius: 6px;
   transition: filter 0.15s;
 }
 

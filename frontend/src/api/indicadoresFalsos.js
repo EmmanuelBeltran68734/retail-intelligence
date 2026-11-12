@@ -33,6 +33,9 @@ const PRODUCTOS = [
   ['DET-1K', 'Detergente 1 kg', 'Aseo', 11500, 2],
 ]
 const PESO_DIA = [0.8, 0.9, 0.95, 1, 1.15, 1.6, 1.3] // lunes a domingo
+// Para mostrar la pantalla de agotamientos (O2): estos productos dejan de venderse después de esta fecha.
+// Con los conteos de ejemplo de inventarioFalsos.js salen los tres casos: confirmado, con existencias y posible.
+const DEJAN_DE_VENDERSE = { 'YOG-1L': '2026-09-17', 'DET-1K': '2026-09-19', 'ATU-170': '2026-09-21' }
 
 // Números al azar, pero siempre los mismos (semilla fija)
 function azar(semilla) {
@@ -69,6 +72,7 @@ function historialInventado() {
       for (let i = 0; i < items; i++) {
         const [codigo, nombre, categoria, precio] = elegir()
         const cantidad = 1 + Math.floor(r() * r() * 3)
+        if (DEJAN_DE_VENDERSE[codigo] && fecha > DEJAN_DE_VENDERSE[codigo]) continue
         filas.push([fecha, id, codigo, nombre, categoria, cantidad * precio, cliente])
       }
     }
@@ -78,7 +82,7 @@ function historialInventado() {
 }
 
 // Todas las ventas de la tienda falsa, con la forma del DataFrame del backend
-function ventasDeLaTienda(db) {
+export function ventasDeLaTienda(db) {
   const filas = [...(db.ventasDemo === false ? [] : historialInventado()), ...(db.ventas || [])]
   const categorias = [...new Set(filas.map((f) => f[4]))].sort((a, b) => a.localeCompare(b, 'es'))
   const productos = [...new Set(filas.map((f) => f[2]))].sort()
