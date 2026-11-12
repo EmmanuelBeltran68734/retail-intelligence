@@ -95,7 +95,7 @@ class Aviso(BaseModel):
 
 class CargaDetalle(CargaResumen):
     errores: list[ErrorFila]
-    avisos: list[Aviso] = []
+    advertencias: list[Aviso] = []
 
 
 class ProductoNuevo(BaseModel):

@@ -3,7 +3,7 @@
 Versión 0.7 · 12 nov 2026 · responsable: Ema
 
 > **Cambios de la 0.7 (correcciones del docente):**
-> - O5: `POST /cargas` rechaza con `409 archivo_repetido` el mismo archivo subido dos veces (aunque cambie el nombre) y la revisión trae `avisos` (tickets ya guardados y fechas que se cruzan). `GET /indicadores/resumen` no calcula el crecimiento contra un período cargado a medias: `crecimiento.periodo_incompleto`.
+> - O5: `POST /cargas` rechaza con `409 archivo_duplicado` el mismo archivo subido dos veces (aunque cambie el nombre) y la revisión trae `advertencias` (tickets ya guardados y fechas que se cruzan). `GET /indicadores/resumen` no calcula el crecimiento contra un período cargado a medias: `crecimiento.periodo_incompleto`.
 > - O3: `GET /indicadores/pronostico` trae `ejecucion` (número, versión y parámetros del modelo, huella de los datos y cargas de origen). Cada resultado queda guardado en `ejecucion_modelo`.
 > - O2: rutas nuevas 20 a 23: plantilla, carga e historial de conteos de existencias, y `GET /indicadores/agotamientos`, que nunca dice «se agotó» sin un conteo en cero.
 >
@@ -226,18 +226,18 @@ Devuelve `201`:
 
 ```json
 {
-  "error": "archivo_repetido",
+  "error": "archivo_duplicado",
   "mensaje": "Este archivo ya lo subiste el 11/11/2026 («ventas_prueba.csv»). Ábrelo desde el historial de cargas en vez de subirlo otra vez.",
-  "id_carga_anterior": "f39eadf4-…",
+  "carga_id": "f39eadf4-…",
   "estado_anterior": "validada"
 }
 ```
 
-**Avisos (O5).** `POST /cargas` y `GET /cargas/{id}` traen `avisos` mientras la carga espera confirmación. No impiden guardar.
+**Advertencias (O5).** `POST /cargas` y `GET /cargas/{id}` traen `advertencias` mientras la carga espera confirmación. No impiden guardar.
 
 ```json
-"avisos": [
-  { "tipo": "tickets_ya_guardados", "cantidad": 2, "mensaje": "2 de los 3 tickets de este archivo ya estaban guardados. No se van a sumar otra vez." },
+"advertencias": [
+  { "tipo": "tickets_existentes", "cantidad": 2, "mensaje": "2 de los 3 tickets de este archivo ya estaban guardados. No se van a sumar otra vez." },
   { "tipo": "fechas_cruzadas", "cantidad": 40, "mensaje": "Ya tienes 40 ventas guardadas entre el 01/09/2026 y el 30/09/2026 con otros números de ticket. Si este archivo repite esos días, las ventas se contarían dos veces." }
 ]
 ```

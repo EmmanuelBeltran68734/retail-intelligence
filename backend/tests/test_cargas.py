@@ -114,8 +114,8 @@ def test_un_ticket_repetido_no_se_duplica(cliente):
     cliente.post(f"/api/cargas/{primera}/confirmar", headers=cabecera(token))
     con_uno_nuevo = BUENO + "2026-09-16,F-3,LEC-1L,Leche entera 1 L,Lácteos,1,4500,0,,efectivo\n"
     segunda = subir(cliente, token, con_uno_nuevo).json()
-    assert segunda["avisos"][0]["tipo"] == "tickets_ya_guardados" and segunda["avisos"][0]["cantidad"] == 2
-    assert segunda["avisos"][0]["mensaje"] == "2 de los 3 tickets de este archivo ya estaban guardados. No se van a sumar otra vez."
+    assert segunda["advertencias"][0]["tipo"] == "tickets_existentes" and segunda["advertencias"][0]["cantidad"] == 2
+    assert segunda["advertencias"][0]["mensaje"] == "2 de los 3 tickets de este archivo ya estaban guardados. No se van a sumar otra vez."
     r = cliente.post(f"/api/cargas/{segunda['id']}/confirmar", headers=cabecera(token)).json()
     assert r["ventas_guardadas"] == 1 and r["filas_descartadas"] == 3
     assert r["catalogo_nuevo"]["productos"] == []
@@ -127,8 +127,8 @@ def test_el_mismo_archivo_no_se_sube_dos_veces(cliente):
     primera = subir(cliente, token, BUENO).json()["id"]
     r = cliente.post("/api/cargas", headers=cabecera(token),
                      files={"archivo": ("otro_nombre.csv", BUENO.encode(), "text/csv")})
-    assert r.status_code == 409 and r.json()["error"] == "archivo_repetido"
-    assert r.json()["id_carga_anterior"] == primera and "Ábrelo desde el historial" in r.json()["mensaje"]
+    assert r.status_code == 409 and r.json()["error"] == "archivo_duplicado"
+    assert r.json()["carga_id"] == primera and "Ábrelo desde el historial" in r.json()["mensaje"]
     assert len(cliente.get("/api/cargas", headers=cabecera(token)).json()) == 1
     cliente.delete(f"/api/cargas/{primera}", headers=cabecera(token))
     assert subir(cliente, token, BUENO).status_code == 201
@@ -139,7 +139,7 @@ def test_aviso_de_fechas_que_se_cruzan(cliente):
     primera = subir(cliente, token, BUENO).json()["id"]
     cliente.post(f"/api/cargas/{primera}/confirmar", headers=cabecera(token))
     otros_tickets = ENCABEZADO + "2026-09-14,Z-9,ARZ-500,Arroz Diana 500 g,Granos,1,3200,0,,efectivo\n"
-    avisos = subir(cliente, token, otros_tickets).json()["avisos"]
+    avisos = subir(cliente, token, otros_tickets).json()["advertencias"]
     assert [a["tipo"] for a in avisos] == ["fechas_cruzadas"] and avisos[0]["cantidad"] == 1
 
 
