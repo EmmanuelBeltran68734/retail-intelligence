@@ -138,7 +138,9 @@ export default function Tablero() {
   // Mini tendencia: hasta 6 meses que terminan en el mes elegido (solo sin filtro de categoría)
   const iMes = meses.puntos?.findIndex((p) => p.inicio === mes) ?? -1
   const tendencia = !categoria && iMes >= 0 ? meses.puntos.slice(Math.max(0, iMes - 5), iMes + 1) : null
-  const comparadoCon = datos ? nombreAnterior(alcance, datos.anterior) : ''
+  // Período cargado a medias (observación O5): no se compara y se avisa junto a los filtros
+  const incompleto = Boolean(r?.crecimiento?.periodo_incompleto)
+  const comparadoCon = datos && !incompleto ? nombreAnterior(alcance, datos.anterior) : ''
 
   return (
     <>
@@ -189,6 +191,12 @@ export default function Tablero() {
         {cargando && ' · actualizando…'}
       </p>
 
+      {incompleto && !cargando && (
+        <p className="aviso info" role="status">
+          {r.crecimiento.frase}
+        </p>
+      )}
+
       {error && (
         <p className="aviso error" role="alert">
           {error}
@@ -210,7 +218,8 @@ export default function Tablero() {
               <div className="lab">Ventas</div>
               <div className="val">{pesos(r.ventas_totales.valor)}</div>
               <Cambio valor={r.crecimiento.valor} />
-              <div className="exp">{r.crecimiento.frase}</div>
+              {/* Si el período está incompleto, la explicación ya está en el aviso de arriba: no se repite */}
+              <div className="exp">{incompleto ? 'Sin comparación con el período anterior: mira el aviso de arriba.' : r.crecimiento.frase}</div>
               {tendencia && alcance === 'mes' && <Tendencia puntos={tendencia} />}
             </div>
             <div className="card kpi">
@@ -244,7 +253,7 @@ export default function Tablero() {
               <GraficoVentas
                 key={clave}
                 puntos={datos.tiempo}
-                anteriores={datos.tiempoAnterior}
+                anteriores={incompleto ? null : datos.tiempoAnterior}
                 nombreAnterior={comparadoCon}
                 unidad={info.unidad}
                 descripcion={`${info.titulo}. El punto más alto fue ${mejor(datos.tiempo).etiqueta}, con ${pesos(mejor(datos.tiempo).ventas)}.`}

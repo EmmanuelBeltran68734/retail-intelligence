@@ -46,7 +46,8 @@ test('P06 filtros: trimestre, semana, categoría y mes', async () => {
   fireEvent.change(selMes, { target: { value: '2026-04-01' } })
   await screen.findByText(/Del 1 al 30 de abril de 2026/, {}, T)
   await waitFor(() => expect(screen.queryByText(/actualizando/)).toBeNull(), T)
-  expect(screen.getByText(/Todavía no hay ventas del período anterior/)).toBeTruthy()
+  // Abril es el primer mes con ventas: marzo está vacío, así que es un período incompleto (contrato 0.7, O5)
+  expect(screen.getAllByText(/No comparamos con marzo porque tus ventas cargadas empiezan el 1 de abril/).length).toBeGreaterThan(0)
 })
 
 test('Tienda nueva sin ventas: invitación a cargar', async () => {

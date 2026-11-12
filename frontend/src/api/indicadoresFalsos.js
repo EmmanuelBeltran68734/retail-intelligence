@@ -139,16 +139,29 @@ function agrupar(filas, clave) {
 }
 const redondear = (n) => Math.round(n * 100) / 100
 
-function resumen(filas, anteriores, desde, hasta, desdeAnt, hastaAnt) {
+// datosDesde y datosHasta: primera y última venta cargada de la tienda (contrato 0.7, observación O5).
+// Igual que en Python: si el período anterior empieza antes de la primera venta, o el actual termina después
+// de la última, alguno está cargado a medias y NO se calcula el crecimiento (para no mostrar una subida o bajada falsa).
+function resumen(filas, anteriores, desde, hasta, desdeAnt, hastaAnt, datosDesde = null, datosHasta = null) {
   const [ventas, transacciones] = totales(filas)
   const [ventasAnt] = totales(anteriores)
   const mes = esMesCompleto(desde, hasta)
   const cuando = mes ? `En ${MESES[Number(desde.slice(5, 7)) - 1]}` : 'En este período'
   const ticket = transacciones ? ventas / transacciones : 0
 
+  let incompleto = null
+  const diaMes = (f) => `${Number(f.slice(8, 10))} de ${MESES[Number(f.slice(5, 7)) - 1]}`
+  if (datosDesde && datosDesde > desdeAnt) {
+    incompleto = `No comparamos con ${nombrePeriodo(desdeAnt, hastaAnt)} porque tus ventas cargadas empiezan el ${diaMes(datosDesde)}: ese período está incompleto.`
+  } else if (datosHasta && datosHasta < hasta) {
+    incompleto = `Todavía no comparamos este período: tus ventas cargadas llegan hasta el ${diaMes(datosHasta)} y el período termina después.`
+  }
+
   let crecimiento = null
   let fraseCrec = 'Todavía no hay ventas del período anterior para comparar.'
-  if (ventasAnt > 0) {
+  if (incompleto) {
+    fraseCrec = incompleto
+  } else if (ventasAnt > 0) {
     crecimiento = Math.round(((ventas - ventasAnt) / ventasAnt) * 1000) / 10
     const referencia = mes ? `en ${nombrePeriodo(desdeAnt, hastaAnt)}` : nombrePeriodo(desdeAnt, hastaAnt)
     if (crecimiento > 0) fraseCrec = `Vendiste ${decimal(crecimiento)} % más que ${referencia}.`
@@ -169,7 +182,7 @@ function resumen(filas, anteriores, desde, hasta, desdeAnt, hastaAnt) {
     ventas_totales: { valor: redondear(ventas), frase: `${cuando} vendiste ${dinero(ventas)}.` },
     transacciones: { valor: transacciones, frase: transacciones === 1 ? 'Hiciste 1 venta.' : `Hiciste ${entero(transacciones)} ventas.` },
     ticket_promedio: { valor: Math.round(ticket), frase: `En promedio, cada cliente gastó ${dinero(ticket)}.` },
-    crecimiento: { valor: crecimiento, frase: fraseCrec },
+    crecimiento: { valor: crecimiento, frase: fraseCrec, periodo_incompleto: incompleto !== null },
     concentracion: { valor: concentracion, top_productos: top, frase: fraseConc },
   }
 }
@@ -281,7 +294,9 @@ export async function resumenFalso(token, filtros = {}) {
   else desdeAnt = sumarDias(hastaAnt, -(diasEntre(desde, hasta) - 1))
   return {
     sin_datos: false,
-    ...resumen(filtrar(filas, desde, hasta, filtros), filtrar(filas, desdeAnt, hastaAnt, filtros), desde, hasta, desdeAnt, hastaAnt),
+    ...resumen(filtrar(filas, desde, hasta, filtros), filtrar(filas, desdeAnt, hastaAnt, filtros), desde, hasta, desdeAnt, hastaAnt,
+      filas.reduce((m, f) => (f.fecha < m ? f.fecha : m), filas[0].fecha),
+      filas.reduce((m, f) => (f.fecha > m ? f.fecha : m), filas[0].fecha)),
   }
 }
 
