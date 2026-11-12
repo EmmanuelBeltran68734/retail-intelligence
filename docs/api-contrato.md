@@ -5,6 +5,7 @@ Versión 0.7 · 12 nov 2026 · responsable: Ema
 > **Cambios de la 0.7 (correcciones del docente):**
 > - O5: `POST /cargas` rechaza con `409 archivo_duplicado` el mismo archivo subido dos veces (aunque cambie el nombre) y la revisión trae `advertencias` (tickets ya guardados y fechas que se cruzan). `GET /indicadores/resumen` no calcula el crecimiento contra un período cargado a medias: `crecimiento.periodo_incompleto`.
 > - O3: `GET /indicadores/pronostico` trae `ejecucion` (número, versión y parámetros del modelo, huella de los datos y cargas de origen). Cada resultado queda guardado en `ejecucion_modelo`.
+> - O4: en `/indicadores/pronostico` cada serie usa el método que menos se equivocó en las últimas 4 semanas (Holt-Winters o el promedio de las últimas 4 semanas; si empatan, el promedio) y trae `modelo`, `modelo_nombre`, `confianza` y `semana_inicio`, más `id_ejecucion`, `version_modelo` y `mensaje` arriba, como los usa la tarjeta de P02.
 > - O2: rutas nuevas 20 a 23: plantilla, carga e historial de conteos de existencias, y `GET /indicadores/agotamientos`, que nunca dice «se agotó» sin un conteo en cero.
 >
 > **Cambios de la 0.6:** nueva ruta 19, `GET /indicadores/pronostico`, que usa el pronóstico Holt-Winters de Bianca (`app/servicios/pronostico.py`) y agrega el rango bajo–alto y el error del modelo frente al método base.
@@ -423,12 +424,21 @@ Pronóstico de ventas de las próximas semanas para el total del comercio y cada
 }
 ```
 
+**Modelo elegido y confianza (O4).** Por cada serie se usa el método con menor MAE en las 4 semanas de prueba; si empatan, el promedio (el más sencillo). `modelo` es `holt_winters` o `promedio`, y el rango es ± el MAE del método elegido. `confianza` sale del MAPE del método elegido: `alta` hasta 15 %, `media` hasta 25 % (la meta del proyecto) y `baja` si es mayor; con confianza baja la frase lo advierte. Arriba van `id_ejecucion`, `version_modelo` (`{"nombre": "holt_winters_semanal", "version": "1.1"}`) y `mensaje` (texto cuando no hay series; si no, `null`). Cada punto trae `semana_inicio` y `semana_fin` (semanas de martes a lunes).
+
+```json
+{ "categoria": "Aseo", "id_categoria": 9, "modelo": "promedio", "modelo_nombre": "Promedio de las últimas 4 semanas",
+  "confianza": "alta", "pronostico": [ { "semana_inicio": "2026-09-29", "semana_fin": "2026-10-05", "valor": 712050.0, "bajo": 631050.0, "alto": 793050.0 } ],
+  "error": { "semanas_evaluadas": 4, "mae_modelo": 133457.7, "mae_base": 81000.0, "mape_modelo": 20.7, "mape_base": 11.9 },
+  "mejor": "base", "frase": "Usamos el promedio de las últimas 4 semanas porque se equivocó menos ($81.000 por semana) que Holt-Winters ($133.458)." }
+```
+
 **Trazabilidad (O3).** Cada respuesta trae `ejecucion`. La huella es el SHA-256 de las ventas semanales por categoría que entraron al modelo, más `semanas` y `categoria_id`. Si la huella y la versión no cambiaron, se devuelve la misma ejecución guardada (`reutilizada: true`); al cargar una semana nueva, cambia la huella y se crea otra.
 
 ```json
 "ejecucion": {
   "numero": 1,
-  "version_modelo": "holt_winters_semanal 1.0",
+  "version_modelo": "holt_winters_semanal 1.1",
   "parametros": { "tendencia": "add", "estacionalidad": "add", "periodos_estacionales": 4, "semanas_prueba": 4, "minimo_semanas": 12, "metodo_base": "promedio de las 4 semanas anteriores a la prueba", "rango": "valor ± MAE del modelo" },
   "huella_datos": "3f9c…(64 caracteres)",
   "cargas_de_origen": 1,

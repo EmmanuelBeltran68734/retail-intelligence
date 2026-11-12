@@ -160,6 +160,17 @@ def _ficha(ejecucion: EjecucionModelo, version: VersionModelo, reutilizada: bool
     }
 
 
+def _respuesta(ejecucion: EjecucionModelo, version: VersionModelo, reutilizada: bool) -> dict:
+    """Formato de la tarjeta de P02: id_ejecucion y version_modelo arriba, y la ficha completa en `ejecucion`."""
+    return {
+        **ejecucion.resultado,
+        "id_ejecucion": ejecucion.id_ejecucion,
+        "version_modelo": {"nombre": version.nombre, "version": version.version},
+        "mensaje": ejecucion.resultado.get("mensaje"),
+        "ejecucion": _ficha(ejecucion, version, reutilizada=reutilizada),
+    }
+
+
 @router.get("/pronostico", summary="Pronóstico de ventas de las próximas semanas (Holt-Winters)")
 def pronostico_ventas(
     semanas: int = Query(4, ge=1, le=8),
@@ -185,7 +196,7 @@ def pronostico_ventas(
         EjecucionModelo.huella_datos == huella))
     if ejecucion is not None:
         sesion.commit()
-        return {**ejecucion.resultado, "ejecucion": _ficha(ejecucion, version, reutilizada=True)}
+        return _respuesta(ejecucion, version, reutilizada=True)
 
     resultado = jsonable_encoder({
         "sin_datos": False,
@@ -203,7 +214,7 @@ def pronostico_ventas(
     sesion.add(ejecucion)
     sesion.commit()
     sesion.refresh(ejecucion)
-    return {**resultado, "ejecucion": _ficha(ejecucion, version, reutilizada=False)}
+    return _respuesta(ejecucion, version, reutilizada=False)
 
 
 @router.get("/agotamientos", summary="Productos que dejaron de venderse: confirmado, posible o con existencias (O2)")

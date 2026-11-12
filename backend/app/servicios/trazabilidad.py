@@ -8,7 +8,7 @@ import pandas as pd
 from app.servicios import pronostico_tablero
 
 NOMBRE = "holt_winters_semanal"
-VERSION = "1.0"
+VERSION = "1.1"
 PARAMETROS = {
     "modelo": "Holt-Winters (statsmodels ExponentialSmoothing)",
     "tendencia": "add",
@@ -19,7 +19,9 @@ PARAMETROS = {
     "semanas_prueba": pronostico_tablero.SEMANAS_PRUEBA,
     "minimo_semanas": pronostico_tablero.MINIMO_SEMANAS,
     "metodo_base": "promedio de las 4 semanas anteriores a la prueba",
-    "rango": "valor ± MAE del modelo",
+    "eleccion": "por serie, el de menor MAE en las últimas 4 semanas; si empatan, el promedio",
+    "rango": "valor ± MAE del método elegido",
+    "confianza": {"alta": "MAPE <= 15 %", "media": "MAPE <= 25 %", "baja": "MAPE > 25 %"},
 }
 
 
@@ -41,5 +43,6 @@ def huella_datos(df: pd.DataFrame, semanas: int, id_categoria: int | None) -> st
 
 
 def metricas(resultado: dict) -> list[dict]:
-    return [{"categoria": s["categoria"], "id_categoria": s["id_categoria"], **s["error"], "mejor": s["mejor"]}
+    return [{"categoria": s["categoria"], "id_categoria": s["id_categoria"], **s["error"], "mejor": s["mejor"],
+             "confianza": s["confianza"]}
             for s in resultado.get("series", [])]

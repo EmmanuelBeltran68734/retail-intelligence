@@ -40,7 +40,11 @@ def test_pronostico_con_rango_y_errores(cliente):
     assert total["pronostico"][0]["semana_fin"] > datos["historia"]["hasta"]
     error = total["error"]
     assert error["semanas_evaluadas"] == 4 and error["mae_modelo"] >= 0 and error["mae_base"] >= 0
-    assert total["mejor"] in ("modelo", "base") and total["frase"].startswith("En las últimas 4 semanas")
+    assert total["mejor"] in ("modelo", "base") and total["frase"].startswith("Usamos ")
+    assert total["confianza"] in ("alta", "media", "baja") and total["modelo_nombre"]
+    assert total["pronostico"][0]["semana_inicio"] < total["pronostico"][0]["semana_fin"]
+    assert datos["id_ejecucion"] == datos["ejecucion"]["numero"] and datos["version_modelo"]["version"] == "1.1"
+    assert datos["mensaje"] is None
 
 
 def test_filtro_por_categoria_y_numero_de_semanas(cliente):
@@ -95,7 +99,7 @@ def test_misma_data_misma_ejecucion_y_semana_nueva_otra(cliente):
     segunda = cliente.get(URL, headers=cab(token)).json()
     e1, e2 = primera["ejecucion"], segunda["ejecucion"]
     assert e1["numero"] == e2["numero"] and e1["reutilizada"] is False and e2["reutilizada"] is True
-    assert e1["version_modelo"] == "holt_winters_semanal 1.0" and e1["parametros"]["periodos_estacionales"] == 4
+    assert e1["version_modelo"] == "holt_winters_semanal 1.1" and e1["parametros"]["periodos_estacionales"] == 4
     assert len(e1["huella_datos"]) == 64 and e1["cargas_de_origen"] == 1
     assert segunda["series"] == primera["series"]
 
@@ -112,3 +116,25 @@ def test_otra_consulta_es_otra_ejecucion(cliente):
     cuatro = cliente.get(URL, headers=cab(token)).json()["ejecucion"]["numero"]
     dos = cliente.get(f"{URL}?semanas=2", headers=cab(token)).json()["ejecucion"]["numero"]
     assert cuatro != dos
+
+
+def test_si_el_promedio_acierta_mas_se_usa_el_promedio(cliente):
+    """O4: cuando el método base se equivoca menos, el pronóstico que se muestra es el promedio."""
+    from datetime import date
+    import pandas as pd
+    from app.servicios import pronostico_tablero
+
+    # Ventas planas con ruido: Holt-Winters no gana a un promedio.
+    ruido = [0, 900, -700, 300, -500, 800, -200, 100, -900, 600, -300, 400, 700, -600, 200, -100]
+    filas = [{"fecha": date(2026, 5, 5) + pd.Timedelta(weeks=i), "id_categoria": 1, "categoria": "Granos",
+              "importe": 100000.0 + ruido[i]} for i in range(16)]
+    serie = pronostico_tablero.calcular(pd.DataFrame(filas), 4, False)["series"][0]
+    assert serie["mejor"] == "base" and serie["modelo"] == "promedio"
+    assert serie["modelo_nombre"] == "Promedio de las últimas 4 semanas"
+    assert len({p["valor"] for p in serie["pronostico"]}) == 1
+    assert serie["frase"].startswith("Usamos el promedio de las últimas 4 semanas")
+
+
+def test_confianza_por_error():
+    from app.servicios.pronostico_tablero import _confianza
+    assert (_confianza(6.7), _confianza(20.0), _confianza(41.8), _confianza(None)) == ("alta", "media", "baja", "baja")
