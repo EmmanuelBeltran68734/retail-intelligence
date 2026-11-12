@@ -180,14 +180,62 @@ function base(db) {
 
 function sinErrores(c) {
   // eslint-disable-next-line no-unused-vars
-  const { errores, pendientes, ...resumen } = c
+  const { errores, pendientes, huella, ...resumen } = c
   return resumen
 }
 
 function detalle(c) {
   // eslint-disable-next-line no-unused-vars
-  const { pendientes, ...resto } = c
-  return { ...resto, errores: c.errores.map(({ fila, columna, valor, mensaje, sugerencia }) => ({ fila, columna, valor, mensaje, sugerencia })) }
+  const { pendientes, huella, ...resto } = c
+  return { ...resto, advertencias: c.advertencias || [], errores: c.errores.map(({ fila, columna, valor, mensaje, sugerencia }) => ({ fila, columna, valor, mensaje, sugerencia })) }
+}
+
+// Huella del contenido del archivo: si dos archivos tienen exactamente el mismo texto, tienen la misma huella
+function huella(texto) {
+  let h = 0
+  for (let i = 0; i < texto.length; i++) h = (Math.imul(31, h) + texto.charCodeAt(i)) | 0
+  return `${texto.length}-${h >>> 0}`
+}
+
+const MESES_CORTOS = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic']
+const fechaCorta = (f) => `${Number(f.slice(8, 10))} ${MESES_CORTOS[Number(f.slice(5, 7)) - 1]}`
+// Fecha y hora de subida -> día en la hora del computador ("11 nov")
+const diaLocal = (iso) => {
+  const d = new Date(iso)
+  return `${d.getDate()} ${MESES_CORTOS[d.getMonth()]}`
+}
+
+// Advertencias de P04 (observación O5) — formato PENDIENTE DE CONFIRMAR CON EMMANUEL:
+// [{ tipo: 'tickets_existentes' | 'fechas_cruzadas', mensaje }]. No son errores: el archivo se puede guardar igual.
+function advertencias(db, validas) {
+  const lista = []
+  const guardados = new Set(db.catalogo.tickets)
+  const repetidos = [...new Set(validas.map((v) => `${v.id_ticket}|${v.fecha}`))].filter((t) => guardados.has(t))
+  if (repetidos.length) {
+    const [ticket, fecha] = repetidos[0].split('|')
+    lista.push({
+      tipo: 'tickets_existentes',
+      mensaje:
+        repetidos.length === 1
+          ? `El ticket ${ticket} del ${fechaCorta(fecha)} ya estaba guardado. No se va a sumar dos veces.`
+          : `${repetidos.length} tickets de este archivo ya estaban guardados (por ejemplo, ${ticket} del ${fechaCorta(fecha)}). No se van a sumar dos veces.`,
+    })
+  }
+  const fechas = validas.map((v) => v.fecha).sort()
+  if (fechas.length) {
+    const cruzadas = db.ventas.map((v) => v[0]).filter((f) => f >= fechas[0] && f <= fechas.at(-1)).sort()
+    if (cruzadas.length) {
+      lista.push({
+        tipo: 'fechas_cruzadas',
+        mensaje: `${
+          cruzadas[0] === cruzadas.at(-1)
+            ? `Ya tenías ventas guardadas del ${fechaCorta(cruzadas[0])}, y este archivo también trae ventas de ese día.`
+            : `Ya tenías ventas guardadas entre el ${fechaCorta(cruzadas[0])} y el ${fechaCorta(cruzadas.at(-1))}, y este archivo también trae ventas de esos días.`
+        } Revisa que no sean las mismas ventas antes de guardar.`,
+      })
+    }
+  }
+  return lista
 }
 
 function buscar(db, id) {
@@ -223,7 +271,22 @@ export async function subir(token, archivo) {
     throw fallo(422, 'archivo_ilegible', 'En modo de ejemplo solo se pueden leer archivos .csv. Con el servidor también sirve Excel.')
   }
 
-  const filas = partirCsv(await archivo.text())
+  const texto = await archivo.text()
+  // Archivo duplicado (observación O5) — formato PENDIENTE DE CONFIRMAR CON EMMANUEL:
+  // 409 { error: 'archivo_duplicado', mensaje, carga_id }. Una carga descartada no cuenta: se puede volver a subir.
+  const marca = huella(texto)
+  const anterior = db.cargas.find((c) => c.huella === marca && c.estado !== 'rechazada')
+  if (anterior) {
+    const e = fallo(
+      409,
+      'archivo_duplicado',
+      `Este archivo ya lo subiste el ${diaLocal(anterior.creada_en)} (${anterior.nombre_archivo}). No lo volvimos a revisar para no duplicar tus ventas.`,
+    )
+    e.carga_id = anterior.id
+    throw e
+  }
+
+  const filas = partirCsv(texto)
   if (!filas.length) throw fallo(422, 'archivo_ilegible', 'No pudimos leer el archivo. Revisa que esté basado en la plantilla.')
   const encabezados = filas[0].map(normalizarEncabezado)
   const registros = filas.slice(1).map((f) => Object.fromEntries(encabezados.map((h, i) => [h, f[i] ?? ''])))
@@ -239,6 +302,8 @@ export async function subir(token, archivo) {
     columnas_ignoradas: [],
     periodo: { desde: null, hasta: null },
     errores: [],
+    advertencias: [],
+    huella: marca,
   }
 
   const faltan = OBLIGATORIAS.filter((c) => !encabezados.includes(c))
@@ -264,6 +329,7 @@ export async function subir(token, archivo) {
   carga.periodo = { desde: fechas[0] || null, hasta: fechas.at(-1) || null }
   carga.estado = errores.length ? 'con_errores' : 'recibida'
   carga.errores = errores
+  carga.advertencias = advertencias(db, validas)
   carga.pendientes = validas
   db.cargas.unshift(carga)
   guardar(db)

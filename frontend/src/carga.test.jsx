@@ -46,11 +46,9 @@ test('P03 → P04 → P05 con el archivo de ejemplo', async () => {
   fireEvent.click(screen.getByText('Cargar otro archivo'))
   const tabla = await screen.findByRole('table')
   expect(within(tabla).getByText('Guardada')).toBeTruthy()
-  // subir el mismo archivo otra vez: los tickets ya existen
+  // subir el mismo archivo otra vez: ahora se avisa que está repetido (observación O5, ver duplicados.test.jsx)
   fireEvent.click(screen.getByText('Probar con el archivo de ejemplo'))
-  await screen.findByRole('heading', { name: 'Revisamos tu archivo' }, { timeout: 3000 })
-  fireEvent.click(screen.getByText('Guardar las 7 que están bien'))
-  await screen.findByText(/no había ventas nuevas para guardar/, {}, { timeout: 3000 })
+  await screen.findByText(/Este archivo ya lo subiste/, {}, { timeout: 3000 })
 })
 
 test('Descartar y archivo sin columnas', async () => {

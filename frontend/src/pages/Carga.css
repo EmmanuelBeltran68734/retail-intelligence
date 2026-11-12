@@ -193,3 +193,18 @@ a.btn {
   font-weight: 800;
   font-variant-numeric: tabular-nums;
 }
+
+/* Aviso amarillo de P03 y P04 (observación O5): archivo repetido y advertencias antes de guardar.
+   No son errores: el tendero decide, pero lo lee antes. */
+.aviso.advertencia {
+  background: var(--warn-bg);
+  color: var(--warn);
+  border-left: 4px solid var(--warn);
+}
+
+.aviso.advertencia ul {
+  margin: 6px 0 0;
+  padding-left: 18px;
+  display: grid;
+  gap: 4px;
+}

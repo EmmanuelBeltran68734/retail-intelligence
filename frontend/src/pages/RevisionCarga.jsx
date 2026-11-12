@@ -222,6 +222,17 @@ export default function RevisionCarga() {
 
           <section className="card acciones">
             <h2>¿Qué quieres hacer?</h2>
+            {/* Advertencias (observación O5): van antes del botón Guardar para leerlas antes de decidir */}
+            {carga.advertencias?.length > 0 && (
+              <div className="aviso advertencia" role="status">
+                <strong>Antes de guardar, revisa esto:</strong>
+                <ul>
+                  {carga.advertencias.map((a, i) => (
+                    <li key={a.tipo || i}>{typeof a === 'string' ? a : a.mensaje}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
             {carga.filas_validas > 0 && (
               <button className="btn" type="button" onClick={guardar} disabled={Boolean(ocupado)}>
                 {ocupado === 'guardar' ? 'Guardando…' : textoGuardar(carga.filas_validas, hayErrores)}
