@@ -65,8 +65,13 @@ def _totales(df: pd.DataFrame) -> tuple[float, int]:
 
 
 def resumen(df: pd.DataFrame, df_anterior: pd.DataFrame,
-            desde: date, hasta: date, desde_ant: date, hasta_ant: date) -> dict:
-    """Tarjetas de P02 y P06: ventas, transacciones, ticket promedio, crecimiento y concentración."""
+            desde: date, hasta: date, desde_ant: date, hasta_ant: date,
+            datos_desde: date | None = None, datos_hasta: date | None = None) -> dict:
+    """Tarjetas de P02 y P06: ventas, transacciones, ticket promedio, crecimiento y concentración.
+
+    `datos_desde` y `datos_hasta` son la primera y la última venta cargada del comercio. Si el período anterior
+    empieza antes de la primera venta, o el actual termina después de la última, alguno está cargado a medias:
+    entonces no se calcula el crecimiento, para no mostrar una subida o bajada falsa (O5)."""
     ventas, transacciones = _totales(df)
     ventas_ant, _ = _totales(df_anterior)
     mes = es_mes_completo(desde, hasta)
@@ -74,7 +79,18 @@ def resumen(df: pd.DataFrame, df_anterior: pd.DataFrame,
 
     ticket = ventas / transacciones if transacciones else 0.0
 
-    if ventas_ant > 0:
+    incompleto = None
+    if datos_desde is not None and datos_desde > desde_ant:
+        incompleto = (f"No comparamos con {nombre_periodo(desde_ant, hasta_ant)} porque tus ventas cargadas empiezan "
+                      f"el {datos_desde.day} de {MESES[datos_desde.month - 1]}: ese período está incompleto.")
+    elif datos_hasta is not None and datos_hasta < hasta:
+        incompleto = (f"Todavía no comparamos este período: tus ventas cargadas llegan hasta el {datos_hasta.day} de "
+                      f"{MESES[datos_hasta.month - 1]} y el período termina después.")
+
+    if incompleto:
+        crecimiento = None
+        frase_crec = incompleto
+    elif ventas_ant > 0:
         crecimiento = round((ventas - ventas_ant) / ventas_ant * 100, 1)
         referencia = f"en {nombre_periodo(desde_ant, hasta_ant)}" if mes else nombre_periodo(desde_ant, hasta_ant)
         if crecimiento > 0:
@@ -104,7 +120,7 @@ def resumen(df: pd.DataFrame, df_anterior: pd.DataFrame,
         "transacciones": {"valor": transacciones,
                           "frase": "Hiciste 1 venta." if transacciones == 1 else f"Hiciste {entero(transacciones)} ventas."},
         "ticket_promedio": {"valor": round(ticket), "frase": f"En promedio, cada cliente gastó {dinero(ticket)}."},
-        "crecimiento": {"valor": crecimiento, "frase": frase_crec},
+        "crecimiento": {"valor": crecimiento, "frase": frase_crec, "periodo_incompleto": incompleto is not None},
         "concentracion": {"valor": concentracion, "top_productos": top, "frase": frase_conc},
     }
 

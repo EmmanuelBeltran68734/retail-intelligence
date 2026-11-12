@@ -2,6 +2,8 @@
 
 Semana 1 (HU-01, HU-02): comercio, rol y usuario.
 Semana 2 (HU-03 a HU-06): carga, error_carga, categoria, producto, cliente, venta y detalle_venta.
+Correcciones del docente (migración 0003): huella del archivo en carga (O5), version_modelo y
+ejecucion_modelo para la trazabilidad del pronóstico (O3) e inventario para confirmar agotamientos (O2).
 """
 import uuid
 from datetime import date, datetime
@@ -94,6 +96,8 @@ class Carga(Base):
     filas_pendientes: Mapped[list | None] = mapped_column(JSON)
     fecha_carga: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.current_timestamp())
     confirmada_en: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    # SHA-256 del contenido del archivo: el mismo archivo no se acepta dos veces (O5).
+    huella: Mapped[str | None] = mapped_column(String(64), index=True)
 
     errores: Mapped[list["ErrorCarga"]] = relationship(
         back_populates="carga", cascade="all, delete-orphan", order_by="ErrorCarga.id_error"
@@ -178,3 +182,55 @@ class DetalleVenta(Base):
     descuento: Mapped[float] = mapped_column(Dinero, default=0)
 
     venta: Mapped[Venta] = relationship(back_populates="detalles")
+
+
+# ---------------------------------------------------------------------------
+# Migración 0003 · correcciones del docente
+# ---------------------------------------------------------------------------
+class VersionModelo(Base):
+    """Una versión del pronóstico con sus parámetros (O3). Si cambian los parámetros, es otra versión."""
+
+    __tablename__ = "version_modelo"
+    __table_args__ = (UniqueConstraint("nombre", "version"),)
+
+    id_version: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
+    nombre: Mapped[str] = mapped_column(String(60))
+    version: Mapped[str] = mapped_column(String(20))
+    parametros: Mapped[dict] = mapped_column(JSON)
+    creado_en: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.current_timestamp())
+
+
+class EjecucionModelo(Base):
+    """Una corrida del pronóstico: con qué versión, con qué datos (huella) y qué resultado dio (O3)."""
+
+    __tablename__ = "ejecucion_modelo"
+
+    id_ejecucion: Mapped[int] = mapped_column(IdGrande, primary_key=True, autoincrement=True)
+    id_comercio: Mapped[uuid.UUID] = mapped_column(ForeignKey("comercio.id_comercio", ondelete="CASCADE"), index=True)
+    id_version: Mapped[int] = mapped_column(ForeignKey("version_modelo.id_version"))
+    # SHA-256 de las series semanales usadas + la consulta (semanas y categoría).
+    huella_datos: Mapped[str] = mapped_column(String(64), index=True)
+    desde: Mapped[date] = mapped_column(Date)
+    hasta: Mapped[date] = mapped_column(Date)
+    semanas: Mapped[int] = mapped_column(SmallInteger)
+    id_categoria: Mapped[int | None] = mapped_column(Integer)
+    cargas: Mapped[list] = mapped_column(JSON)  # ids de las cargas de origen
+    metricas: Mapped[list] = mapped_column(JSON)
+    resultado: Mapped[dict] = mapped_column(JSON)
+    creado_en: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.current_timestamp())
+
+    version_modelo: Mapped[VersionModelo] = relationship()
+
+
+class Inventario(Base):
+    """Conteo de existencias de un producto en una fecha (O2). Sirve para confirmar un agotamiento."""
+
+    __tablename__ = "inventario"
+    __table_args__ = (UniqueConstraint("id_producto", "fecha"),)
+
+    id_inventario: Mapped[int] = mapped_column(IdGrande, primary_key=True, autoincrement=True)
+    id_comercio: Mapped[uuid.UUID] = mapped_column(ForeignKey("comercio.id_comercio", ondelete="CASCADE"), index=True)
+    id_producto: Mapped[int] = mapped_column(ForeignKey("producto.id_producto", ondelete="CASCADE"))
+    fecha: Mapped[date] = mapped_column(Date)
+    existencias: Mapped[float] = mapped_column(Numeric(12, 3, asdecimal=False))
+    cargado_en: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.current_timestamp())

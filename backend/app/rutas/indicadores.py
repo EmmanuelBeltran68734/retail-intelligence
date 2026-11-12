@@ -4,14 +4,15 @@ from typing import Literal
 
 import pandas as pd
 from fastapi import APIRouter, Depends, Query
+from fastapi.encoders import jsonable_encoder
 from sqlalchemy import func, select
 from sqlalchemy.orm import Session
 
 from app.db import obtener_sesion
 from app.dependencias import usuario_actual
 from app.errores import ErrorApi
-from app.modelos import Categoria, Cliente, DetalleVenta, Producto, Usuario, Venta
-from app.servicios import indicadores, pronostico_tablero
+from app.modelos import Categoria, Cliente, DetalleVenta, EjecucionModelo, Inventario, Producto, Usuario, Venta, VersionModelo
+from app.servicios import agotamientos, indicadores, pronostico_tablero, trazabilidad
 
 router = APIRouter(prefix="/api/indicadores", tags=["indicadores"])
 
@@ -55,6 +56,13 @@ def _periodo(sesion: Session, id_comercio, desde: date | None, hasta: date | Non
     return desde, hasta
 
 
+def _rango_datos(sesion: Session, id_comercio):
+    """Primera y última venta cargada del comercio."""
+    return sesion.execute(
+        select(func.min(Venta.fecha), func.max(Venta.fecha)).where(Venta.id_comercio == id_comercio)
+    ).one()
+
+
 def _control_clientes(usuario: Usuario, cliente_id: int | None, agrupar: str | None = None):
     """El encargado no ve clientes (HU-02)."""
     if (cliente_id is not None or agrupar == "cliente") and usuario.rol.nombre != "propietario":
@@ -84,7 +92,9 @@ def resumen(
         desde_ant = hasta_ant - timedelta(days=dias - 1)
     df = _ventas(sesion, usuario.id_comercio, desde, hasta, categoria_id, cliente_id)
     df_ant = _ventas(sesion, usuario.id_comercio, desde_ant, hasta_ant, categoria_id, cliente_id)
-    return {"sin_datos": False, **indicadores.resumen(df, df_ant, desde, hasta, desde_ant, hasta_ant)}
+    primera, ultima = _rango_datos(sesion, usuario.id_comercio)
+    return {"sin_datos": False, **indicadores.resumen(df, df_ant, desde, hasta, desde_ant, hasta_ant,
+                                                       datos_desde=primera, datos_hasta=ultima)}
 
 
 @router.get("/ventas", summary="Series para los gráficos (RF-05)")
@@ -127,6 +137,29 @@ def clasificacion_abc(
     return {"sin_datos": False, "periodo": {"desde": desde, "hasta": hasta}, **indicadores.abc(df)}
 
 
+def _version_modelo(sesion: Session) -> VersionModelo:
+    version = sesion.scalar(select(VersionModelo).where(
+        VersionModelo.nombre == trazabilidad.NOMBRE, VersionModelo.version == trazabilidad.VERSION))
+    if version is None:
+        version = VersionModelo(nombre=trazabilidad.NOMBRE, version=trazabilidad.VERSION,
+                                parametros=trazabilidad.PARAMETROS)
+        sesion.add(version)
+        sesion.flush()
+    return version
+
+
+def _ficha(ejecucion: EjecucionModelo, version: VersionModelo, reutilizada: bool) -> dict:
+    return {
+        "numero": ejecucion.id_ejecucion,
+        "version_modelo": f"{version.nombre} {version.version}",
+        "parametros": version.parametros,
+        "huella_datos": ejecucion.huella_datos,
+        "cargas_de_origen": len(ejecucion.cargas),
+        "creada_en": ejecucion.creado_en,
+        "reutilizada": reutilizada,
+    }
+
+
 @router.get("/pronostico", summary="Pronóstico de ventas de las próximas semanas (Holt-Winters)")
 def pronostico_ventas(
     semanas: int = Query(4, ge=1, le=8),
@@ -135,18 +168,67 @@ def pronostico_ventas(
     sesion: Session = Depends(obtener_sesion),
 ):
     """Total del comercio y cada categoría: valor pronosticado por semana con rango bajo–alto,
-    y el error del modelo frente al método base (promedio de las 4 semanas anteriores)."""
-    primera, ultima = sesion.execute(
-        select(func.min(Venta.fecha), func.max(Venta.fecha)).where(Venta.id_comercio == usuario.id_comercio)
-    ).one()
+    y el error del modelo frente al método base (promedio de las 4 semanas anteriores).
+
+    Cada respuesta trae su `ejecucion` (O3): número, versión y parámetros del modelo, y la huella de los datos.
+    Si los datos y la versión no cambiaron, se devuelve la misma ejecución en vez de calcular otra."""
+    primera, ultima = _rango_datos(sesion, usuario.id_comercio)
     if ultima is None:
         return {"sin_datos": True}
     hasta = pronostico_tablero.ultima_semana_completa(ultima)
     df = _ventas(sesion, usuario.id_comercio, primera, hasta, categoria_id, None)
-    return {
+    version = _version_modelo(sesion)
+    huella = trazabilidad.huella_datos(df, semanas, categoria_id)
+
+    ejecucion = sesion.scalar(select(EjecucionModelo).where(
+        EjecucionModelo.id_comercio == usuario.id_comercio, EjecucionModelo.id_version == version.id_version,
+        EjecucionModelo.huella_datos == huella))
+    if ejecucion is not None:
+        sesion.commit()
+        return {**ejecucion.resultado, "ejecucion": _ficha(ejecucion, version, reutilizada=True)}
+
+    resultado = jsonable_encoder({
         "sin_datos": False,
         "modelo": "Holt-Winters (ciclo de 4 semanas)",
         "historia": {"desde": primera, "hasta": hasta},
         "semanas": semanas,
         **pronostico_tablero.calcular(df, semanas, incluir_total=categoria_id is None, hasta=hasta),
+    })
+    cargas = sorted(str(c) for c in sesion.scalars(select(Venta.id_carga).distinct().where(
+        Venta.id_comercio == usuario.id_comercio, Venta.fecha >= primera, Venta.fecha <= hasta)))
+    ejecucion = EjecucionModelo(
+        id_comercio=usuario.id_comercio, id_version=version.id_version, huella_datos=huella,
+        desde=primera, hasta=hasta, semanas=semanas, id_categoria=categoria_id, cargas=cargas,
+        metricas=trazabilidad.metricas(resultado), resultado=resultado)
+    sesion.add(ejecucion)
+    sesion.commit()
+    sesion.refresh(ejecucion)
+    return {**resultado, "ejecucion": _ficha(ejecucion, version, reutilizada=False)}
+
+
+@router.get("/agotamientos", summary="Productos que dejaron de venderse: confirmado, posible o con existencias (O2)")
+def productos_agotados(
+    hasta: date | None = None,
+    usuario: Usuario = Depends(usuario_actual),
+    sesion: Session = Depends(obtener_sesion),
+):
+    """Nunca dice «se agotó» sin un conteo de existencias en cero. Sin conteo, el resultado es «posible»
+    (confianza baja); si el conteo muestra unidades, «con_existencias»."""
+    _, ultima = _rango_datos(sesion, usuario.id_comercio)
+    if ultima is None:
+        return {"sin_datos": True}
+    hasta = min(hasta, ultima) if hasta else ultima
+    desde = hasta - timedelta(days=agotamientos.VENTANA_DIAS - 1)
+    ventas_df = _ventas(sesion, usuario.id_comercio, desde, hasta, None, None)
+    conteos = pd.DataFrame(sesion.execute(
+        select(Inventario.fecha, Inventario.id_producto, Inventario.existencias)
+        .where(Inventario.id_comercio == usuario.id_comercio, Inventario.fecha <= hasta)
+    ).all(), columns=["fecha", "id_producto", "existencias"])
+    productos = agotamientos.detectar(ventas_df, conteos, hasta)
+    return {
+        "sin_datos": False,
+        "periodo": {"desde": desde, "hasta": hasta},
+        "regla": agotamientos.REGLA,
+        "resumen": {t: sum(1 for p in productos if p["tipo"] == t) for t in ("confirmado", "posible", "con_existencias")},
+        "productos": productos,
     }

@@ -1,4 +1,5 @@
 """RF-02, RF-03, RF-04 · HU-03 a HU-06: plantilla, subir archivo, revisar errores y confirmar."""
+import hashlib
 import uuid
 from collections import OrderedDict
 from datetime import date, datetime, timezone
@@ -10,7 +11,7 @@ from sqlalchemy.orm import Session
 from app.db import obtener_sesion
 from app.dependencias import usuario_actual
 from app.errores import ErrorApi
-from app.esquemas import CargaConfirmada, CargaDetalle, CargaResumen, CatalogoNuevo, ErrorFila, Periodo, ProductoNuevo
+from app.esquemas import Aviso, CargaConfirmada, CargaDetalle, CargaResumen, CatalogoNuevo, ErrorFila, Periodo, ProductoNuevo
 from app.modelos import Carga, Categoria, Cliente, DetalleVenta, ErrorCarga, Producto, Usuario, Venta
 from app.servicios.plantilla import COLUMNAS, OBLIGATORIAS, TAMANO_MAXIMO, ArchivoIlegible, leer_archivo, plantilla
 from app.servicios.validacion import validar
@@ -29,10 +30,40 @@ def _resumen(c: Carga) -> dict:
     )
 
 
-def _detalle(c: Carga) -> CargaDetalle:
+def _fecha_texto(d: date) -> str:
+    return d.strftime("%d/%m/%Y")
+
+
+def _avisos(sesion: Session, c: Carga) -> list[Aviso]:
+    """Mientras la carga espera confirmación: avisa qué tickets ya estaban guardados y si las fechas se cruzan
+    con ventas que ya existen (O5). No impide guardar: los tickets repetidos se descartan al confirmar."""
+    if not c.filas_pendientes or c.periodo_desde is None:
+        return []
+    del_archivo = {(f["id_ticket"], f["fecha"]) for f in c.filas_pendientes}
+    guardadas = {(t, f.isoformat()) for t, f in sesion.execute(
+        select(Venta.id_ticket, Venta.fecha).where(
+            Venta.id_comercio == c.id_comercio, Venta.fecha >= c.periodo_desde, Venta.fecha <= c.periodo_hasta))}
+    avisos = []
+    repetidos = len(del_archivo & guardadas)
+    if repetidos:
+        avisos.append(Aviso(
+            tipo="tickets_ya_guardados", cantidad=repetidos,
+            mensaje=(f"{repetidos} de los {len(del_archivo)} tickets de este archivo ya estaban guardados. "
+                     "No se van a sumar otra vez.")))
+    otras = len(guardadas - del_archivo)
+    if otras:
+        avisos.append(Aviso(
+            tipo="fechas_cruzadas", cantidad=otras,
+            mensaje=(f"Ya tienes {otras} ventas guardadas entre el {_fecha_texto(c.periodo_desde)} y el "
+                     f"{_fecha_texto(c.periodo_hasta)} con otros números de ticket. Si este archivo repite esos días, "
+                     "las ventas se contarían dos veces.")))
+    return avisos
+
+
+def _detalle(sesion: Session, c: Carga) -> CargaDetalle:
     errores = [ErrorFila(fila=e.fila, columna=e.campo, valor=e.valor, mensaje=e.mensaje, sugerencia=e.sugerencia)
                for e in c.errores]
-    return CargaDetalle(**_resumen(c), errores=errores)
+    return CargaDetalle(**_resumen(c), errores=errores, avisos=_avisos(sesion, c))
 
 
 def _carga_del_comercio(sesion: Session, id_carga: uuid.UUID, usuario: Usuario) -> Carga:
@@ -71,8 +102,20 @@ async def subir(
     except ArchivoIlegible:
         raise ErrorApi(422, "archivo_ilegible", "No pudimos leer el archivo. Revisa que esté basado en la plantilla.")
 
+    # O5: el mismo archivo (mismo contenido, aunque tenga otro nombre) no se acepta dos veces,
+    # salvo que la carga anterior se haya descartado.
+    huella = hashlib.sha256(contenido).hexdigest()
+    anterior = sesion.scalar(
+        select(Carga).where(Carga.id_comercio == usuario.id_comercio, Carga.huella == huella,
+                            Carga.estado != "rechazada").order_by(Carga.fecha_carga.desc()))
+    if anterior is not None:
+        raise ErrorApi(409, "archivo_repetido",
+                       f"Este archivo ya lo subiste el {_fecha_texto(anterior.fecha_carga.date())} "
+                       f"(«{anterior.nombre_archivo}»). Ábrelo desde el historial de cargas en vez de subirlo otra vez.",
+                       id_carga_anterior=str(anterior.id_carga), estado_anterior=anterior.estado)
+
     carga = Carga(id_comercio=usuario.id_comercio, id_usuario=usuario.id_usuario, nombre_archivo=nombre,
-                  estado="recibida", filas_total=len(df))
+                  estado="recibida", filas_total=len(df), huella=huella)
     faltan = [c for c in OBLIGATORIAS if c not in df.columns]
     if faltan:
         carga.estado = "rechazada"
@@ -98,7 +141,7 @@ async def subir(
     sesion.add(carga)
     sesion.commit()
     sesion.refresh(carga)
-    return _detalle(carga)
+    return _detalle(sesion, carga)
 
 
 @router.get("", response_model=list[CargaResumen], summary="Historial de cargas")
@@ -111,7 +154,7 @@ def historial(usuario: Usuario = Depends(usuario_actual), sesion: Session = Depe
 
 @router.get("/{id_carga}", response_model=CargaDetalle, summary="Detalle de una carga con sus errores")
 def detalle(id_carga: uuid.UUID, usuario: Usuario = Depends(usuario_actual), sesion: Session = Depends(obtener_sesion)):
-    return _detalle(_carga_del_comercio(sesion, id_carga, usuario))
+    return _detalle(sesion, _carga_del_comercio(sesion, id_carga, usuario))
 
 
 @router.post("/{id_carga}/confirmar", response_model=CargaConfirmada, summary="Guardar las filas buenas (HU-06)")

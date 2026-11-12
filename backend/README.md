@@ -2,6 +2,8 @@
 
 API en FastAPI (Ema): modelos de la base de datos (SQLAlchemy), migraciones (Alembic) y pruebas (pytest).
 
+Migraciones: `0001` comercio, rol y usuario · `0002` cargas, catálogo y ventas · `0003` correcciones del docente (huella de archivo, `version_modelo`, `ejecucion_modelo` e `inventario`). Para volver atrás: `alembic downgrade 0002`.
+
 ## Primera vez (Windows, PowerShell), desde la carpeta `backend`
 
 ```

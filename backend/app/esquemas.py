@@ -86,8 +86,16 @@ class CargaResumen(BaseModel):
     periodo: Periodo
 
 
+class Aviso(BaseModel):
+    """Advertencia de la revisión que no impide guardar (O5): tickets ya guardados o fechas que se cruzan."""
+    tipo: str
+    cantidad: int
+    mensaje: str
+
+
 class CargaDetalle(CargaResumen):
     errores: list[ErrorFila]
+    avisos: list[Aviso] = []
 
 
 class ProductoNuevo(BaseModel):
