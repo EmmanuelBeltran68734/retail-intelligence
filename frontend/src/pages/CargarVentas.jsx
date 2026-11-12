@@ -60,7 +60,7 @@ export default function CargarVentas() {
       const carga = await subirCarga(token, archivo)
       navegar(`/cargar/${carga.id}`, { state: { carga } })
     } catch (err) {
-      setError({ mensaje: err.mensaje, faltan: err.faltan })
+      setError({ mensaje: err.mensaje, faltan: err.faltan, tipo: err.error, cargaId: err.carga_id })
       setSubiendo('')
     }
   }
@@ -125,7 +125,23 @@ export default function CargarVentas() {
             )}
           </label>
 
-          {error && (
+          {/* Archivo repetido (observación O5): no es un error del archivo, por eso va en amarillo y lleva a la carga anterior */}
+          {error?.tipo === 'archivo_duplicado' && (
+            <div className="aviso advertencia stack" role="alert" style={{ gap: 8 }}>
+              <p className="sin-margen">{error.mensaje}</p>
+              {error.cargaId != null ? (
+                <div className="row">
+                  <button className="btn sm" type="button" onClick={() => navegar(`/cargar/${error.cargaId}`)}>
+                    Ver la carga anterior
+                  </button>
+                </div>
+              ) : (
+                <p className="sin-margen">Puedes buscarla en el historial de abajo.</p>
+              )}
+            </div>
+          )}
+
+          {error && error.tipo !== 'archivo_duplicado' && (
             <div className="aviso error" role="alert">
               <p className="sin-margen">{error.mensaje}</p>
               {error.faltan?.length > 0 && (

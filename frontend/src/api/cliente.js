@@ -65,6 +65,8 @@ async function pedir(metodo, ruta, { token, cuerpo } = {}) {
     e.mensaje = e.message
     // Datos extra de algunos errores, por ejemplo "faltan" en 422 columnas_faltantes (ruta 8)
     if (datos?.faltan) e.faltan = datos.faltan
+    // ...y "carga_id" en 409 archivo_duplicado (ruta 8, pendiente de confirmar con Emmanuel): la carga que ya existía
+    if (datos?.carga_id != null) e.carga_id = datos.carga_id
     throw e
   }
   return datos
