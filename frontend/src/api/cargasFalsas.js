@@ -10,7 +10,7 @@ const MEDIOS_PAGO = ['efectivo', 'tarjeta', 'transferencia', 'credito']
 // ---------- Leer el CSV ----------
 
 // «Código producto» -> «codigo_producto»: sin tildes, en minúscula y con guion bajo (igual que el backend)
-function normalizarEncabezado(texto) {
+export function normalizarEncabezado(texto) {
   return String(texto)
     .normalize('NFKD')
     .replace(/[^\x20-\x7E]/g, '')
@@ -21,7 +21,7 @@ function normalizarEncabezado(texto) {
 }
 
 // Separa un CSV en filas y celdas. Acepta coma o punto y coma y celdas entre comillas.
-function partirCsv(texto) {
+export function partirCsv(texto) {
   texto = texto.replace(/^\uFEFF/, '')
   const primera = texto.split(/\r?\n/, 1)[0]
   const sep = (primera.match(/;/g) || []).length > (primera.match(/,/g) || []).length ? ';' : ','

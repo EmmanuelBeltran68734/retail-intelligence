@@ -22,6 +22,7 @@ export const NAV = [
     titulo: 'Tus datos',
     opciones: [
       ['/cargar', 'Cargar ventas', 'up', 'P03'],
+      ['/inventario', 'Inventario', 'caja', 'P15'],
       ['/guia-plantilla', 'Guía de la plantilla', 'book', 'P13'],
       ['/mi-negocio', 'Mi negocio', 'shop', 'P14'],
     ],
