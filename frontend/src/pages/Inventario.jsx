@@ -79,13 +79,18 @@ export default function Inventario() {
 
   const productos = lista?.productos || []
   // Último conteo de cada producto (la ruta 22 los trae del más reciente al más antiguo)
+  // Se une por id_producto (contrato 0.8), que es el mismo id de la ruta 17. Si un conteo no lo trae, se usa el nombre.
+  const clave = (id, nombre) => (id != null ? `id:${id}` : `nombre:${nombre}`)
   const ultimoConteo = new Map()
-  for (const c of conteos || []) if (!ultimoConteo.has(c.producto)) ultimoConteo.set(c.producto, c)
+  for (const c of conteos || []) {
+    const k = clave(c.id_producto, c.producto)
+    if (!ultimoConteo.has(k)) ultimoConteo.set(k, c)
+  }
   const hayConteos = (conteos?.length || 0) > 0
   // Primero lo que se acabó, luego lo que falta contar y al final lo que sí hay
   const PRIORIDAD = { bad: 0, c: 1, good: 2 }
   const top = (masVendidos?.puntos || [])
-    .map((p) => ({ ...p, estado: estadoDe(ultimoConteo.get(p.etiqueta)) }))
+    .map((p) => ({ ...p, estado: estadoDe(ultimoConteo.get(clave(p.id, p.etiqueta)) ?? ultimoConteo.get(clave(null, p.etiqueta))) }))
     .sort((a, b) => PRIORIDAD[a.estado.clase] - PRIORIDAD[b.estado.clase] || b.ventas - a.ventas)
 
   const subirArchivo = (

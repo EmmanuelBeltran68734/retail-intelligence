@@ -242,7 +242,7 @@ export function subirConteo(token, archivo) {
   })
 }
 
-// 22. GET /inventario: conteos guardados, del más reciente al más antiguo
+// 22. GET /inventario: conteos guardados, del más reciente al más antiguo (fecha, id_producto, codigo, producto, existencias)
 export const listarConteos = (token) =>
   conSesion(token, () => (USAR_DATOS_FALSOS ? inventarioFalsos.listarConteos(token) : pedir('GET', '/inventario', { token })))
 
