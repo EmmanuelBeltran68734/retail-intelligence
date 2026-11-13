@@ -101,5 +101,6 @@ def conteos(usuario: Usuario = Depends(usuario_actual), sesion: Session = Depend
     filas = sesion.execute(
         select(Inventario, Producto).join(Producto, Producto.id_producto == Inventario.id_producto)
         .where(Inventario.id_comercio == usuario.id_comercio).order_by(Inventario.fecha.desc(), Producto.codigo))
-    return [{"fecha": c.fecha, "codigo": p.codigo, "producto": p.nombre, "existencias": c.existencias}
+    return [{"fecha": c.fecha, "id_producto": p.id_producto, "codigo": p.codigo, "producto": p.nombre,
+             "existencias": c.existencias}
             for c, p in filas]
