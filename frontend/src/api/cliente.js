@@ -253,3 +253,13 @@ export const agotamientos = (token, filtros = {}) =>
       ? inventarioFalsos.agotamientosFalsos(token, filtros)
       : pedir('GET', `/indicadores/agotamientos${consulta(filtros)}`, { token }),
   )
+
+// GET /indicadores/asociaciones?desde&hasta&minimo_coocurrencias&limite (O1, Bianca): productos que van juntos.
+// Cada regla trae producto_origen, producto_destino, soporte y confianza (en %), lift y compras_conjuntas.
+// Pendiente con Emmanuel: agregarla al contrato (docs/api-contrato.md) con su número.
+export const productosQueVanJuntos = (token, filtros = {}) =>
+  conSesion(token, () =>
+    USAR_DATOS_FALSOS
+      ? indicadoresFalsos.asociacionesFalsas(token, filtros)
+      : pedir('GET', `/indicadores/asociaciones${consulta(filtros)}`, { token }),
+  )

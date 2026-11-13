@@ -36,6 +36,13 @@ const PESO_DIA = [0.8, 0.9, 0.95, 1, 1.15, 1.6, 1.3] // lunes a domingo
 // Para mostrar la pantalla de agotamientos (O2): estos productos dejan de venderse después de esta fecha.
 // Con los conteos de ejemplo de inventarioFalsos.js salen los tres casos: confirmado, con existencias y posible.
 const DEJAN_DE_VENDERSE = { 'YOG-1L': '2026-09-17', 'DET-1K': '2026-09-19', 'ATU-170': '2026-09-21' }
+// Para mostrar P11 «Van juntos» (O1): parejas que se compran juntas más de lo normal. Si el ticket trae el primero,
+// en n de cada 10 tickets se agrega también el segundo (sin usar el azar, para no cambiar el resto de los datos).
+const PAREJAS = [
+  ['PAN-TAJ', 'LEC-1L', 6],
+  ['CAF-250', 'PNL-500', 5],
+  ['GAS-15', 'PAP-150', 4],
+]
 
 // Números al azar, pero siempre los mismos (semilla fija)
 function azar(semilla) {
@@ -69,11 +76,20 @@ function historialInventado() {
       const id = `D-${ticket}`
       const cliente = r() < 0.6 ? `C-${String(1 + Math.floor(r() * 120)).padStart(3, '0')}` : null
       const items = 1 + Math.floor(r() * r() * 4)
+      const enTicket = new Set()
       for (let i = 0; i < items; i++) {
         const [codigo, nombre, categoria, precio] = elegir()
         const cantidad = 1 + Math.floor(r() * r() * 3)
         if (DEJAN_DE_VENDERSE[codigo] && fecha > DEJAN_DE_VENDERSE[codigo]) continue
         filas.push([fecha, id, codigo, nombre, categoria, cantidad * precio, cliente])
+        enTicket.add(codigo)
+      }
+      for (const [a, b, n] of PAREJAS) {
+        if (enTicket.has(a) && !enTicket.has(b) && ticket % 10 < n) {
+          const [codigo, nombre, categoria, precio] = PRODUCTOS.find((p) => p[0] === b)
+          filas.push([fecha, id, codigo, nombre, categoria, precio, cliente])
+          enTicket.add(codigo)
+        }
       }
     }
   }
@@ -443,4 +459,60 @@ export async function pronosticoFalso(token) {
     ],
     mensaje: null,
   }
+}
+
+// GET /indicadores/asociaciones (O1) — misma cuenta que backend/app/servicios/asociaciones.py (Bianca):
+// cada ticket es una compra y cada producto cuenta una vez por ticket. Soporte y confianza en %, lift con 3 decimales.
+export async function asociacionesFalsas(token, filtros = {}) {
+  await esperar()
+  const db = leer()
+  usuarioDelToken(db, token)
+  const todas = ventasDeLaTienda(db)
+  const p = periodo(todas, filtros.desde, filtros.hasta)
+  if (!p) return { sin_datos: true, total_transacciones: 0, asociaciones: [] }
+  const [desde, hasta] = p
+  const minimo = filtros.minimo_coocurrencias ?? 2
+  const limite = filtros.limite ?? 10
+  const tickets = new Map()
+  const nombres = new Map()
+  for (const f of filtrar(todas, desde, hasta)) {
+    if (!tickets.has(f.id_venta)) tickets.set(f.id_venta, new Set())
+    tickets.get(f.id_venta).add(f.id_producto)
+    nombres.set(f.id_producto, f.producto)
+  }
+  const total = tickets.size
+  if (!total) return { sin_datos: false, periodo: { desde, hasta }, total_transacciones: 0, asociaciones: [] }
+  const frecuencia = new Map()
+  const pares = new Map()
+  for (const productos of tickets.values()) {
+    const lista = [...productos].sort((x, y) => x - y)
+    for (const x of lista) frecuencia.set(x, (frecuencia.get(x) || 0) + 1)
+    for (let i = 0; i < lista.length; i++) {
+      for (let j = i + 1; j < lista.length; j++) {
+        const clave = `${lista[i]}|${lista[j]}`
+        pares.set(clave, (pares.get(clave) || 0) + 1)
+      }
+    }
+  }
+  const asociaciones = []
+  for (const [clave, juntos] of pares) {
+    if (juntos < minimo) continue
+    const [a, b] = clave.split('|').map(Number)
+    const soporte = juntos / total
+    const lift = soporte / ((frecuencia.get(a) / total) * (frecuencia.get(b) / total))
+    for (const [origen, destino] of [[a, b], [b, a]]) {
+      asociaciones.push({
+        producto_origen: nombres.get(origen),
+        producto_destino: nombres.get(destino),
+        soporte: redondear(soporte * 100),
+        confianza: redondear((juntos / frecuencia.get(origen)) * 100),
+        lift: Math.round(lift * 1000) / 1000,
+        compras_conjuntas: juntos,
+      })
+    }
+  }
+  asociaciones.sort(
+    (x, y) => y.lift - x.lift || y.confianza - x.confianza || y.compras_conjuntas - x.compras_conjuntas || x.producto_origen.localeCompare(y.producto_origen),
+  )
+  return { sin_datos: false, periodo: { desde, hasta }, total_transacciones: total, asociaciones: asociaciones.slice(0, limite) }
 }

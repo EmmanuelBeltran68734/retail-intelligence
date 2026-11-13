@@ -1,0 +1,57 @@
+/* P11 · Productos que van juntos (O1): barra naranja = entre los que llevan el primero; barra gris = en general */
+
+.juntos-lista {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+}
+
+.juntos {
+  display: grid;
+  gap: 8px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.juntos:last-child {
+  border-bottom: 0;
+}
+
+.juntos-arriba {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.juntos-arriba .pill {
+  flex: none;
+}
+
+.juntos-barras {
+  display: grid;
+  gap: 4px;
+}
+
+.juntos-barras .hbar {
+  margin-top: 0;
+}
+
+.hbar.gris span {
+  background: var(--muted);
+}
+
+.juntos small {
+  font-size: 0.78rem;
+}
+
+.juntos-tecnico {
+  font-size: 0.8rem;
+}
+
+@media (max-width: 560px) {
+  .juntos-arriba {
+    flex-direction: column;
+  }
+}
