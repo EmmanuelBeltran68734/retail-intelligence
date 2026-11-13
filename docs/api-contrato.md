@@ -1,7 +1,9 @@
 # Contrato de la API · RF-01 a RF-07
 
-Versión 0.7 · 12 nov 2026 · responsable: Ema
+Versión 0.8 · 13 nov 2026 · responsable: Ema
 
+> **Cambios de la 0.8:** ruta 24, `GET /indicadores/asociaciones` (O1, servicio de Bianca): productos que se compran juntos con soporte, confianza y lift. `GET /inventario` trae también `id_producto`.
+>
 > **Cambios de la 0.7 (correcciones del docente):**
 > - O5: `POST /cargas` rechaza con `409 archivo_duplicado` el mismo archivo subido dos veces (aunque cambie el nombre) y la revisión trae `advertencias` (tickets ya guardados y fechas que se cruzan). `GET /indicadores/resumen` no calcula el crecimiento contra un período cargado a medias: `crecimiento.periodo_incompleto`.
 > - O3: `GET /indicadores/pronostico` trae `ejecucion` (número, versión y parámetros del modelo, huella de los datos y cargas de origen). Cada resultado queda guardado en `ejecucion_modelo`.
@@ -70,6 +72,7 @@ Este documento dice qué recibe y qué devuelve cada ruta del backend. Sofía us
 | 21 | 🔒 `POST /inventario` | Inventario | O2 | 6 |
 | 22 | 🔒 `GET /inventario` | Inventario | O2 | 6 |
 | 23 | 🔒 `GET /indicadores/agotamientos` | Inventario, P08 | O2 | 6 |
+| 24 | 🔒 `GET /indicadores/asociaciones` | P11 | O1 | 6 |
 
 ---
 
@@ -466,7 +469,7 @@ Recibe `archivo` (`.csv` o `.xlsx`). Guarda las filas correctas y devuelve los e
 
 ### 22. 🔒 `GET /inventario`
 
-Conteos guardados del comercio, del más reciente al más antiguo: `fecha`, `codigo`, `producto`, `existencias`.
+Conteos guardados del comercio, del más reciente al más antiguo: `fecha`, `id_producto`, `codigo`, `producto`, `existencias`.
 
 ### 23. 🔒 `GET /indicadores/agotamientos`
 
@@ -488,6 +491,25 @@ Productos que dejaron de venderse, con su tipo. Parámetro opcional `hasta` (por
       "ultima_venta": "2026-09-20", "dias_sin_venta": 10, "se_vende_cada_dias": 1.0,
       "tipo": "confirmado", "confianza": "alta", "evidencia": { "fecha": "2026-09-28", "existencias": 0.0 },
       "mensaje": "Se agotó: el conteo del 28/09/2026 dice 0 unidades. No se vende desde el 20/09/2026." }
+  ]
+}
+```
+
+### 24. 🔒 `GET /indicadores/asociaciones`
+
+Productos que se compran juntos (O1). Parámetros: `desde`, `hasta` (por defecto, los últimos 30 días con ventas), `minimo_coocurrencias` (por defecto 2) y `limite` (1 a 100, por defecto 10). Cada ticket (`id_venta`) es una transacción y cada producto cuenta una vez por ticket.
+
+- `soporte` = tickets con A y B / total de tickets (en %).
+- `confianza` A → B = tickets con A y B / tickets con A (en %).
+- `lift` = soporte / (proporción de A × proporción de B). Mayor que 1: se compran juntos más de lo esperado; cerca de 1: sin relación; menor que 1: se evitan. No demuestra causalidad.
+
+```json
+{
+  "sin_datos": false,
+  "periodo": { "desde": "2026-10-02", "hasta": "2026-10-31" },
+  "total_transacciones": 394,
+  "asociaciones": [
+    { "producto_origen": "Gaseosa 1.5 L", "producto_destino": "Detergente 1 kg", "soporte": 10.91, "confianza": 47.78, "lift": 1.828, "compras_conjuntas": 43 }
   ]
 }
 ```

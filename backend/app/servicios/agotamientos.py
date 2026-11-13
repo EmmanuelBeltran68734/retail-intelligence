@@ -65,7 +65,10 @@ def detectar(ventas: pd.DataFrame, conteos: pd.DataFrame, hasta: date) -> list[d
             ultimo = posteriores.sort_values("fecha").iloc[-1]
             evidencia = {"fecha": ultimo["fecha"], "existencias": float(ultimo["existencias"])}
 
-        habitual = f"normalmente se vende 1 de cada {cada:.1f} días".replace(".", ",").replace(",0 ", " ")
+        if cada < 1.5:
+            habitual = "normalmente se vende todos los días"
+        else:
+            habitual = f"normalmente se vende 1 de cada {cada:.1f} días".replace(".", ",").replace(",0 ", " ")
         if evidencia is not None and evidencia["existencias"] <= 0:
             tipo, confianza = "confirmado", "alta"
             mensaje = (f"Se agotó: el conteo del {_fecha(evidencia['fecha'])} dice 0 unidades. "

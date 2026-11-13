@@ -36,6 +36,7 @@ def test_sin_conteo_es_posible_y_nunca_dice_se_agoto(cliente):
     for p in r["productos"]:
         assert p["confianza"] == "baja" and "agotó" not in p["mensaje"]
         assert p["mensaje"].startswith("Posible agotamiento")
+        assert "normalmente se vende todos los días" in p["mensaje"]
     assert r["resumen"] == {"confirmado": 0, "posible": 2, "con_existencias": 0}
 
 
@@ -69,7 +70,8 @@ def test_errores_por_fila_en_el_conteo(cliente):
     # Un segundo conteo del mismo producto y fecha reemplaza al anterior.
     r2 = subir_conteo(cliente, token, "fecha,codigo_producto,existencias\n2026-09-28,PAN,7\n").json()
     assert r2["conteos_actualizados"] == 1
-    assert cliente.get("/api/inventario", headers=cab(token)).json()[0]["existencias"] == 7
+    conteo = cliente.get("/api/inventario", headers=cab(token)).json()[0]
+    assert conteo["existencias"] == 7 and isinstance(conteo["id_producto"], int)
 
 
 def test_plantilla_y_aislamiento(cliente):
@@ -83,3 +85,18 @@ def test_plantilla_y_aislamiento(cliente):
     # El otro comercio no puede contar productos que no son suyos.
     r = subir_conteo(cliente, token_b, "fecha,codigo_producto,existencias\n2026-09-28,LEC,0\n").json()
     assert r["conteos_guardados"] == 0 and r["filas_con_error"] == 1
+
+
+def test_escenarios_de_octubre_dan_los_tres_casos(cliente):
+    """Archivos de Bianca (O2): yogur confirmado, gaseosa con existencias y detergente posible."""
+    from pathlib import Path
+    datos = Path(__file__).resolve().parents[2] / "datos"
+    token = registrar(cliente).json()["token"]
+    for nombre in ("ventas_prueba.csv", "ventas_octubre_escenarios_O2.csv"):
+        id_carga = cliente.post("/api/cargas", headers=cab(token), files={
+            "archivo": (nombre, (datos / nombre).read_bytes(), "text/csv")}).json()["id"]
+        cliente.post(f"/api/cargas/{id_carga}/confirmar", headers=cab(token))
+    subir_conteo(cliente, token, (datos / "inventario_octubre_escenarios_O2.csv").read_text(encoding="utf-8"))
+    r = cliente.get(URL, headers=cab(token)).json()
+    tipos = {p["producto"]["codigo"]: p["tipo"] for p in r["productos"]}
+    assert tipos == {"YOG-1L": "confirmado", "GAS-15": "con_existencias", "DET-1K": "posible"}

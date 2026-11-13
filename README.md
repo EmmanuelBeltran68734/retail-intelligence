@@ -13,10 +13,11 @@ Proyecto de Ingeniería I · tercer corte (oct.–nov. 2026). Alcance: RF-01 a R
 | Tablero e indicadores con frases (RF-05, RF-06) | Funciona; no calcula el crecimiento contra un período cargado a medias |
 | Clasificación ABC (RF-07) | Funciona |
 | Pronóstico semanal Holt-Winters con rango y comparación contra un método base (RF-09 mínimo) | Funciona; cada resultado queda guardado con su versión, parámetros y huella de los datos |
-| Conteos de existencias y agotamientos con evidencia | Funciona; sin conteo en cero solo se dice «posible agotamiento» |
+| Conteos de existencias y agotamientos con evidencia | Funciona; sin conteo en cero solo se dice «posible agotamiento». Escenarios de prueba: `datos/ventas_octubre_escenarios_O2.csv` + `datos/inventario_octubre_escenarios_O2.csv` |
+| Productos que se compran juntos (soporte, confianza y lift) | Ruta lista (`/indicadores/asociaciones`); pantalla P11 pendiente |
 | Despliegue en la nube | Pendiente; la demostración se hace en local |
 
-La API tiene 23 rutas (ver `docs/api-contrato.md`) y el backend tiene 72 pruebas automáticas que corren en GitHub Actions en cada pull request.
+La API tiene 24 rutas (ver `docs/api-contrato.md`) y el backend tiene 81 pruebas automáticas que corren en GitHub Actions en cada pull request.
 
 ## Cómo correr la demo en un computador (Windows)
 
