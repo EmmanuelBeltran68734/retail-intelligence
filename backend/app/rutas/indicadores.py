@@ -243,3 +243,40 @@ def productos_agotados(
         "resumen": {t: sum(1 for p in productos if p["tipo"] == t) for t in ("confirmado", "posible", "con_existencias")},
         "productos": productos,
     }
+
+@router.get("/asociaciones", summary="Asociaciones de productos mediante lift (O1)")
+def asociaciones_productos(
+    desde: date | None = None,
+    hasta: date | None = None,
+    minimo_coocurrencias: int = Query(2, ge=1),
+    limite: int = Query(10, ge=1, le=100),
+    usuario: Usuario = Depends(usuario_actual),
+    sesion: Session = Depends(obtener_sesion),
+):
+    from app.servicios.asociaciones import calcular_lift
+
+    periodo = _periodo(sesion, usuario.id_comercio, desde, hasta)
+
+    if periodo is None:
+        return {
+            "sin_datos": True,
+            "total_transacciones": 0,
+            "asociaciones": [],
+        }
+
+    inicio, fin = periodo
+    df = _ventas(
+        sesion, usuario.id_comercio, inicio, fin, None, None
+    )
+
+    resultado = calcular_lift(
+        df,
+        minimo_coocurrencias=minimo_coocurrencias,
+        limite=limite,
+    )
+
+    return {
+        "sin_datos": False,
+        "periodo": {"desde": inicio, "hasta": fin},
+        **resultado,
+    }
