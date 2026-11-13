@@ -125,7 +125,7 @@ export async function subirConteo(token, archivo) {
   return { nombre_archivo: nombre, conteos_guardados: nuevos, conteos_actualizados: actualizados, filas_con_error: errores.length, errores }
 }
 
-// 22. GET /inventario
+// 22. GET /inventario (contrato 0.8: también trae id_producto)
 export async function listarConteos(token) {
   await esperar()
   const db = leer()
@@ -133,7 +133,13 @@ export async function listarConteos(token) {
   const productos = catalogo(db)
   return [...conteosDe(db)]
     .sort((a, b) => b.fecha.localeCompare(a.fecha) || a.codigo.localeCompare(b.codigo))
-    .map((c) => ({ fecha: c.fecha, codigo: c.codigo, producto: productos.get(c.codigo)?.nombre || c.codigo, existencias: c.existencias }))
+    .map((c) => ({
+      fecha: c.fecha,
+      id_producto: productos.get(c.codigo)?.id ?? null,
+      codigo: c.codigo,
+      producto: productos.get(c.codigo)?.nombre || c.codigo,
+      existencias: c.existencias,
+    }))
 }
 
 // 23. GET /indicadores/agotamientos
