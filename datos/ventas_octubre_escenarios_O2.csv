@@ -1,0 +1,1201 @@
+fecha,id_ticket,codigo_producto,nombre_producto,categoria,cantidad,precio_unitario,descuento,id_cliente,medio_pago
+2026-10-01,F-202610-01-001,YOG-1L,Yogur 1 L,Lácteos,3,8500,0,C-002,tarjeta
+2026-10-01,F-202610-01-001,GAS-15,Gaseosa 1.5 L,Bebidas,2,4800,0,C-002,tarjeta
+2026-10-01,F-202610-01-001,ARZ-500,Arroz Diana 500 g,Granos,4,3200,0,C-002,tarjeta
+2026-10-01,F-202610-01-002,GAS-15,Gaseosa 1.5 L,Bebidas,1,4800,0,C-114,transferencia
+2026-10-01,F-202610-01-002,YOG-1L,Yogur 1 L,Lácteos,4,8500,0,C-114,transferencia
+2026-10-01,F-202610-01-002,AGU-600,Agua 600 ml,Bebidas,1,2200,0,C-114,transferencia
+2026-10-01,F-202610-01-003,GAS-15,Gaseosa 1.5 L,Bebidas,3,4800,0,,efectivo
+2026-10-01,F-202610-01-003,YOG-1L,Yogur 1 L,Lácteos,3,8500,0,,efectivo
+2026-10-01,F-202610-01-003,JAB-250,Jabón de baño,Aseo,3,3900,0,,efectivo
+2026-10-01,F-202610-01-004,LEC-1L,Leche entera 1 L,Lácteos,2,4500,0,,transferencia
+2026-10-01,F-202610-01-004,DET-1K,Detergente 1 kg,Aseo,1,11500,0,,transferencia
+2026-10-01,F-202610-01-004,YOG-1L,Yogur 1 L,Lácteos,2,8500,0,,transferencia
+2026-10-01,F-202610-01-005,YOG-1L,Yogur 1 L,Lácteos,1,8500,0,C-137,efectivo
+2026-10-01,F-202610-01-005,FRJ-500,Frijol 500 g,Granos,3,4500,0,C-137,efectivo
+2026-10-01,F-202610-01-005,DET-1K,Detergente 1 kg,Aseo,2,11500,0,C-137,efectivo
+2026-10-01,F-202610-01-006,ATU-170,Atún 170 g,Enlatados,3,7900,0,C-146,transferencia
+2026-10-01,F-202610-01-006,GAS-15,Gaseosa 1.5 L,Bebidas,2,4800,0,C-146,transferencia
+2026-10-01,F-202610-01-006,YOG-1L,Yogur 1 L,Lácteos,3,8500,0,C-146,transferencia
+2026-10-01,F-202610-01-007,QUE-250,Queso 250 g,Lácteos,4,7200,0,C-046,efectivo
+2026-10-01,F-202610-01-007,ARR-1K,Arroz 1 kg,Granos,2,5800,0,C-046,efectivo
+2026-10-01,F-202610-01-007,ATU-170,Atún 170 g,Enlatados,2,7900,0,C-046,efectivo
+2026-10-01,F-202610-01-008,DET-1K,Detergente 1 kg,Aseo,4,11500,0,,efectivo
+2026-10-01,F-202610-01-008,GAS-15,Gaseosa 1.5 L,Bebidas,3,4800,0,,efectivo
+2026-10-01,F-202610-01-008,PAN-TAJ,Pan tajado,Panadería,4,6800,0,,efectivo
+2026-10-01,F-202610-01-009,GAS-15,Gaseosa 1.5 L,Bebidas,3,4800,0,,tarjeta
+2026-10-01,F-202610-01-009,YOG-1L,Yogur 1 L,Lácteos,1,8500,0,,tarjeta
+2026-10-01,F-202610-01-009,DET-1K,Detergente 1 kg,Aseo,1,11500,0,,tarjeta
+2026-10-01,F-202610-01-010,DET-1K,Detergente 1 kg,Aseo,4,11500,0,,efectivo
+2026-10-01,F-202610-01-010,LEN-500,Lentejas 500 g,Granos,3,3800,0,,efectivo
+2026-10-01,F-202610-01-010,GAS-15,Gaseosa 1.5 L,Bebidas,1,4800,0,,efectivo
+2026-10-01,F-202610-01-011,GAS-15,Gaseosa 1.5 L,Bebidas,2,4800,0,C-067,efectivo
+2026-10-01,F-202610-01-011,YOG-1L,Yogur 1 L,Lácteos,1,8500,0,C-067,efectivo
+2026-10-01,F-202610-01-011,PAP-150,Papas fritas 150 g,Snacks,1,5200,0,C-067,efectivo
+2026-10-01,F-202610-01-012,PAN-TAJ,Pan tajado,Panadería,2,6800,0,C-007,tarjeta
+2026-10-01,F-202610-01-012,GAS-15,Gaseosa 1.5 L,Bebidas,3,4800,0,C-007,tarjeta
+2026-10-01,F-202610-01-012,LEC-1L,Leche entera 1 L,Lácteos,4,4500,0,C-007,tarjeta
+2026-10-01,F-202610-01-013,JUG-1L,Jugo 1 L,Bebidas,2,5600,0,,efectivo
+2026-10-01,F-202610-01-013,GAS-15,Gaseosa 1.5 L,Bebidas,1,4800,0,,efectivo
+2026-10-01,F-202610-01-013,DET-1K,Detergente 1 kg,Aseo,1,11500,0,,efectivo
+2026-10-01,F-202610-01-014,GAS-15,Gaseosa 1.5 L,Bebidas,2,4800,0,C-056,efectivo
+2026-10-01,F-202610-01-014,YOG-1L,Yogur 1 L,Lácteos,2,8500,0,C-056,efectivo
+2026-10-01,F-202610-01-014,PAN-TAJ,Pan tajado,Panadería,4,6800,0,C-056,efectivo
+2026-10-01,F-202610-01-015,YOG-1L,Yogur 1 L,Lácteos,4,8500,0,C-083,tarjeta
+2026-10-01,F-202610-01-015,LEC-1L,Leche entera 1 L,Lácteos,2,4500,0,C-083,tarjeta
+2026-10-01,F-202610-01-015,GAS-15,Gaseosa 1.5 L,Bebidas,3,4800,0,C-083,tarjeta
+2026-10-01,F-202610-01-016,DET-1K,Detergente 1 kg,Aseo,1,11500,0,C-033,efectivo
+2026-10-01,F-202610-01-016,GAS-15,Gaseosa 1.5 L,Bebidas,4,4800,0,C-033,efectivo
+2026-10-01,F-202610-01-016,AGU-600,Agua 600 ml,Bebidas,4,2200,0,C-033,efectivo
+2026-10-01,F-202610-01-017,LEN-500,Lentejas 500 g,Granos,4,3800,0,,transferencia
+2026-10-01,F-202610-01-017,YOG-1L,Yogur 1 L,Lácteos,4,8500,0,,transferencia
+2026-10-01,F-202610-01-017,DET-1K,Detergente 1 kg,Aseo,2,11500,0,,transferencia
+2026-10-01,F-202610-01-018,GAS-15,Gaseosa 1.5 L,Bebidas,1,4800,0,C-076,tarjeta
+2026-10-01,F-202610-01-018,LEC-1L,Leche entera 1 L,Lácteos,1,4500,0,C-076,tarjeta
+2026-10-01,F-202610-01-018,PAN-TAJ,Pan tajado,Panadería,3,6800,0,C-076,tarjeta
+2026-10-01,F-202610-01-019,DET-1K,Detergente 1 kg,Aseo,3,11500,0,,transferencia
+2026-10-01,F-202610-01-019,GAL-PAQ,Galletas paquete,Snacks,1,2800,0,,transferencia
+2026-10-01,F-202610-01-019,QUE-250,Queso 250 g,Lácteos,3,7200,0,,transferencia
+2026-10-01,F-202610-01-020,GAS-15,Gaseosa 1.5 L,Bebidas,2,4800,0,C-084,efectivo
+2026-10-01,F-202610-01-020,YOG-1L,Yogur 1 L,Lácteos,4,8500,0,C-084,efectivo
+2026-10-01,F-202610-01-020,GAL-PAQ,Galletas paquete,Snacks,1,2800,0,C-084,efectivo
+2026-10-02,F-202610-02-001,DET-1K,Detergente 1 kg,Aseo,4,11500,0,C-020,transferencia
+2026-10-02,F-202610-02-001,LEN-500,Lentejas 500 g,Granos,1,3800,0,C-020,transferencia
+2026-10-02,F-202610-02-001,GAS-15,Gaseosa 1.5 L,Bebidas,1,4800,0,C-020,transferencia
+2026-10-02,F-202610-02-002,YOG-1L,Yogur 1 L,Lácteos,3,8500,0,C-149,tarjeta
+2026-10-02,F-202610-02-002,DET-1K,Detergente 1 kg,Aseo,4,11500,0,C-149,tarjeta
+2026-10-02,F-202610-02-002,GAS-15,Gaseosa 1.5 L,Bebidas,1,4800,0,C-149,tarjeta
+2026-10-02,F-202610-02-003,QUE-250,Queso 250 g,Lácteos,3,7200,0,C-039,tarjeta
+2026-10-02,F-202610-02-003,DET-1K,Detergente 1 kg,Aseo,4,11500,0,C-039,tarjeta
+2026-10-02,F-202610-02-003,YOG-1L,Yogur 1 L,Lácteos,4,8500,0,C-039,tarjeta
+2026-10-02,F-202610-02-004,DET-1K,Detergente 1 kg,Aseo,2,11500,0,C-064,efectivo
+2026-10-02,F-202610-02-004,GAS-15,Gaseosa 1.5 L,Bebidas,4,4800,0,C-064,efectivo
+2026-10-02,F-202610-02-004,FRJ-500,Frijol 500 g,Granos,3,4500,0,C-064,efectivo
+2026-10-02,F-202610-02-005,DET-1K,Detergente 1 kg,Aseo,3,11500,0,C-039,transferencia
+2026-10-02,F-202610-02-005,GAS-15,Gaseosa 1.5 L,Bebidas,4,4800,0,C-039,transferencia
+2026-10-02,F-202610-02-005,LEC-1L,Leche entera 1 L,Lácteos,3,4500,0,C-039,transferencia
+2026-10-02,F-202610-02-006,GAS-15,Gaseosa 1.5 L,Bebidas,3,4800,0,,tarjeta
+2026-10-02,F-202610-02-006,YOG-1L,Yogur 1 L,Lácteos,3,8500,0,,tarjeta
+2026-10-02,F-202610-02-006,PAP-150,Papas fritas 150 g,Snacks,1,5200,0,,tarjeta
+2026-10-02,F-202610-02-007,DET-1K,Detergente 1 kg,Aseo,4,11500,0,C-004,efectivo
+2026-10-02,F-202610-02-007,JAB-250,Jabón de baño,Aseo,3,3900,0,C-004,efectivo
+2026-10-02,F-202610-02-007,GAS-15,Gaseosa 1.5 L,Bebidas,3,4800,0,C-004,efectivo
+2026-10-02,F-202610-02-008,GAS-15,Gaseosa 1.5 L,Bebidas,4,4800,0,,tarjeta
+2026-10-02,F-202610-02-008,YOG-1L,Yogur 1 L,Lácteos,3,8500,0,,tarjeta
+2026-10-02,F-202610-02-008,AGU-600,Agua 600 ml,Bebidas,2,2200,0,,tarjeta
+2026-10-02,F-202610-02-009,DET-1K,Detergente 1 kg,Aseo,4,11500,0,,transferencia
+2026-10-02,F-202610-02-009,ARZ-500,Arroz Diana 500 g,Granos,2,3200,0,,transferencia
+2026-10-02,F-202610-02-009,GAS-15,Gaseosa 1.5 L,Bebidas,2,4800,0,,transferencia
+2026-10-02,F-202610-02-010,GAS-15,Gaseosa 1.5 L,Bebidas,3,4800,0,,transferencia
+2026-10-02,F-202610-02-010,DET-1K,Detergente 1 kg,Aseo,2,11500,0,,transferencia
+2026-10-02,F-202610-02-010,PAP-150,Papas fritas 150 g,Snacks,1,5200,0,,transferencia
+2026-10-02,F-202610-02-011,YOG-1L,Yogur 1 L,Lácteos,4,8500,0,C-091,tarjeta
+2026-10-02,F-202610-02-011,ATU-170,Atún 170 g,Enlatados,3,7900,0,C-091,tarjeta
+2026-10-02,F-202610-02-011,LEN-500,Lentejas 500 g,Granos,4,3800,0,C-091,tarjeta
+2026-10-02,F-202610-02-012,GAS-15,Gaseosa 1.5 L,Bebidas,3,4800,0,C-040,tarjeta
+2026-10-02,F-202610-02-012,AGU-600,Agua 600 ml,Bebidas,2,2200,0,C-040,tarjeta
+2026-10-02,F-202610-02-012,DET-1K,Detergente 1 kg,Aseo,3,11500,0,C-040,tarjeta
+2026-10-02,F-202610-02-013,YOG-1L,Yogur 1 L,Lácteos,2,8500,0,C-065,efectivo
+2026-10-02,F-202610-02-013,JUG-1L,Jugo 1 L,Bebidas,4,5600,0,C-065,efectivo
+2026-10-02,F-202610-02-013,DET-1K,Detergente 1 kg,Aseo,3,11500,0,C-065,efectivo
+2026-10-02,F-202610-02-014,JUG-1L,Jugo 1 L,Bebidas,2,5600,0,C-103,efectivo
+2026-10-02,F-202610-02-014,DET-1K,Detergente 1 kg,Aseo,2,11500,0,C-103,efectivo
+2026-10-02,F-202610-02-014,GAS-15,Gaseosa 1.5 L,Bebidas,1,4800,0,C-103,efectivo
+2026-10-02,F-202610-02-015,YOG-1L,Yogur 1 L,Lácteos,4,8500,0,,tarjeta
+2026-10-02,F-202610-02-015,GAS-15,Gaseosa 1.5 L,Bebidas,2,4800,0,,tarjeta
+2026-10-02,F-202610-02-015,GAL-PAQ,Galletas paquete,Snacks,3,2800,0,,tarjeta
+2026-10-02,F-202610-02-016,YOG-1L,Yogur 1 L,Lácteos,1,8500,0,,efectivo
+2026-10-02,F-202610-02-016,LEC-1L,Leche entera 1 L,Lácteos,3,4500,0,,efectivo
+2026-10-02,F-202610-02-016,AGU-600,Agua 600 ml,Bebidas,3,2200,0,,efectivo
+2026-10-02,F-202610-02-017,DET-1K,Detergente 1 kg,Aseo,2,11500,0,,efectivo
+2026-10-02,F-202610-02-017,PAN-TAJ,Pan tajado,Panadería,1,6800,0,,efectivo
+2026-10-02,F-202610-02-017,YOG-1L,Yogur 1 L,Lácteos,2,8500,0,,efectivo
+2026-10-02,F-202610-02-018,DET-1K,Detergente 1 kg,Aseo,3,11500,0,C-115,transferencia
+2026-10-02,F-202610-02-018,YOG-1L,Yogur 1 L,Lácteos,4,8500,0,C-115,transferencia
+2026-10-02,F-202610-02-018,JUG-1L,Jugo 1 L,Bebidas,4,5600,0,C-115,transferencia
+2026-10-02,F-202610-02-019,JUG-1L,Jugo 1 L,Bebidas,4,5600,0,C-141,tarjeta
+2026-10-02,F-202610-02-019,GAS-15,Gaseosa 1.5 L,Bebidas,1,4800,0,C-141,tarjeta
+2026-10-02,F-202610-02-019,DET-1K,Detergente 1 kg,Aseo,3,11500,0,C-141,tarjeta
+2026-10-02,F-202610-02-020,GAS-15,Gaseosa 1.5 L,Bebidas,4,4800,0,,tarjeta
+2026-10-02,F-202610-02-020,YOG-1L,Yogur 1 L,Lácteos,3,8500,0,,tarjeta
+2026-10-02,F-202610-02-020,DET-1K,Detergente 1 kg,Aseo,4,11500,0,,tarjeta
+2026-10-03,F-202610-03-001,JUG-1L,Jugo 1 L,Bebidas,1,5600,0,C-083,tarjeta
+2026-10-03,F-202610-03-001,PAP-150,Papas fritas 150 g,Snacks,1,5200,0,C-083,tarjeta
+2026-10-03,F-202610-03-001,FRJ-500,Frijol 500 g,Granos,4,4500,0,C-083,tarjeta
+2026-10-03,F-202610-03-002,AGU-600,Agua 600 ml,Bebidas,2,2200,0,C-124,efectivo
+2026-10-03,F-202610-03-002,JUG-1L,Jugo 1 L,Bebidas,1,5600,0,C-124,efectivo
+2026-10-03,F-202610-03-002,YOG-1L,Yogur 1 L,Lácteos,3,8500,0,C-124,efectivo
+2026-10-03,F-202610-03-003,DET-1K,Detergente 1 kg,Aseo,3,11500,0,C-005,tarjeta
+2026-10-03,F-202610-03-003,QUE-250,Queso 250 g,Lácteos,4,7200,0,C-005,tarjeta
+2026-10-03,F-202610-03-003,LEC-1L,Leche entera 1 L,Lácteos,3,4500,0,C-005,tarjeta
+2026-10-03,F-202610-03-004,GAS-15,Gaseosa 1.5 L,Bebidas,2,4800,0,,efectivo
+2026-10-03,F-202610-03-004,LEC-1L,Leche entera 1 L,Lácteos,2,4500,0,,efectivo
+2026-10-03,F-202610-03-004,ARR-1K,Arroz 1 kg,Granos,3,5800,0,,efectivo
+2026-10-03,F-202610-03-005,GAS-15,Gaseosa 1.5 L,Bebidas,4,4800,0,C-121,transferencia
+2026-10-03,F-202610-03-005,YOG-1L,Yogur 1 L,Lácteos,3,8500,0,C-121,transferencia
+2026-10-03,F-202610-03-005,AGU-600,Agua 600 ml,Bebidas,2,2200,0,C-121,transferencia
+2026-10-03,F-202610-03-006,DET-1K,Detergente 1 kg,Aseo,3,11500,0,C-054,transferencia
+2026-10-03,F-202610-03-006,ARR-1K,Arroz 1 kg,Granos,2,5800,0,C-054,transferencia
+2026-10-03,F-202610-03-006,ATU-170,Atún 170 g,Enlatados,1,7900,0,C-054,transferencia
+2026-10-03,F-202610-03-007,GAS-15,Gaseosa 1.5 L,Bebidas,4,4800,0,C-029,transferencia
+2026-10-03,F-202610-03-007,DET-1K,Detergente 1 kg,Aseo,3,11500,0,C-029,transferencia
+2026-10-03,F-202610-03-007,YOG-1L,Yogur 1 L,Lácteos,1,8500,0,C-029,transferencia
+2026-10-03,F-202610-03-008,DET-1K,Detergente 1 kg,Aseo,3,11500,0,,tarjeta
+2026-10-03,F-202610-03-008,GAS-15,Gaseosa 1.5 L,Bebidas,4,4800,0,,tarjeta
+2026-10-03,F-202610-03-008,JAB-250,Jabón de baño,Aseo,3,3900,0,,tarjeta
+2026-10-03,F-202610-03-009,DET-1K,Detergente 1 kg,Aseo,3,11500,0,C-002,tarjeta
+2026-10-03,F-202610-03-009,PAP-150,Papas fritas 150 g,Snacks,3,5200,0,C-002,tarjeta
+2026-10-03,F-202610-03-009,YOG-1L,Yogur 1 L,Lácteos,3,8500,0,C-002,tarjeta
+2026-10-03,F-202610-03-010,YOG-1L,Yogur 1 L,Lácteos,3,8500,0,,transferencia
+2026-10-03,F-202610-03-010,ATU-170,Atún 170 g,Enlatados,4,7900,0,,transferencia
+2026-10-03,F-202610-03-010,GAS-15,Gaseosa 1.5 L,Bebidas,2,4800,0,,transferencia
+2026-10-03,F-202610-03-011,YOG-1L,Yogur 1 L,Lácteos,2,8500,0,C-020,efectivo
+2026-10-03,F-202610-03-011,PAP-150,Papas fritas 150 g,Snacks,3,5200,0,C-020,efectivo
+2026-10-03,F-202610-03-011,GAS-15,Gaseosa 1.5 L,Bebidas,3,4800,0,C-020,efectivo
+2026-10-03,F-202610-03-012,YOG-1L,Yogur 1 L,Lácteos,2,8500,0,,efectivo
+2026-10-03,F-202610-03-012,ARZ-500,Arroz Diana 500 g,Granos,4,3200,0,,efectivo
+2026-10-03,F-202610-03-012,ATU-170,Atún 170 g,Enlatados,2,7900,0,,efectivo
+2026-10-03,F-202610-03-013,LEN-500,Lentejas 500 g,Granos,4,3800,0,C-078,transferencia
+2026-10-03,F-202610-03-013,YOG-1L,Yogur 1 L,Lácteos,3,8500,0,C-078,transferencia
+2026-10-03,F-202610-03-013,DET-1K,Detergente 1 kg,Aseo,3,11500,0,C-078,transferencia
+2026-10-03,F-202610-03-014,YOG-1L,Yogur 1 L,Lácteos,4,8500,0,,efectivo
+2026-10-03,F-202610-03-014,GAL-PAQ,Galletas paquete,Snacks,4,2800,0,,efectivo
+2026-10-03,F-202610-03-014,DET-1K,Detergente 1 kg,Aseo,4,11500,0,,efectivo
+2026-10-03,F-202610-03-015,DET-1K,Detergente 1 kg,Aseo,1,11500,0,,tarjeta
+2026-10-03,F-202610-03-015,LEN-500,Lentejas 500 g,Granos,4,3800,0,,tarjeta
+2026-10-03,F-202610-03-015,YOG-1L,Yogur 1 L,Lácteos,1,8500,0,,tarjeta
+2026-10-03,F-202610-03-016,JAB-250,Jabón de baño,Aseo,1,3900,0,C-119,efectivo
+2026-10-03,F-202610-03-016,GAS-15,Gaseosa 1.5 L,Bebidas,1,4800,0,C-119,efectivo
+2026-10-03,F-202610-03-016,YOG-1L,Yogur 1 L,Lácteos,1,8500,0,C-119,efectivo
+2026-10-03,F-202610-03-017,DET-1K,Detergente 1 kg,Aseo,4,11500,0,C-100,tarjeta
+2026-10-03,F-202610-03-017,YOG-1L,Yogur 1 L,Lácteos,4,8500,0,C-100,tarjeta
+2026-10-03,F-202610-03-017,GAS-15,Gaseosa 1.5 L,Bebidas,3,4800,0,C-100,tarjeta
+2026-10-03,F-202610-03-018,DET-1K,Detergente 1 kg,Aseo,3,11500,0,,tarjeta
+2026-10-03,F-202610-03-018,GAS-15,Gaseosa 1.5 L,Bebidas,3,4800,0,,tarjeta
+2026-10-03,F-202610-03-018,LEN-500,Lentejas 500 g,Granos,2,3800,0,,tarjeta
+2026-10-03,F-202610-03-019,YOG-1L,Yogur 1 L,Lácteos,1,8500,0,,tarjeta
+2026-10-03,F-202610-03-019,LEN-500,Lentejas 500 g,Granos,2,3800,0,,tarjeta
+2026-10-03,F-202610-03-019,GAL-PAQ,Galletas paquete,Snacks,1,2800,0,,tarjeta
+2026-10-03,F-202610-03-020,YOG-1L,Yogur 1 L,Lácteos,4,8500,0,,transferencia
+2026-10-03,F-202610-03-020,DET-1K,Detergente 1 kg,Aseo,2,11500,0,,transferencia
+2026-10-03,F-202610-03-020,FRJ-500,Frijol 500 g,Granos,3,4500,0,,transferencia
+2026-10-04,F-202610-04-001,DET-1K,Detergente 1 kg,Aseo,3,11500,0,C-140,tarjeta
+2026-10-04,F-202610-04-001,GAS-15,Gaseosa 1.5 L,Bebidas,2,4800,0,C-140,tarjeta
+2026-10-04,F-202610-04-001,ARR-1K,Arroz 1 kg,Granos,4,5800,0,C-140,tarjeta
+2026-10-04,F-202610-04-002,LEN-500,Lentejas 500 g,Granos,4,3800,0,C-083,efectivo
+2026-10-04,F-202610-04-002,GAL-PAQ,Galletas paquete,Snacks,3,2800,0,C-083,efectivo
+2026-10-04,F-202610-04-002,QUE-250,Queso 250 g,Lácteos,1,7200,0,C-083,efectivo
+2026-10-04,F-202610-04-003,DET-1K,Detergente 1 kg,Aseo,4,11500,0,C-089,efectivo
+2026-10-04,F-202610-04-003,JAB-250,Jabón de baño,Aseo,2,3900,0,C-089,efectivo
+2026-10-04,F-202610-04-003,YOG-1L,Yogur 1 L,Lácteos,3,8500,0,C-089,efectivo
+2026-10-04,F-202610-04-004,GAS-15,Gaseosa 1.5 L,Bebidas,3,4800,0,C-036,transferencia
+2026-10-04,F-202610-04-004,YOG-1L,Yogur 1 L,Lácteos,1,8500,0,C-036,transferencia
+2026-10-04,F-202610-04-004,DET-1K,Detergente 1 kg,Aseo,3,11500,0,C-036,transferencia
+2026-10-04,F-202610-04-005,YOG-1L,Yogur 1 L,Lácteos,2,8500,0,C-070,tarjeta
+2026-10-04,F-202610-04-005,QUE-250,Queso 250 g,Lácteos,2,7200,0,C-070,tarjeta
+2026-10-04,F-202610-04-005,PAN-TAJ,Pan tajado,Panadería,3,6800,0,C-070,tarjeta
+2026-10-04,F-202610-04-006,DET-1K,Detergente 1 kg,Aseo,2,11500,0,,efectivo
+2026-10-04,F-202610-04-006,AGU-600,Agua 600 ml,Bebidas,4,2200,0,,efectivo
+2026-10-04,F-202610-04-006,YOG-1L,Yogur 1 L,Lácteos,4,8500,0,,efectivo
+2026-10-04,F-202610-04-007,YOG-1L,Yogur 1 L,Lácteos,1,8500,0,C-012,efectivo
+2026-10-04,F-202610-04-007,PAN-TAJ,Pan tajado,Panadería,4,6800,0,C-012,efectivo
+2026-10-04,F-202610-04-007,LEC-1L,Leche entera 1 L,Lácteos,2,4500,0,C-012,efectivo
+2026-10-04,F-202610-04-008,YOG-1L,Yogur 1 L,Lácteos,1,8500,0,C-034,tarjeta
+2026-10-04,F-202610-04-008,LEC-1L,Leche entera 1 L,Lácteos,3,4500,0,C-034,tarjeta
+2026-10-04,F-202610-04-008,GAS-15,Gaseosa 1.5 L,Bebidas,3,4800,0,C-034,tarjeta
+2026-10-04,F-202610-04-009,PAP-150,Papas fritas 150 g,Snacks,3,5200,0,C-025,efectivo
+2026-10-04,F-202610-04-009,YOG-1L,Yogur 1 L,Lácteos,4,8500,0,C-025,efectivo
+2026-10-04,F-202610-04-009,DET-1K,Detergente 1 kg,Aseo,2,11500,0,C-025,efectivo
+2026-10-04,F-202610-04-010,DET-1K,Detergente 1 kg,Aseo,1,11500,0,C-037,efectivo
+2026-10-04,F-202610-04-010,PAN-TAJ,Pan tajado,Panadería,4,6800,0,C-037,efectivo
+2026-10-04,F-202610-04-010,LEN-500,Lentejas 500 g,Granos,2,3800,0,C-037,efectivo
+2026-10-04,F-202610-04-011,YOG-1L,Yogur 1 L,Lácteos,3,8500,0,C-073,tarjeta
+2026-10-04,F-202610-04-011,GAL-PAQ,Galletas paquete,Snacks,1,2800,0,C-073,tarjeta
+2026-10-04,F-202610-04-011,AGU-600,Agua 600 ml,Bebidas,3,2200,0,C-073,tarjeta
+2026-10-04,F-202610-04-012,DET-1K,Detergente 1 kg,Aseo,1,11500,0,,transferencia
+2026-10-04,F-202610-04-012,GAS-15,Gaseosa 1.5 L,Bebidas,4,4800,0,,transferencia
+2026-10-04,F-202610-04-012,JAB-250,Jabón de baño,Aseo,3,3900,0,,transferencia
+2026-10-04,F-202610-04-013,YOG-1L,Yogur 1 L,Lácteos,3,8500,0,,tarjeta
+2026-10-04,F-202610-04-013,ATU-170,Atún 170 g,Enlatados,4,7900,0,,tarjeta
+2026-10-04,F-202610-04-013,GAS-15,Gaseosa 1.5 L,Bebidas,3,4800,0,,tarjeta
+2026-10-04,F-202610-04-014,DET-1K,Detergente 1 kg,Aseo,2,11500,0,,transferencia
+2026-10-04,F-202610-04-014,PAP-150,Papas fritas 150 g,Snacks,2,5200,0,,transferencia
+2026-10-04,F-202610-04-014,GAS-15,Gaseosa 1.5 L,Bebidas,4,4800,0,,transferencia
+2026-10-04,F-202610-04-015,DET-1K,Detergente 1 kg,Aseo,2,11500,0,C-009,efectivo
+2026-10-04,F-202610-04-015,LEN-500,Lentejas 500 g,Granos,2,3800,0,C-009,efectivo
+2026-10-04,F-202610-04-015,GAL-PAQ,Galletas paquete,Snacks,4,2800,0,C-009,efectivo
+2026-10-04,F-202610-04-016,LEN-500,Lentejas 500 g,Granos,1,3800,0,,transferencia
+2026-10-04,F-202610-04-016,FRJ-500,Frijol 500 g,Granos,2,4500,0,,transferencia
+2026-10-04,F-202610-04-016,GAS-15,Gaseosa 1.5 L,Bebidas,4,4800,0,,transferencia
+2026-10-04,F-202610-04-017,QUE-250,Queso 250 g,Lácteos,1,7200,0,C-089,efectivo
+2026-10-04,F-202610-04-017,DET-1K,Detergente 1 kg,Aseo,4,11500,0,C-089,efectivo
+2026-10-04,F-202610-04-017,YOG-1L,Yogur 1 L,Lácteos,4,8500,0,C-089,efectivo
+2026-10-04,F-202610-04-018,ARZ-500,Arroz Diana 500 g,Granos,2,3200,0,C-120,tarjeta
+2026-10-04,F-202610-04-018,YOG-1L,Yogur 1 L,Lácteos,4,8500,0,C-120,tarjeta
+2026-10-04,F-202610-04-018,PAN-TAJ,Pan tajado,Panadería,1,6800,0,C-120,tarjeta
+2026-10-04,F-202610-04-019,LEC-1L,Leche entera 1 L,Lácteos,1,4500,0,,efectivo
+2026-10-04,F-202610-04-019,YOG-1L,Yogur 1 L,Lácteos,1,8500,0,,efectivo
+2026-10-04,F-202610-04-019,QUE-250,Queso 250 g,Lácteos,4,7200,0,,efectivo
+2026-10-04,F-202610-04-020,GAS-15,Gaseosa 1.5 L,Bebidas,3,4800,0,,tarjeta
+2026-10-04,F-202610-04-020,JUG-1L,Jugo 1 L,Bebidas,1,5600,0,,tarjeta
+2026-10-04,F-202610-04-020,YOG-1L,Yogur 1 L,Lácteos,3,8500,0,,tarjeta
+2026-10-05,F-202610-05-001,ARZ-500,Arroz Diana 500 g,Granos,3,3200,0,,tarjeta
+2026-10-05,F-202610-05-001,GAS-15,Gaseosa 1.5 L,Bebidas,1,4800,0,,tarjeta
+2026-10-05,F-202610-05-001,DET-1K,Detergente 1 kg,Aseo,1,11500,0,,tarjeta
+2026-10-05,F-202610-05-002,ARZ-500,Arroz Diana 500 g,Granos,3,3200,0,C-072,tarjeta
+2026-10-05,F-202610-05-002,PAP-150,Papas fritas 150 g,Snacks,3,5200,0,C-072,tarjeta
+2026-10-05,F-202610-05-002,GAS-15,Gaseosa 1.5 L,Bebidas,3,4800,0,C-072,tarjeta
+2026-10-05,F-202610-05-003,DET-1K,Detergente 1 kg,Aseo,2,11500,0,C-123,transferencia
+2026-10-05,F-202610-05-003,LEN-500,Lentejas 500 g,Granos,4,3800,0,C-123,transferencia
+2026-10-05,F-202610-05-003,YOG-1L,Yogur 1 L,Lácteos,4,8500,0,C-123,transferencia
+2026-10-05,F-202610-05-004,ARR-1K,Arroz 1 kg,Granos,1,5800,0,C-042,transferencia
+2026-10-05,F-202610-05-004,YOG-1L,Yogur 1 L,Lácteos,1,8500,0,C-042,transferencia
+2026-10-05,F-202610-05-004,FRJ-500,Frijol 500 g,Granos,1,4500,0,C-042,transferencia
+2026-10-05,F-202610-05-005,PAN-TAJ,Pan tajado,Panadería,2,6800,0,,transferencia
+2026-10-05,F-202610-05-005,GAS-15,Gaseosa 1.5 L,Bebidas,3,4800,0,,transferencia
+2026-10-05,F-202610-05-005,LEC-1L,Leche entera 1 L,Lácteos,2,4500,0,,transferencia
+2026-10-05,F-202610-05-006,YOG-1L,Yogur 1 L,Lácteos,1,8500,0,,efectivo
+2026-10-05,F-202610-05-006,DET-1K,Detergente 1 kg,Aseo,2,11500,0,,efectivo
+2026-10-05,F-202610-05-006,PAP-150,Papas fritas 150 g,Snacks,1,5200,0,,efectivo
+2026-10-05,F-202610-05-007,GAS-15,Gaseosa 1.5 L,Bebidas,3,4800,0,,efectivo
+2026-10-05,F-202610-05-007,FRJ-500,Frijol 500 g,Granos,1,4500,0,,efectivo
+2026-10-05,F-202610-05-007,LEN-500,Lentejas 500 g,Granos,2,3800,0,,efectivo
+2026-10-05,F-202610-05-008,DET-1K,Detergente 1 kg,Aseo,3,11500,0,,tarjeta
+2026-10-05,F-202610-05-008,PAN-TAJ,Pan tajado,Panadería,2,6800,0,,tarjeta
+2026-10-05,F-202610-05-008,GAS-15,Gaseosa 1.5 L,Bebidas,4,4800,0,,tarjeta
+2026-10-05,F-202610-05-009,JAB-250,Jabón de baño,Aseo,2,3900,0,,transferencia
+2026-10-05,F-202610-05-009,YOG-1L,Yogur 1 L,Lácteos,3,8500,0,,transferencia
+2026-10-05,F-202610-05-009,GAL-PAQ,Galletas paquete,Snacks,1,2800,0,,transferencia
+2026-10-05,F-202610-05-010,GAS-15,Gaseosa 1.5 L,Bebidas,4,4800,0,,tarjeta
+2026-10-05,F-202610-05-010,LEN-500,Lentejas 500 g,Granos,1,3800,0,,tarjeta
+2026-10-05,F-202610-05-010,ARZ-500,Arroz Diana 500 g,Granos,2,3200,0,,tarjeta
+2026-10-05,F-202610-05-011,DET-1K,Detergente 1 kg,Aseo,3,11500,0,,tarjeta
+2026-10-05,F-202610-05-011,GAS-15,Gaseosa 1.5 L,Bebidas,4,4800,0,,tarjeta
+2026-10-05,F-202610-05-011,PAP-150,Papas fritas 150 g,Snacks,2,5200,0,,tarjeta
+2026-10-05,F-202610-05-012,YOG-1L,Yogur 1 L,Lácteos,2,8500,0,C-013,efectivo
+2026-10-05,F-202610-05-012,DET-1K,Detergente 1 kg,Aseo,1,11500,0,C-013,efectivo
+2026-10-05,F-202610-05-012,JUG-1L,Jugo 1 L,Bebidas,2,5600,0,C-013,efectivo
+2026-10-05,F-202610-05-013,GAS-15,Gaseosa 1.5 L,Bebidas,4,4800,0,C-058,tarjeta
+2026-10-05,F-202610-05-013,PAP-150,Papas fritas 150 g,Snacks,4,5200,0,C-058,tarjeta
+2026-10-05,F-202610-05-013,DET-1K,Detergente 1 kg,Aseo,1,11500,0,C-058,tarjeta
+2026-10-05,F-202610-05-014,GAS-15,Gaseosa 1.5 L,Bebidas,4,4800,0,C-109,transferencia
+2026-10-05,F-202610-05-014,DET-1K,Detergente 1 kg,Aseo,2,11500,0,C-109,transferencia
+2026-10-05,F-202610-05-014,LEN-500,Lentejas 500 g,Granos,4,3800,0,C-109,transferencia
+2026-10-05,F-202610-05-015,JUG-1L,Jugo 1 L,Bebidas,4,5600,0,C-086,tarjeta
+2026-10-05,F-202610-05-015,ARR-1K,Arroz 1 kg,Granos,1,5800,0,C-086,tarjeta
+2026-10-05,F-202610-05-015,YOG-1L,Yogur 1 L,Lácteos,1,8500,0,C-086,tarjeta
+2026-10-05,F-202610-05-016,DET-1K,Detergente 1 kg,Aseo,4,11500,0,C-049,efectivo
+2026-10-05,F-202610-05-016,PAN-TAJ,Pan tajado,Panadería,4,6800,0,C-049,efectivo
+2026-10-05,F-202610-05-016,GAS-15,Gaseosa 1.5 L,Bebidas,2,4800,0,C-049,efectivo
+2026-10-05,F-202610-05-017,GAS-15,Gaseosa 1.5 L,Bebidas,1,4800,0,,transferencia
+2026-10-05,F-202610-05-017,AGU-600,Agua 600 ml,Bebidas,1,2200,0,,transferencia
+2026-10-05,F-202610-05-017,ARZ-500,Arroz Diana 500 g,Granos,3,3200,0,,transferencia
+2026-10-05,F-202610-05-018,YOG-1L,Yogur 1 L,Lácteos,1,8500,0,,tarjeta
+2026-10-05,F-202610-05-018,PAN-TAJ,Pan tajado,Panadería,4,6800,0,,tarjeta
+2026-10-05,F-202610-05-018,AGU-600,Agua 600 ml,Bebidas,1,2200,0,,tarjeta
+2026-10-05,F-202610-05-019,PAP-150,Papas fritas 150 g,Snacks,1,5200,0,,tarjeta
+2026-10-05,F-202610-05-019,GAS-15,Gaseosa 1.5 L,Bebidas,4,4800,0,,tarjeta
+2026-10-05,F-202610-05-019,YOG-1L,Yogur 1 L,Lácteos,1,8500,0,,tarjeta
+2026-10-05,F-202610-05-020,PAN-TAJ,Pan tajado,Panadería,1,6800,0,,transferencia
+2026-10-05,F-202610-05-020,YOG-1L,Yogur 1 L,Lácteos,2,8500,0,,transferencia
+2026-10-05,F-202610-05-020,DET-1K,Detergente 1 kg,Aseo,1,11500,0,,transferencia
+2026-10-06,F-202610-06-001,DET-1K,Detergente 1 kg,Aseo,4,11500,0,,tarjeta
+2026-10-06,F-202610-06-001,JUG-1L,Jugo 1 L,Bebidas,1,5600,0,,tarjeta
+2026-10-06,F-202610-06-001,YOG-1L,Yogur 1 L,Lácteos,4,8500,0,,tarjeta
+2026-10-06,F-202610-06-002,GAS-15,Gaseosa 1.5 L,Bebidas,1,4800,0,,tarjeta
+2026-10-06,F-202610-06-002,QUE-250,Queso 250 g,Lácteos,2,7200,0,,tarjeta
+2026-10-06,F-202610-06-002,ARR-1K,Arroz 1 kg,Granos,2,5800,0,,tarjeta
+2026-10-06,F-202610-06-003,YOG-1L,Yogur 1 L,Lácteos,1,8500,0,C-114,tarjeta
+2026-10-06,F-202610-06-003,GAS-15,Gaseosa 1.5 L,Bebidas,1,4800,0,C-114,tarjeta
+2026-10-06,F-202610-06-003,ARZ-500,Arroz Diana 500 g,Granos,3,3200,0,C-114,tarjeta
+2026-10-06,F-202610-06-004,YOG-1L,Yogur 1 L,Lácteos,2,8500,0,,transferencia
+2026-10-06,F-202610-06-004,ARZ-500,Arroz Diana 500 g,Granos,4,3200,0,,transferencia
+2026-10-06,F-202610-06-004,DET-1K,Detergente 1 kg,Aseo,4,11500,0,,transferencia
+2026-10-06,F-202610-06-005,GAS-15,Gaseosa 1.5 L,Bebidas,1,4800,0,C-086,tarjeta
+2026-10-06,F-202610-06-005,DET-1K,Detergente 1 kg,Aseo,1,11500,0,C-086,tarjeta
+2026-10-06,F-202610-06-005,ARZ-500,Arroz Diana 500 g,Granos,2,3200,0,C-086,tarjeta
+2026-10-06,F-202610-06-006,YOG-1L,Yogur 1 L,Lácteos,4,8500,0,,tarjeta
+2026-10-06,F-202610-06-006,GAS-15,Gaseosa 1.5 L,Bebidas,1,4800,0,,tarjeta
+2026-10-06,F-202610-06-006,ARR-1K,Arroz 1 kg,Granos,3,5800,0,,tarjeta
+2026-10-06,F-202610-06-007,DET-1K,Detergente 1 kg,Aseo,2,11500,0,C-126,efectivo
+2026-10-06,F-202610-06-007,GAS-15,Gaseosa 1.5 L,Bebidas,3,4800,0,C-126,efectivo
+2026-10-06,F-202610-06-007,YOG-1L,Yogur 1 L,Lácteos,2,8500,0,C-126,efectivo
+2026-10-06,F-202610-06-008,ARZ-500,Arroz Diana 500 g,Granos,3,3200,0,C-030,efectivo
+2026-10-06,F-202610-06-008,GAS-15,Gaseosa 1.5 L,Bebidas,2,4800,0,C-030,efectivo
+2026-10-06,F-202610-06-008,LEC-1L,Leche entera 1 L,Lácteos,2,4500,0,C-030,efectivo
+2026-10-06,F-202610-06-009,GAS-15,Gaseosa 1.5 L,Bebidas,2,4800,0,,transferencia
+2026-10-06,F-202610-06-009,GAL-PAQ,Galletas paquete,Snacks,1,2800,0,,transferencia
+2026-10-06,F-202610-06-009,YOG-1L,Yogur 1 L,Lácteos,4,8500,0,,transferencia
+2026-10-06,F-202610-06-010,PAP-150,Papas fritas 150 g,Snacks,3,5200,0,C-116,efectivo
+2026-10-06,F-202610-06-010,YOG-1L,Yogur 1 L,Lácteos,2,8500,0,C-116,efectivo
+2026-10-06,F-202610-06-010,ATU-170,Atún 170 g,Enlatados,3,7900,0,C-116,efectivo
+2026-10-06,F-202610-06-011,ARZ-500,Arroz Diana 500 g,Granos,2,3200,0,C-018,efectivo
+2026-10-06,F-202610-06-011,YOG-1L,Yogur 1 L,Lácteos,1,8500,0,C-018,efectivo
+2026-10-06,F-202610-06-011,AGU-600,Agua 600 ml,Bebidas,4,2200,0,C-018,efectivo
+2026-10-06,F-202610-06-012,ARR-1K,Arroz 1 kg,Granos,1,5800,0,C-019,efectivo
+2026-10-06,F-202610-06-012,YOG-1L,Yogur 1 L,Lácteos,2,8500,0,C-019,efectivo
+2026-10-06,F-202610-06-012,GAS-15,Gaseosa 1.5 L,Bebidas,2,4800,0,C-019,efectivo
+2026-10-06,F-202610-06-013,GAS-15,Gaseosa 1.5 L,Bebidas,4,4800,0,C-073,tarjeta
+2026-10-06,F-202610-06-013,ARR-1K,Arroz 1 kg,Granos,2,5800,0,C-073,tarjeta
+2026-10-06,F-202610-06-013,YOG-1L,Yogur 1 L,Lácteos,3,8500,0,C-073,tarjeta
+2026-10-06,F-202610-06-014,ARR-1K,Arroz 1 kg,Granos,1,5800,0,,efectivo
+2026-10-06,F-202610-06-014,DET-1K,Detergente 1 kg,Aseo,4,11500,0,,efectivo
+2026-10-06,F-202610-06-014,JAB-250,Jabón de baño,Aseo,2,3900,0,,efectivo
+2026-10-06,F-202610-06-015,GAL-PAQ,Galletas paquete,Snacks,2,2800,0,C-012,tarjeta
+2026-10-06,F-202610-06-015,YOG-1L,Yogur 1 L,Lácteos,1,8500,0,C-012,tarjeta
+2026-10-06,F-202610-06-015,DET-1K,Detergente 1 kg,Aseo,3,11500,0,C-012,tarjeta
+2026-10-06,F-202610-06-016,GAS-15,Gaseosa 1.5 L,Bebidas,3,4800,0,C-126,tarjeta
+2026-10-06,F-202610-06-016,DET-1K,Detergente 1 kg,Aseo,1,11500,0,C-126,tarjeta
+2026-10-06,F-202610-06-016,JUG-1L,Jugo 1 L,Bebidas,4,5600,0,C-126,tarjeta
+2026-10-06,F-202610-06-017,ATU-170,Atún 170 g,Enlatados,2,7900,0,C-141,efectivo
+2026-10-06,F-202610-06-017,YOG-1L,Yogur 1 L,Lácteos,1,8500,0,C-141,efectivo
+2026-10-06,F-202610-06-017,DET-1K,Detergente 1 kg,Aseo,1,11500,0,C-141,efectivo
+2026-10-06,F-202610-06-018,GAS-15,Gaseosa 1.5 L,Bebidas,4,4800,0,C-123,efectivo
+2026-10-06,F-202610-06-018,QUE-250,Queso 250 g,Lácteos,3,7200,0,C-123,efectivo
+2026-10-06,F-202610-06-018,YOG-1L,Yogur 1 L,Lácteos,1,8500,0,C-123,efectivo
+2026-10-06,F-202610-06-019,YOG-1L,Yogur 1 L,Lácteos,3,8500,0,C-069,efectivo
+2026-10-06,F-202610-06-019,GAL-PAQ,Galletas paquete,Snacks,3,2800,0,C-069,efectivo
+2026-10-06,F-202610-06-019,ATU-170,Atún 170 g,Enlatados,1,7900,0,C-069,efectivo
+2026-10-06,F-202610-06-020,GAS-15,Gaseosa 1.5 L,Bebidas,3,4800,0,,efectivo
+2026-10-06,F-202610-06-020,YOG-1L,Yogur 1 L,Lácteos,2,8500,0,,efectivo
+2026-10-06,F-202610-06-020,DET-1K,Detergente 1 kg,Aseo,2,11500,0,,efectivo
+2026-10-07,F-202610-07-001,PAP-150,Papas fritas 150 g,Snacks,3,5200,0,C-019,efectivo
+2026-10-07,F-202610-07-001,GAS-15,Gaseosa 1.5 L,Bebidas,4,4800,0,C-019,efectivo
+2026-10-07,F-202610-07-001,ARR-1K,Arroz 1 kg,Granos,1,5800,0,C-019,efectivo
+2026-10-07,F-202610-07-002,DET-1K,Detergente 1 kg,Aseo,3,11500,0,C-031,transferencia
+2026-10-07,F-202610-07-002,GAS-15,Gaseosa 1.5 L,Bebidas,3,4800,0,C-031,transferencia
+2026-10-07,F-202610-07-002,JUG-1L,Jugo 1 L,Bebidas,1,5600,0,C-031,transferencia
+2026-10-07,F-202610-07-003,YOG-1L,Yogur 1 L,Lácteos,1,8500,0,C-035,transferencia
+2026-10-07,F-202610-07-003,ARZ-500,Arroz Diana 500 g,Granos,3,3200,0,C-035,transferencia
+2026-10-07,F-202610-07-003,DET-1K,Detergente 1 kg,Aseo,1,11500,0,C-035,transferencia
+2026-10-07,F-202610-07-004,DET-1K,Detergente 1 kg,Aseo,2,11500,0,C-088,efectivo
+2026-10-07,F-202610-07-004,PAN-TAJ,Pan tajado,Panadería,3,6800,0,C-088,efectivo
+2026-10-07,F-202610-07-004,LEN-500,Lentejas 500 g,Granos,2,3800,0,C-088,efectivo
+2026-10-07,F-202610-07-005,DET-1K,Detergente 1 kg,Aseo,4,11500,0,,transferencia
+2026-10-07,F-202610-07-005,YOG-1L,Yogur 1 L,Lácteos,4,8500,0,,transferencia
+2026-10-07,F-202610-07-005,JAB-250,Jabón de baño,Aseo,4,3900,0,,transferencia
+2026-10-07,F-202610-07-006,GAS-15,Gaseosa 1.5 L,Bebidas,4,4800,0,,efectivo
+2026-10-07,F-202610-07-006,YOG-1L,Yogur 1 L,Lácteos,2,8500,0,,efectivo
+2026-10-07,F-202610-07-006,ARR-1K,Arroz 1 kg,Granos,3,5800,0,,efectivo
+2026-10-07,F-202610-07-007,DET-1K,Detergente 1 kg,Aseo,1,11500,0,C-044,efectivo
+2026-10-07,F-202610-07-007,AGU-600,Agua 600 ml,Bebidas,2,2200,0,C-044,efectivo
+2026-10-07,F-202610-07-007,YOG-1L,Yogur 1 L,Lácteos,4,8500,0,C-044,efectivo
+2026-10-07,F-202610-07-008,QUE-250,Queso 250 g,Lácteos,1,7200,0,,tarjeta
+2026-10-07,F-202610-07-008,GAS-15,Gaseosa 1.5 L,Bebidas,4,4800,0,,tarjeta
+2026-10-07,F-202610-07-008,GAL-PAQ,Galletas paquete,Snacks,2,2800,0,,tarjeta
+2026-10-07,F-202610-07-009,PAN-TAJ,Pan tajado,Panadería,2,6800,0,C-107,transferencia
+2026-10-07,F-202610-07-009,AGU-600,Agua 600 ml,Bebidas,2,2200,0,C-107,transferencia
+2026-10-07,F-202610-07-009,GAS-15,Gaseosa 1.5 L,Bebidas,2,4800,0,C-107,transferencia
+2026-10-07,F-202610-07-010,GAS-15,Gaseosa 1.5 L,Bebidas,2,4800,0,C-069,transferencia
+2026-10-07,F-202610-07-010,DET-1K,Detergente 1 kg,Aseo,4,11500,0,C-069,transferencia
+2026-10-07,F-202610-07-010,GAL-PAQ,Galletas paquete,Snacks,2,2800,0,C-069,transferencia
+2026-10-07,F-202610-07-011,ARR-1K,Arroz 1 kg,Granos,3,5800,0,,transferencia
+2026-10-07,F-202610-07-011,GAS-15,Gaseosa 1.5 L,Bebidas,4,4800,0,,transferencia
+2026-10-07,F-202610-07-011,YOG-1L,Yogur 1 L,Lácteos,3,8500,0,,transferencia
+2026-10-07,F-202610-07-012,YOG-1L,Yogur 1 L,Lácteos,4,8500,0,,tarjeta
+2026-10-07,F-202610-07-012,DET-1K,Detergente 1 kg,Aseo,4,11500,0,,tarjeta
+2026-10-07,F-202610-07-012,ARR-1K,Arroz 1 kg,Granos,3,5800,0,,tarjeta
+2026-10-07,F-202610-07-013,DET-1K,Detergente 1 kg,Aseo,3,11500,0,,transferencia
+2026-10-07,F-202610-07-013,JAB-250,Jabón de baño,Aseo,3,3900,0,,transferencia
+2026-10-07,F-202610-07-013,AGU-600,Agua 600 ml,Bebidas,4,2200,0,,transferencia
+2026-10-07,F-202610-07-014,YOG-1L,Yogur 1 L,Lácteos,1,8500,0,,transferencia
+2026-10-07,F-202610-07-014,JUG-1L,Jugo 1 L,Bebidas,3,5600,0,,transferencia
+2026-10-07,F-202610-07-014,DET-1K,Detergente 1 kg,Aseo,3,11500,0,,transferencia
+2026-10-07,F-202610-07-015,GAS-15,Gaseosa 1.5 L,Bebidas,2,4800,0,,transferencia
+2026-10-07,F-202610-07-015,LEN-500,Lentejas 500 g,Granos,1,3800,0,,transferencia
+2026-10-07,F-202610-07-015,DET-1K,Detergente 1 kg,Aseo,1,11500,0,,transferencia
+2026-10-07,F-202610-07-016,ARZ-500,Arroz Diana 500 g,Granos,2,3200,0,C-136,transferencia
+2026-10-07,F-202610-07-016,FRJ-500,Frijol 500 g,Granos,4,4500,0,C-136,transferencia
+2026-10-07,F-202610-07-016,PAP-150,Papas fritas 150 g,Snacks,1,5200,0,C-136,transferencia
+2026-10-07,F-202610-07-017,GAS-15,Gaseosa 1.5 L,Bebidas,1,4800,0,C-060,efectivo
+2026-10-07,F-202610-07-017,YOG-1L,Yogur 1 L,Lácteos,3,8500,0,C-060,efectivo
+2026-10-07,F-202610-07-017,AGU-600,Agua 600 ml,Bebidas,4,2200,0,C-060,efectivo
+2026-10-07,F-202610-07-018,YOG-1L,Yogur 1 L,Lácteos,4,8500,0,C-012,tarjeta
+2026-10-07,F-202610-07-018,GAS-15,Gaseosa 1.5 L,Bebidas,4,4800,0,C-012,tarjeta
+2026-10-07,F-202610-07-018,DET-1K,Detergente 1 kg,Aseo,4,11500,0,C-012,tarjeta
+2026-10-07,F-202610-07-019,JUG-1L,Jugo 1 L,Bebidas,3,5600,0,,tarjeta
+2026-10-07,F-202610-07-019,AGU-600,Agua 600 ml,Bebidas,1,2200,0,,tarjeta
+2026-10-07,F-202610-07-019,DET-1K,Detergente 1 kg,Aseo,2,11500,0,,tarjeta
+2026-10-07,F-202610-07-020,YOG-1L,Yogur 1 L,Lácteos,2,8500,0,,efectivo
+2026-10-07,F-202610-07-020,AGU-600,Agua 600 ml,Bebidas,2,2200,0,,efectivo
+2026-10-07,F-202610-07-020,GAL-PAQ,Galletas paquete,Snacks,4,2800,0,,efectivo
+2026-10-08,F-202610-08-001,DET-1K,Detergente 1 kg,Aseo,4,11500,0,C-027,efectivo
+2026-10-08,F-202610-08-001,GAS-15,Gaseosa 1.5 L,Bebidas,3,4800,0,C-027,efectivo
+2026-10-08,F-202610-08-001,FRJ-500,Frijol 500 g,Granos,1,4500,0,C-027,efectivo
+2026-10-08,F-202610-08-002,YOG-1L,Yogur 1 L,Lácteos,2,8500,0,,tarjeta
+2026-10-08,F-202610-08-002,ARR-1K,Arroz 1 kg,Granos,1,5800,0,,tarjeta
+2026-10-08,F-202610-08-002,DET-1K,Detergente 1 kg,Aseo,3,11500,0,,tarjeta
+2026-10-08,F-202610-08-003,LEC-1L,Leche entera 1 L,Lácteos,2,4500,0,C-129,tarjeta
+2026-10-08,F-202610-08-003,DET-1K,Detergente 1 kg,Aseo,3,11500,0,C-129,tarjeta
+2026-10-08,F-202610-08-003,YOG-1L,Yogur 1 L,Lácteos,4,8500,0,C-129,tarjeta
+2026-10-08,F-202610-08-004,AGU-600,Agua 600 ml,Bebidas,2,2200,0,C-135,transferencia
+2026-10-08,F-202610-08-004,YOG-1L,Yogur 1 L,Lácteos,3,8500,0,C-135,transferencia
+2026-10-08,F-202610-08-004,FRJ-500,Frijol 500 g,Granos,2,4500,0,C-135,transferencia
+2026-10-08,F-202610-08-005,GAS-15,Gaseosa 1.5 L,Bebidas,1,4800,0,C-046,tarjeta
+2026-10-08,F-202610-08-005,ARZ-500,Arroz Diana 500 g,Granos,4,3200,0,C-046,tarjeta
+2026-10-08,F-202610-08-005,YOG-1L,Yogur 1 L,Lácteos,2,8500,0,C-046,tarjeta
+2026-10-08,F-202610-08-006,GAS-15,Gaseosa 1.5 L,Bebidas,4,4800,0,C-088,transferencia
+2026-10-08,F-202610-08-006,DET-1K,Detergente 1 kg,Aseo,2,11500,0,C-088,transferencia
+2026-10-08,F-202610-08-006,ARR-1K,Arroz 1 kg,Granos,3,5800,0,C-088,transferencia
+2026-10-08,F-202610-08-007,YOG-1L,Yogur 1 L,Lácteos,1,8500,0,,tarjeta
+2026-10-08,F-202610-08-007,JUG-1L,Jugo 1 L,Bebidas,2,5600,0,,tarjeta
+2026-10-08,F-202610-08-007,GAS-15,Gaseosa 1.5 L,Bebidas,3,4800,0,,tarjeta
+2026-10-08,F-202610-08-008,JAB-250,Jabón de baño,Aseo,3,3900,0,C-114,tarjeta
+2026-10-08,F-202610-08-008,GAS-15,Gaseosa 1.5 L,Bebidas,2,4800,0,C-114,tarjeta
+2026-10-08,F-202610-08-008,DET-1K,Detergente 1 kg,Aseo,1,11500,0,C-114,tarjeta
+2026-10-08,F-202610-08-009,DET-1K,Detergente 1 kg,Aseo,4,11500,0,,tarjeta
+2026-10-08,F-202610-08-009,ARR-1K,Arroz 1 kg,Granos,3,5800,0,,tarjeta
+2026-10-08,F-202610-08-009,LEN-500,Lentejas 500 g,Granos,2,3800,0,,tarjeta
+2026-10-08,F-202610-08-010,YOG-1L,Yogur 1 L,Lácteos,2,8500,0,C-074,efectivo
+2026-10-08,F-202610-08-010,DET-1K,Detergente 1 kg,Aseo,2,11500,0,C-074,efectivo
+2026-10-08,F-202610-08-010,JAB-250,Jabón de baño,Aseo,2,3900,0,C-074,efectivo
+2026-10-08,F-202610-08-011,LEN-500,Lentejas 500 g,Granos,2,3800,0,,tarjeta
+2026-10-08,F-202610-08-011,ARR-1K,Arroz 1 kg,Granos,3,5800,0,,tarjeta
+2026-10-08,F-202610-08-011,DET-1K,Detergente 1 kg,Aseo,2,11500,0,,tarjeta
+2026-10-08,F-202610-08-012,DET-1K,Detergente 1 kg,Aseo,2,11500,0,,efectivo
+2026-10-08,F-202610-08-012,GAS-15,Gaseosa 1.5 L,Bebidas,2,4800,0,,efectivo
+2026-10-08,F-202610-08-012,YOG-1L,Yogur 1 L,Lácteos,4,8500,0,,efectivo
+2026-10-08,F-202610-08-013,DET-1K,Detergente 1 kg,Aseo,4,11500,0,C-083,transferencia
+2026-10-08,F-202610-08-013,AGU-600,Agua 600 ml,Bebidas,4,2200,0,C-083,transferencia
+2026-10-08,F-202610-08-013,QUE-250,Queso 250 g,Lácteos,1,7200,0,C-083,transferencia
+2026-10-08,F-202610-08-014,QUE-250,Queso 250 g,Lácteos,1,7200,0,C-036,tarjeta
+2026-10-08,F-202610-08-014,DET-1K,Detergente 1 kg,Aseo,2,11500,0,C-036,tarjeta
+2026-10-08,F-202610-08-014,GAS-15,Gaseosa 1.5 L,Bebidas,3,4800,0,C-036,tarjeta
+2026-10-08,F-202610-08-015,DET-1K,Detergente 1 kg,Aseo,1,11500,0,,tarjeta
+2026-10-08,F-202610-08-015,PAN-TAJ,Pan tajado,Panadería,3,6800,0,,tarjeta
+2026-10-08,F-202610-08-015,FRJ-500,Frijol 500 g,Granos,3,4500,0,,tarjeta
+2026-10-08,F-202610-08-016,GAS-15,Gaseosa 1.5 L,Bebidas,4,4800,0,C-044,tarjeta
+2026-10-08,F-202610-08-016,PAN-TAJ,Pan tajado,Panadería,3,6800,0,C-044,tarjeta
+2026-10-08,F-202610-08-016,ARR-1K,Arroz 1 kg,Granos,4,5800,0,C-044,tarjeta
+2026-10-08,F-202610-08-017,DET-1K,Detergente 1 kg,Aseo,4,11500,0,C-042,tarjeta
+2026-10-08,F-202610-08-017,YOG-1L,Yogur 1 L,Lácteos,2,8500,0,C-042,tarjeta
+2026-10-08,F-202610-08-017,GAS-15,Gaseosa 1.5 L,Bebidas,1,4800,0,C-042,tarjeta
+2026-10-08,F-202610-08-018,DET-1K,Detergente 1 kg,Aseo,2,11500,0,C-011,efectivo
+2026-10-08,F-202610-08-018,JUG-1L,Jugo 1 L,Bebidas,2,5600,0,C-011,efectivo
+2026-10-08,F-202610-08-018,LEC-1L,Leche entera 1 L,Lácteos,4,4500,0,C-011,efectivo
+2026-10-08,F-202610-08-019,PAN-TAJ,Pan tajado,Panadería,4,6800,0,C-060,efectivo
+2026-10-08,F-202610-08-019,JAB-250,Jabón de baño,Aseo,4,3900,0,C-060,efectivo
+2026-10-08,F-202610-08-019,DET-1K,Detergente 1 kg,Aseo,2,11500,0,C-060,efectivo
+2026-10-08,F-202610-08-020,PAP-150,Papas fritas 150 g,Snacks,4,5200,0,,efectivo
+2026-10-08,F-202610-08-020,DET-1K,Detergente 1 kg,Aseo,1,11500,0,,efectivo
+2026-10-08,F-202610-08-020,GAL-PAQ,Galletas paquete,Snacks,1,2800,0,,efectivo
+2026-10-09,F-202610-09-001,YOG-1L,Yogur 1 L,Lácteos,1,8500,0,C-129,tarjeta
+2026-10-09,F-202610-09-001,ARR-1K,Arroz 1 kg,Granos,1,5800,0,C-129,tarjeta
+2026-10-09,F-202610-09-001,ATU-170,Atún 170 g,Enlatados,1,7900,0,C-129,tarjeta
+2026-10-09,F-202610-09-002,ATU-170,Atún 170 g,Enlatados,3,7900,0,C-100,transferencia
+2026-10-09,F-202610-09-002,QUE-250,Queso 250 g,Lácteos,4,7200,0,C-100,transferencia
+2026-10-09,F-202610-09-002,YOG-1L,Yogur 1 L,Lácteos,1,8500,0,C-100,transferencia
+2026-10-09,F-202610-09-003,YOG-1L,Yogur 1 L,Lácteos,4,8500,0,C-073,efectivo
+2026-10-09,F-202610-09-003,GAS-15,Gaseosa 1.5 L,Bebidas,4,4800,0,C-073,efectivo
+2026-10-09,F-202610-09-003,AGU-600,Agua 600 ml,Bebidas,2,2200,0,C-073,efectivo
+2026-10-09,F-202610-09-004,DET-1K,Detergente 1 kg,Aseo,4,11500,0,C-068,tarjeta
+2026-10-09,F-202610-09-004,JAB-250,Jabón de baño,Aseo,2,3900,0,C-068,tarjeta
+2026-10-09,F-202610-09-004,YOG-1L,Yogur 1 L,Lácteos,1,8500,0,C-068,tarjeta
+2026-10-09,F-202610-09-005,GAS-15,Gaseosa 1.5 L,Bebidas,4,4800,0,C-116,transferencia
+2026-10-09,F-202610-09-005,JAB-250,Jabón de baño,Aseo,3,3900,0,C-116,transferencia
+2026-10-09,F-202610-09-005,DET-1K,Detergente 1 kg,Aseo,3,11500,0,C-116,transferencia
+2026-10-09,F-202610-09-006,YOG-1L,Yogur 1 L,Lácteos,3,8500,0,C-062,tarjeta
+2026-10-09,F-202610-09-006,DET-1K,Detergente 1 kg,Aseo,2,11500,0,C-062,tarjeta
+2026-10-09,F-202610-09-006,LEC-1L,Leche entera 1 L,Lácteos,2,4500,0,C-062,tarjeta
+2026-10-09,F-202610-09-007,DET-1K,Detergente 1 kg,Aseo,2,11500,0,C-016,tarjeta
+2026-10-09,F-202610-09-007,YOG-1L,Yogur 1 L,Lácteos,3,8500,0,C-016,tarjeta
+2026-10-09,F-202610-09-007,ARZ-500,Arroz Diana 500 g,Granos,3,3200,0,C-016,tarjeta
+2026-10-09,F-202610-09-008,YOG-1L,Yogur 1 L,Lácteos,4,8500,0,C-068,efectivo
+2026-10-09,F-202610-09-008,GAS-15,Gaseosa 1.5 L,Bebidas,1,4800,0,C-068,efectivo
+2026-10-09,F-202610-09-008,AGU-600,Agua 600 ml,Bebidas,3,2200,0,C-068,efectivo
+2026-10-09,F-202610-09-009,GAS-15,Gaseosa 1.5 L,Bebidas,1,4800,0,,tarjeta
+2026-10-09,F-202610-09-009,YOG-1L,Yogur 1 L,Lácteos,2,8500,0,,tarjeta
+2026-10-09,F-202610-09-009,AGU-600,Agua 600 ml,Bebidas,3,2200,0,,tarjeta
+2026-10-09,F-202610-09-010,YOG-1L,Yogur 1 L,Lácteos,1,8500,0,,efectivo
+2026-10-09,F-202610-09-010,ARZ-500,Arroz Diana 500 g,Granos,1,3200,0,,efectivo
+2026-10-09,F-202610-09-010,DET-1K,Detergente 1 kg,Aseo,4,11500,0,,efectivo
+2026-10-09,F-202610-09-011,YOG-1L,Yogur 1 L,Lácteos,2,8500,0,,transferencia
+2026-10-09,F-202610-09-011,ARZ-500,Arroz Diana 500 g,Granos,2,3200,0,,transferencia
+2026-10-09,F-202610-09-011,LEC-1L,Leche entera 1 L,Lácteos,3,4500,0,,transferencia
+2026-10-09,F-202610-09-012,DET-1K,Detergente 1 kg,Aseo,3,11500,0,C-097,transferencia
+2026-10-09,F-202610-09-012,GAL-PAQ,Galletas paquete,Snacks,4,2800,0,C-097,transferencia
+2026-10-09,F-202610-09-012,JUG-1L,Jugo 1 L,Bebidas,1,5600,0,C-097,transferencia
+2026-10-09,F-202610-09-013,YOG-1L,Yogur 1 L,Lácteos,2,8500,0,,tarjeta
+2026-10-09,F-202610-09-013,ARZ-500,Arroz Diana 500 g,Granos,4,3200,0,,tarjeta
+2026-10-09,F-202610-09-013,PAP-150,Papas fritas 150 g,Snacks,2,5200,0,,tarjeta
+2026-10-09,F-202610-09-014,DET-1K,Detergente 1 kg,Aseo,4,11500,0,C-121,efectivo
+2026-10-09,F-202610-09-014,JAB-250,Jabón de baño,Aseo,4,3900,0,C-121,efectivo
+2026-10-09,F-202610-09-014,JUG-1L,Jugo 1 L,Bebidas,4,5600,0,C-121,efectivo
+2026-10-09,F-202610-09-015,GAS-15,Gaseosa 1.5 L,Bebidas,3,4800,0,,transferencia
+2026-10-09,F-202610-09-015,GAL-PAQ,Galletas paquete,Snacks,3,2800,0,,transferencia
+2026-10-09,F-202610-09-015,DET-1K,Detergente 1 kg,Aseo,3,11500,0,,transferencia
+2026-10-09,F-202610-09-016,YOG-1L,Yogur 1 L,Lácteos,2,8500,0,,tarjeta
+2026-10-09,F-202610-09-016,DET-1K,Detergente 1 kg,Aseo,3,11500,0,,tarjeta
+2026-10-09,F-202610-09-016,LEC-1L,Leche entera 1 L,Lácteos,3,4500,0,,tarjeta
+2026-10-09,F-202610-09-017,ARR-1K,Arroz 1 kg,Granos,1,5800,0,C-104,efectivo
+2026-10-09,F-202610-09-017,YOG-1L,Yogur 1 L,Lácteos,3,8500,0,C-104,efectivo
+2026-10-09,F-202610-09-017,GAS-15,Gaseosa 1.5 L,Bebidas,1,4800,0,C-104,efectivo
+2026-10-09,F-202610-09-018,DET-1K,Detergente 1 kg,Aseo,4,11500,0,C-005,tarjeta
+2026-10-09,F-202610-09-018,PAP-150,Papas fritas 150 g,Snacks,3,5200,0,C-005,tarjeta
+2026-10-09,F-202610-09-018,JUG-1L,Jugo 1 L,Bebidas,2,5600,0,C-005,tarjeta
+2026-10-09,F-202610-09-019,YOG-1L,Yogur 1 L,Lácteos,4,8500,0,C-097,tarjeta
+2026-10-09,F-202610-09-019,DET-1K,Detergente 1 kg,Aseo,2,11500,0,C-097,tarjeta
+2026-10-09,F-202610-09-019,JAB-250,Jabón de baño,Aseo,4,3900,0,C-097,tarjeta
+2026-10-09,F-202610-09-020,DET-1K,Detergente 1 kg,Aseo,4,11500,0,,tarjeta
+2026-10-09,F-202610-09-020,JAB-250,Jabón de baño,Aseo,2,3900,0,,tarjeta
+2026-10-09,F-202610-09-020,YOG-1L,Yogur 1 L,Lácteos,3,8500,0,,tarjeta
+2026-10-10,F-202610-10-001,GAS-15,Gaseosa 1.5 L,Bebidas,2,4800,0,C-088,tarjeta
+2026-10-10,F-202610-10-001,AGU-600,Agua 600 ml,Bebidas,2,2200,0,C-088,tarjeta
+2026-10-10,F-202610-10-001,QUE-250,Queso 250 g,Lácteos,4,7200,0,C-088,tarjeta
+2026-10-10,F-202610-10-002,YOG-1L,Yogur 1 L,Lácteos,1,8500,0,C-022,tarjeta
+2026-10-10,F-202610-10-002,DET-1K,Detergente 1 kg,Aseo,3,11500,0,C-022,tarjeta
+2026-10-10,F-202610-10-002,QUE-250,Queso 250 g,Lácteos,1,7200,0,C-022,tarjeta
+2026-10-10,F-202610-10-003,DET-1K,Detergente 1 kg,Aseo,1,11500,0,C-125,tarjeta
+2026-10-10,F-202610-10-003,YOG-1L,Yogur 1 L,Lácteos,3,8500,0,C-125,tarjeta
+2026-10-10,F-202610-10-003,LEC-1L,Leche entera 1 L,Lácteos,2,4500,0,C-125,tarjeta
+2026-10-10,F-202610-10-004,DET-1K,Detergente 1 kg,Aseo,3,11500,0,,transferencia
+2026-10-10,F-202610-10-004,PAN-TAJ,Pan tajado,Panadería,4,6800,0,,transferencia
+2026-10-10,F-202610-10-004,QUE-250,Queso 250 g,Lácteos,3,7200,0,,transferencia
+2026-10-10,F-202610-10-005,DET-1K,Detergente 1 kg,Aseo,1,11500,0,C-133,tarjeta
+2026-10-10,F-202610-10-005,YOG-1L,Yogur 1 L,Lácteos,2,8500,0,C-133,tarjeta
+2026-10-10,F-202610-10-005,AGU-600,Agua 600 ml,Bebidas,2,2200,0,C-133,tarjeta
+2026-10-10,F-202610-10-006,ATU-170,Atún 170 g,Enlatados,4,7900,0,C-003,transferencia
+2026-10-10,F-202610-10-006,GAS-15,Gaseosa 1.5 L,Bebidas,3,4800,0,C-003,transferencia
+2026-10-10,F-202610-10-006,YOG-1L,Yogur 1 L,Lácteos,4,8500,0,C-003,transferencia
+2026-10-10,F-202610-10-007,ATU-170,Atún 170 g,Enlatados,1,7900,0,C-083,tarjeta
+2026-10-10,F-202610-10-007,GAS-15,Gaseosa 1.5 L,Bebidas,4,4800,0,C-083,tarjeta
+2026-10-10,F-202610-10-007,DET-1K,Detergente 1 kg,Aseo,3,11500,0,C-083,tarjeta
+2026-10-10,F-202610-10-008,JUG-1L,Jugo 1 L,Bebidas,4,5600,0,,tarjeta
+2026-10-10,F-202610-10-008,YOG-1L,Yogur 1 L,Lácteos,2,8500,0,,tarjeta
+2026-10-10,F-202610-10-008,ARR-1K,Arroz 1 kg,Granos,3,5800,0,,tarjeta
+2026-10-10,F-202610-10-009,YOG-1L,Yogur 1 L,Lácteos,4,8500,0,C-129,transferencia
+2026-10-10,F-202610-10-009,GAL-PAQ,Galletas paquete,Snacks,1,2800,0,C-129,transferencia
+2026-10-10,F-202610-10-009,PAP-150,Papas fritas 150 g,Snacks,1,5200,0,C-129,transferencia
+2026-10-10,F-202610-10-010,GAS-15,Gaseosa 1.5 L,Bebidas,3,4800,0,C-053,transferencia
+2026-10-10,F-202610-10-010,AGU-600,Agua 600 ml,Bebidas,4,2200,0,C-053,transferencia
+2026-10-10,F-202610-10-010,PAN-TAJ,Pan tajado,Panadería,3,6800,0,C-053,transferencia
+2026-10-10,F-202610-10-011,GAS-15,Gaseosa 1.5 L,Bebidas,2,4800,0,C-030,tarjeta
+2026-10-10,F-202610-10-011,JAB-250,Jabón de baño,Aseo,4,3900,0,C-030,tarjeta
+2026-10-10,F-202610-10-011,ATU-170,Atún 170 g,Enlatados,2,7900,0,C-030,tarjeta
+2026-10-10,F-202610-10-012,YOG-1L,Yogur 1 L,Lácteos,1,8500,0,,transferencia
+2026-10-10,F-202610-10-012,ARZ-500,Arroz Diana 500 g,Granos,4,3200,0,,transferencia
+2026-10-10,F-202610-10-012,ARR-1K,Arroz 1 kg,Granos,3,5800,0,,transferencia
+2026-10-10,F-202610-10-013,PAP-150,Papas fritas 150 g,Snacks,2,5200,0,,transferencia
+2026-10-10,F-202610-10-013,AGU-600,Agua 600 ml,Bebidas,3,2200,0,,transferencia
+2026-10-10,F-202610-10-013,JAB-250,Jabón de baño,Aseo,1,3900,0,,transferencia
+2026-10-10,F-202610-10-014,YOG-1L,Yogur 1 L,Lácteos,4,8500,0,C-084,efectivo
+2026-10-10,F-202610-10-014,PAP-150,Papas fritas 150 g,Snacks,4,5200,0,C-084,efectivo
+2026-10-10,F-202610-10-014,GAS-15,Gaseosa 1.5 L,Bebidas,3,4800,0,C-084,efectivo
+2026-10-10,F-202610-10-015,DET-1K,Detergente 1 kg,Aseo,2,11500,0,C-009,tarjeta
+2026-10-10,F-202610-10-015,AGU-600,Agua 600 ml,Bebidas,3,2200,0,C-009,tarjeta
+2026-10-10,F-202610-10-015,YOG-1L,Yogur 1 L,Lácteos,2,8500,0,C-009,tarjeta
+2026-10-10,F-202610-10-016,DET-1K,Detergente 1 kg,Aseo,3,11500,0,C-062,tarjeta
+2026-10-10,F-202610-10-016,GAL-PAQ,Galletas paquete,Snacks,1,2800,0,C-062,tarjeta
+2026-10-10,F-202610-10-016,PAP-150,Papas fritas 150 g,Snacks,4,5200,0,C-062,tarjeta
+2026-10-10,F-202610-10-017,FRJ-500,Frijol 500 g,Granos,2,4500,0,,transferencia
+2026-10-10,F-202610-10-017,YOG-1L,Yogur 1 L,Lácteos,3,8500,0,,transferencia
+2026-10-10,F-202610-10-017,GAS-15,Gaseosa 1.5 L,Bebidas,3,4800,0,,transferencia
+2026-10-10,F-202610-10-018,LEC-1L,Leche entera 1 L,Lácteos,3,4500,0,C-037,transferencia
+2026-10-10,F-202610-10-018,GAS-15,Gaseosa 1.5 L,Bebidas,2,4800,0,C-037,transferencia
+2026-10-10,F-202610-10-018,JAB-250,Jabón de baño,Aseo,3,3900,0,C-037,transferencia
+2026-10-10,F-202610-10-019,GAS-15,Gaseosa 1.5 L,Bebidas,2,4800,0,,transferencia
+2026-10-10,F-202610-10-019,ARR-1K,Arroz 1 kg,Granos,2,5800,0,,transferencia
+2026-10-10,F-202610-10-019,DET-1K,Detergente 1 kg,Aseo,2,11500,0,,transferencia
+2026-10-10,F-202610-10-020,GAL-PAQ,Galletas paquete,Snacks,4,2800,0,C-014,transferencia
+2026-10-10,F-202610-10-020,GAS-15,Gaseosa 1.5 L,Bebidas,1,4800,0,C-014,transferencia
+2026-10-10,F-202610-10-020,YOG-1L,Yogur 1 L,Lácteos,4,8500,0,C-014,transferencia
+2026-10-11,F-202610-11-001,LEN-500,Lentejas 500 g,Granos,3,3800,0,,transferencia
+2026-10-11,F-202610-11-001,QUE-250,Queso 250 g,Lácteos,4,7200,0,,transferencia
+2026-10-11,F-202610-11-001,PAN-TAJ,Pan tajado,Panadería,3,6800,0,,transferencia
+2026-10-11,F-202610-11-002,LEC-1L,Leche entera 1 L,Lácteos,4,4500,0,,transferencia
+2026-10-11,F-202610-11-002,QUE-250,Queso 250 g,Lácteos,3,7200,0,,transferencia
+2026-10-11,F-202610-11-002,FRJ-500,Frijol 500 g,Granos,4,4500,0,,transferencia
+2026-10-11,F-202610-11-003,GAL-PAQ,Galletas paquete,Snacks,1,2800,0,C-016,tarjeta
+2026-10-11,F-202610-11-003,PAP-150,Papas fritas 150 g,Snacks,2,5200,0,C-016,tarjeta
+2026-10-11,F-202610-11-003,ARR-1K,Arroz 1 kg,Granos,2,5800,0,C-016,tarjeta
+2026-10-11,F-202610-11-004,ARZ-500,Arroz Diana 500 g,Granos,2,3200,0,,efectivo
+2026-10-11,F-202610-11-004,AGU-600,Agua 600 ml,Bebidas,4,2200,0,,efectivo
+2026-10-11,F-202610-11-004,ATU-170,Atún 170 g,Enlatados,1,7900,0,,efectivo
+2026-10-11,F-202610-11-005,JAB-250,Jabón de baño,Aseo,1,3900,0,,tarjeta
+2026-10-11,F-202610-11-005,FRJ-500,Frijol 500 g,Granos,4,4500,0,,tarjeta
+2026-10-11,F-202610-11-005,GAL-PAQ,Galletas paquete,Snacks,3,2800,0,,tarjeta
+2026-10-11,F-202610-11-006,LEN-500,Lentejas 500 g,Granos,3,3800,0,C-146,efectivo
+2026-10-11,F-202610-11-006,PAP-150,Papas fritas 150 g,Snacks,3,5200,0,C-146,efectivo
+2026-10-11,F-202610-11-006,AGU-600,Agua 600 ml,Bebidas,2,2200,0,C-146,efectivo
+2026-10-11,F-202610-11-007,LEN-500,Lentejas 500 g,Granos,1,3800,0,,tarjeta
+2026-10-11,F-202610-11-007,ATU-170,Atún 170 g,Enlatados,4,7900,0,,tarjeta
+2026-10-11,F-202610-11-007,PAP-150,Papas fritas 150 g,Snacks,3,5200,0,,tarjeta
+2026-10-11,F-202610-11-008,JUG-1L,Jugo 1 L,Bebidas,2,5600,0,C-013,transferencia
+2026-10-11,F-202610-11-008,FRJ-500,Frijol 500 g,Granos,4,4500,0,C-013,transferencia
+2026-10-11,F-202610-11-008,ATU-170,Atún 170 g,Enlatados,3,7900,0,C-013,transferencia
+2026-10-11,F-202610-11-009,FRJ-500,Frijol 500 g,Granos,1,4500,0,C-078,transferencia
+2026-10-11,F-202610-11-009,LEN-500,Lentejas 500 g,Granos,4,3800,0,C-078,transferencia
+2026-10-11,F-202610-11-009,JUG-1L,Jugo 1 L,Bebidas,3,5600,0,C-078,transferencia
+2026-10-11,F-202610-11-010,FRJ-500,Frijol 500 g,Granos,2,4500,0,C-133,tarjeta
+2026-10-12,F-202610-12-001,ARR-1K,Arroz 1 kg,Granos,3,5800,0,,efectivo
+2026-10-12,F-202610-12-001,ATU-170,Atún 170 g,Enlatados,3,7900,0,,efectivo
+2026-10-12,F-202610-12-001,PAP-150,Papas fritas 150 g,Snacks,4,5200,0,,efectivo
+2026-10-12,F-202610-12-002,GAL-PAQ,Galletas paquete,Snacks,4,2800,0,C-009,transferencia
+2026-10-12,F-202610-12-002,AGU-600,Agua 600 ml,Bebidas,1,2200,0,C-009,transferencia
+2026-10-12,F-202610-12-002,ARZ-500,Arroz Diana 500 g,Granos,1,3200,0,C-009,transferencia
+2026-10-12,F-202610-12-003,LEN-500,Lentejas 500 g,Granos,2,3800,0,,transferencia
+2026-10-12,F-202610-12-003,AGU-600,Agua 600 ml,Bebidas,3,2200,0,,transferencia
+2026-10-12,F-202610-12-003,ATU-170,Atún 170 g,Enlatados,3,7900,0,,transferencia
+2026-10-12,F-202610-12-004,PAP-150,Papas fritas 150 g,Snacks,2,5200,0,,efectivo
+2026-10-12,F-202610-12-004,PAN-TAJ,Pan tajado,Panadería,3,6800,0,,efectivo
+2026-10-12,F-202610-12-004,QUE-250,Queso 250 g,Lácteos,2,7200,0,,efectivo
+2026-10-12,F-202610-12-005,LEC-1L,Leche entera 1 L,Lácteos,2,4500,0,,efectivo
+2026-10-12,F-202610-12-005,ATU-170,Atún 170 g,Enlatados,2,7900,0,,efectivo
+2026-10-12,F-202610-12-005,ARR-1K,Arroz 1 kg,Granos,1,5800,0,,efectivo
+2026-10-12,F-202610-12-006,FRJ-500,Frijol 500 g,Granos,3,4500,0,,tarjeta
+2026-10-12,F-202610-12-006,PAP-150,Papas fritas 150 g,Snacks,3,5200,0,,tarjeta
+2026-10-12,F-202610-12-006,GAL-PAQ,Galletas paquete,Snacks,3,2800,0,,tarjeta
+2026-10-12,F-202610-12-007,PAN-TAJ,Pan tajado,Panadería,2,6800,0,C-102,transferencia
+2026-10-12,F-202610-12-007,LEC-1L,Leche entera 1 L,Lácteos,1,4500,0,C-102,transferencia
+2026-10-12,F-202610-12-007,LEN-500,Lentejas 500 g,Granos,4,3800,0,C-102,transferencia
+2026-10-12,F-202610-12-008,ATU-170,Atún 170 g,Enlatados,4,7900,0,C-061,transferencia
+2026-10-12,F-202610-12-008,JAB-250,Jabón de baño,Aseo,2,3900,0,C-061,transferencia
+2026-10-12,F-202610-12-008,LEC-1L,Leche entera 1 L,Lácteos,1,4500,0,C-061,transferencia
+2026-10-12,F-202610-12-009,PAP-150,Papas fritas 150 g,Snacks,1,5200,0,C-036,tarjeta
+2026-10-12,F-202610-12-009,FRJ-500,Frijol 500 g,Granos,1,4500,0,C-036,tarjeta
+2026-10-12,F-202610-12-009,ARR-1K,Arroz 1 kg,Granos,2,5800,0,C-036,tarjeta
+2026-10-12,F-202610-12-010,ATU-170,Atún 170 g,Enlatados,1,7900,0,,tarjeta
+2026-10-13,F-202610-13-001,ARR-1K,Arroz 1 kg,Granos,1,5800,0,C-042,tarjeta
+2026-10-13,F-202610-13-001,PAN-TAJ,Pan tajado,Panadería,4,6800,0,C-042,tarjeta
+2026-10-13,F-202610-13-001,LEC-1L,Leche entera 1 L,Lácteos,4,4500,0,C-042,tarjeta
+2026-10-13,F-202610-13-002,ARR-1K,Arroz 1 kg,Granos,4,5800,0,,transferencia
+2026-10-13,F-202610-13-002,PAN-TAJ,Pan tajado,Panadería,4,6800,0,,transferencia
+2026-10-13,F-202610-13-002,ATU-170,Atún 170 g,Enlatados,2,7900,0,,transferencia
+2026-10-13,F-202610-13-003,PAN-TAJ,Pan tajado,Panadería,3,6800,0,C-140,efectivo
+2026-10-13,F-202610-13-003,QUE-250,Queso 250 g,Lácteos,3,7200,0,C-140,efectivo
+2026-10-13,F-202610-13-003,ARR-1K,Arroz 1 kg,Granos,4,5800,0,C-140,efectivo
+2026-10-13,F-202610-13-004,LEC-1L,Leche entera 1 L,Lácteos,2,4500,0,,efectivo
+2026-10-13,F-202610-13-004,ATU-170,Atún 170 g,Enlatados,4,7900,0,,efectivo
+2026-10-13,F-202610-13-004,PAP-150,Papas fritas 150 g,Snacks,2,5200,0,,efectivo
+2026-10-13,F-202610-13-005,LEN-500,Lentejas 500 g,Granos,1,3800,0,,efectivo
+2026-10-13,F-202610-13-005,LEC-1L,Leche entera 1 L,Lácteos,2,4500,0,,efectivo
+2026-10-13,F-202610-13-005,ARZ-500,Arroz Diana 500 g,Granos,1,3200,0,,efectivo
+2026-10-13,F-202610-13-006,ARR-1K,Arroz 1 kg,Granos,1,5800,0,C-056,tarjeta
+2026-10-13,F-202610-13-006,PAP-150,Papas fritas 150 g,Snacks,1,5200,0,C-056,tarjeta
+2026-10-13,F-202610-13-006,JAB-250,Jabón de baño,Aseo,2,3900,0,C-056,tarjeta
+2026-10-13,F-202610-13-007,QUE-250,Queso 250 g,Lácteos,1,7200,0,,transferencia
+2026-10-13,F-202610-13-007,FRJ-500,Frijol 500 g,Granos,4,4500,0,,transferencia
+2026-10-13,F-202610-13-007,GAL-PAQ,Galletas paquete,Snacks,4,2800,0,,transferencia
+2026-10-13,F-202610-13-008,ARZ-500,Arroz Diana 500 g,Granos,3,3200,0,,transferencia
+2026-10-13,F-202610-13-008,PAP-150,Papas fritas 150 g,Snacks,1,5200,0,,transferencia
+2026-10-13,F-202610-13-008,PAN-TAJ,Pan tajado,Panadería,4,6800,0,,transferencia
+2026-10-13,F-202610-13-009,PAP-150,Papas fritas 150 g,Snacks,1,5200,0,,transferencia
+2026-10-13,F-202610-13-009,AGU-600,Agua 600 ml,Bebidas,3,2200,0,,transferencia
+2026-10-13,F-202610-13-009,ARZ-500,Arroz Diana 500 g,Granos,4,3200,0,,transferencia
+2026-10-13,F-202610-13-010,AGU-600,Agua 600 ml,Bebidas,2,2200,0,,efectivo
+2026-10-14,F-202610-14-001,JUG-1L,Jugo 1 L,Bebidas,4,5600,0,,transferencia
+2026-10-14,F-202610-14-001,ARR-1K,Arroz 1 kg,Granos,4,5800,0,,transferencia
+2026-10-14,F-202610-14-001,FRJ-500,Frijol 500 g,Granos,4,4500,0,,transferencia
+2026-10-14,F-202610-14-002,GAL-PAQ,Galletas paquete,Snacks,3,2800,0,,tarjeta
+2026-10-14,F-202610-14-002,JUG-1L,Jugo 1 L,Bebidas,3,5600,0,,tarjeta
+2026-10-14,F-202610-14-002,ATU-170,Atún 170 g,Enlatados,2,7900,0,,tarjeta
+2026-10-14,F-202610-14-003,ARZ-500,Arroz Diana 500 g,Granos,2,3200,0,,efectivo
+2026-10-14,F-202610-14-003,JUG-1L,Jugo 1 L,Bebidas,3,5600,0,,efectivo
+2026-10-14,F-202610-14-003,ATU-170,Atún 170 g,Enlatados,1,7900,0,,efectivo
+2026-10-14,F-202610-14-004,FRJ-500,Frijol 500 g,Granos,2,4500,0,C-061,transferencia
+2026-10-14,F-202610-14-004,LEC-1L,Leche entera 1 L,Lácteos,4,4500,0,C-061,transferencia
+2026-10-14,F-202610-14-004,JUG-1L,Jugo 1 L,Bebidas,4,5600,0,C-061,transferencia
+2026-10-14,F-202610-14-005,PAP-150,Papas fritas 150 g,Snacks,4,5200,0,C-100,tarjeta
+2026-10-14,F-202610-14-005,JAB-250,Jabón de baño,Aseo,4,3900,0,C-100,tarjeta
+2026-10-14,F-202610-14-005,LEC-1L,Leche entera 1 L,Lácteos,4,4500,0,C-100,tarjeta
+2026-10-14,F-202610-14-006,GAL-PAQ,Galletas paquete,Snacks,3,2800,0,,tarjeta
+2026-10-14,F-202610-14-006,LEN-500,Lentejas 500 g,Granos,4,3800,0,,tarjeta
+2026-10-14,F-202610-14-006,QUE-250,Queso 250 g,Lácteos,4,7200,0,,tarjeta
+2026-10-14,F-202610-14-007,AGU-600,Agua 600 ml,Bebidas,2,2200,0,,tarjeta
+2026-10-14,F-202610-14-007,JAB-250,Jabón de baño,Aseo,3,3900,0,,tarjeta
+2026-10-14,F-202610-14-007,JUG-1L,Jugo 1 L,Bebidas,3,5600,0,,tarjeta
+2026-10-14,F-202610-14-008,AGU-600,Agua 600 ml,Bebidas,1,2200,0,,transferencia
+2026-10-14,F-202610-14-008,ARR-1K,Arroz 1 kg,Granos,2,5800,0,,transferencia
+2026-10-14,F-202610-14-008,JUG-1L,Jugo 1 L,Bebidas,4,5600,0,,transferencia
+2026-10-14,F-202610-14-009,ARR-1K,Arroz 1 kg,Granos,3,5800,0,,tarjeta
+2026-10-14,F-202610-14-009,JUG-1L,Jugo 1 L,Bebidas,2,5600,0,,tarjeta
+2026-10-14,F-202610-14-009,LEC-1L,Leche entera 1 L,Lácteos,4,4500,0,,tarjeta
+2026-10-14,F-202610-14-010,ATU-170,Atún 170 g,Enlatados,1,7900,0,,tarjeta
+2026-10-15,F-202610-15-001,PAP-150,Papas fritas 150 g,Snacks,4,5200,0,,tarjeta
+2026-10-15,F-202610-15-001,ARR-1K,Arroz 1 kg,Granos,4,5800,0,,tarjeta
+2026-10-15,F-202610-15-001,LEN-500,Lentejas 500 g,Granos,4,3800,0,,tarjeta
+2026-10-15,F-202610-15-002,JUG-1L,Jugo 1 L,Bebidas,3,5600,0,,transferencia
+2026-10-15,F-202610-15-002,FRJ-500,Frijol 500 g,Granos,2,4500,0,,transferencia
+2026-10-15,F-202610-15-002,QUE-250,Queso 250 g,Lácteos,1,7200,0,,transferencia
+2026-10-15,F-202610-15-003,PAN-TAJ,Pan tajado,Panadería,2,6800,0,,efectivo
+2026-10-15,F-202610-15-003,QUE-250,Queso 250 g,Lácteos,1,7200,0,,efectivo
+2026-10-15,F-202610-15-003,PAP-150,Papas fritas 150 g,Snacks,1,5200,0,,efectivo
+2026-10-15,F-202610-15-004,LEN-500,Lentejas 500 g,Granos,4,3800,0,,transferencia
+2026-10-15,F-202610-15-004,QUE-250,Queso 250 g,Lácteos,4,7200,0,,transferencia
+2026-10-15,F-202610-15-004,FRJ-500,Frijol 500 g,Granos,2,4500,0,,transferencia
+2026-10-15,F-202610-15-005,LEN-500,Lentejas 500 g,Granos,2,3800,0,,transferencia
+2026-10-15,F-202610-15-005,GAL-PAQ,Galletas paquete,Snacks,4,2800,0,,transferencia
+2026-10-15,F-202610-15-005,ARR-1K,Arroz 1 kg,Granos,4,5800,0,,transferencia
+2026-10-15,F-202610-15-006,QUE-250,Queso 250 g,Lácteos,2,7200,0,,tarjeta
+2026-10-15,F-202610-15-006,JUG-1L,Jugo 1 L,Bebidas,3,5600,0,,tarjeta
+2026-10-15,F-202610-15-006,PAP-150,Papas fritas 150 g,Snacks,4,5200,0,,tarjeta
+2026-10-15,F-202610-15-007,JAB-250,Jabón de baño,Aseo,2,3900,0,C-081,tarjeta
+2026-10-15,F-202610-15-007,ATU-170,Atún 170 g,Enlatados,1,7900,0,C-081,tarjeta
+2026-10-15,F-202610-15-007,AGU-600,Agua 600 ml,Bebidas,2,2200,0,C-081,tarjeta
+2026-10-15,F-202610-15-008,ARR-1K,Arroz 1 kg,Granos,3,5800,0,C-019,transferencia
+2026-10-15,F-202610-15-008,FRJ-500,Frijol 500 g,Granos,4,4500,0,C-019,transferencia
+2026-10-15,F-202610-15-008,LEN-500,Lentejas 500 g,Granos,3,3800,0,C-019,transferencia
+2026-10-15,F-202610-15-009,GAL-PAQ,Galletas paquete,Snacks,2,2800,0,C-049,transferencia
+2026-10-15,F-202610-15-009,ARZ-500,Arroz Diana 500 g,Granos,1,3200,0,C-049,transferencia
+2026-10-15,F-202610-15-009,FRJ-500,Frijol 500 g,Granos,2,4500,0,C-049,transferencia
+2026-10-15,F-202610-15-010,LEC-1L,Leche entera 1 L,Lácteos,2,4500,0,,tarjeta
+2026-10-16,F-202610-16-001,ATU-170,Atún 170 g,Enlatados,2,7900,0,,efectivo
+2026-10-16,F-202610-16-001,QUE-250,Queso 250 g,Lácteos,2,7200,0,,efectivo
+2026-10-16,F-202610-16-001,JAB-250,Jabón de baño,Aseo,2,3900,0,,efectivo
+2026-10-16,F-202610-16-002,JAB-250,Jabón de baño,Aseo,2,3900,0,,transferencia
+2026-10-16,F-202610-16-002,PAP-150,Papas fritas 150 g,Snacks,1,5200,0,,transferencia
+2026-10-16,F-202610-16-002,PAN-TAJ,Pan tajado,Panadería,4,6800,0,,transferencia
+2026-10-16,F-202610-16-003,JAB-250,Jabón de baño,Aseo,1,3900,0,C-059,efectivo
+2026-10-16,F-202610-16-003,PAP-150,Papas fritas 150 g,Snacks,4,5200,0,C-059,efectivo
+2026-10-16,F-202610-16-003,LEC-1L,Leche entera 1 L,Lácteos,4,4500,0,C-059,efectivo
+2026-10-16,F-202610-16-004,GAL-PAQ,Galletas paquete,Snacks,2,2800,0,C-088,transferencia
+2026-10-16,F-202610-16-004,LEN-500,Lentejas 500 g,Granos,3,3800,0,C-088,transferencia
+2026-10-16,F-202610-16-004,JUG-1L,Jugo 1 L,Bebidas,3,5600,0,C-088,transferencia
+2026-10-16,F-202610-16-005,LEN-500,Lentejas 500 g,Granos,1,3800,0,,tarjeta
+2026-10-16,F-202610-16-005,FRJ-500,Frijol 500 g,Granos,2,4500,0,,tarjeta
+2026-10-16,F-202610-16-005,PAP-150,Papas fritas 150 g,Snacks,1,5200,0,,tarjeta
+2026-10-16,F-202610-16-006,GAL-PAQ,Galletas paquete,Snacks,3,2800,0,C-082,efectivo
+2026-10-16,F-202610-16-006,PAP-150,Papas fritas 150 g,Snacks,3,5200,0,C-082,efectivo
+2026-10-16,F-202610-16-006,FRJ-500,Frijol 500 g,Granos,2,4500,0,C-082,efectivo
+2026-10-16,F-202610-16-007,LEC-1L,Leche entera 1 L,Lácteos,4,4500,0,,transferencia
+2026-10-16,F-202610-16-007,JAB-250,Jabón de baño,Aseo,2,3900,0,,transferencia
+2026-10-16,F-202610-16-007,AGU-600,Agua 600 ml,Bebidas,2,2200,0,,transferencia
+2026-10-16,F-202610-16-008,LEC-1L,Leche entera 1 L,Lácteos,4,4500,0,,efectivo
+2026-10-16,F-202610-16-008,GAL-PAQ,Galletas paquete,Snacks,4,2800,0,,efectivo
+2026-10-16,F-202610-16-008,AGU-600,Agua 600 ml,Bebidas,2,2200,0,,efectivo
+2026-10-16,F-202610-16-009,ARR-1K,Arroz 1 kg,Granos,1,5800,0,,transferencia
+2026-10-16,F-202610-16-009,LEC-1L,Leche entera 1 L,Lácteos,4,4500,0,,transferencia
+2026-10-16,F-202610-16-009,QUE-250,Queso 250 g,Lácteos,4,7200,0,,transferencia
+2026-10-16,F-202610-16-010,FRJ-500,Frijol 500 g,Granos,1,4500,0,C-143,transferencia
+2026-10-17,F-202610-17-001,ARR-1K,Arroz 1 kg,Granos,3,5800,0,C-088,transferencia
+2026-10-17,F-202610-17-001,QUE-250,Queso 250 g,Lácteos,3,7200,0,C-088,transferencia
+2026-10-17,F-202610-17-001,ATU-170,Atún 170 g,Enlatados,4,7900,0,C-088,transferencia
+2026-10-17,F-202610-17-002,QUE-250,Queso 250 g,Lácteos,3,7200,0,C-040,transferencia
+2026-10-17,F-202610-17-002,PAN-TAJ,Pan tajado,Panadería,1,6800,0,C-040,transferencia
+2026-10-17,F-202610-17-002,JUG-1L,Jugo 1 L,Bebidas,2,5600,0,C-040,transferencia
+2026-10-17,F-202610-17-003,LEC-1L,Leche entera 1 L,Lácteos,4,4500,0,C-132,tarjeta
+2026-10-17,F-202610-17-003,GAL-PAQ,Galletas paquete,Snacks,2,2800,0,C-132,tarjeta
+2026-10-17,F-202610-17-003,PAP-150,Papas fritas 150 g,Snacks,2,5200,0,C-132,tarjeta
+2026-10-17,F-202610-17-004,JAB-250,Jabón de baño,Aseo,2,3900,0,,efectivo
+2026-10-17,F-202610-17-004,JUG-1L,Jugo 1 L,Bebidas,4,5600,0,,efectivo
+2026-10-17,F-202610-17-004,ARZ-500,Arroz Diana 500 g,Granos,4,3200,0,,efectivo
+2026-10-17,F-202610-17-005,ARZ-500,Arroz Diana 500 g,Granos,1,3200,0,,transferencia
+2026-10-17,F-202610-17-005,ATU-170,Atún 170 g,Enlatados,2,7900,0,,transferencia
+2026-10-17,F-202610-17-005,GAL-PAQ,Galletas paquete,Snacks,4,2800,0,,transferencia
+2026-10-17,F-202610-17-006,PAN-TAJ,Pan tajado,Panadería,2,6800,0,C-096,transferencia
+2026-10-17,F-202610-17-006,LEN-500,Lentejas 500 g,Granos,1,3800,0,C-096,transferencia
+2026-10-17,F-202610-17-006,LEC-1L,Leche entera 1 L,Lácteos,2,4500,0,C-096,transferencia
+2026-10-17,F-202610-17-007,JUG-1L,Jugo 1 L,Bebidas,1,5600,0,C-082,transferencia
+2026-10-17,F-202610-17-007,FRJ-500,Frijol 500 g,Granos,3,4500,0,C-082,transferencia
+2026-10-17,F-202610-17-007,AGU-600,Agua 600 ml,Bebidas,1,2200,0,C-082,transferencia
+2026-10-17,F-202610-17-008,JAB-250,Jabón de baño,Aseo,2,3900,0,C-093,transferencia
+2026-10-17,F-202610-17-008,AGU-600,Agua 600 ml,Bebidas,3,2200,0,C-093,transferencia
+2026-10-17,F-202610-17-008,JUG-1L,Jugo 1 L,Bebidas,3,5600,0,C-093,transferencia
+2026-10-17,F-202610-17-009,ARZ-500,Arroz Diana 500 g,Granos,3,3200,0,,efectivo
+2026-10-17,F-202610-17-009,ARR-1K,Arroz 1 kg,Granos,4,5800,0,,efectivo
+2026-10-17,F-202610-17-009,LEN-500,Lentejas 500 g,Granos,2,3800,0,,efectivo
+2026-10-17,F-202610-17-010,AGU-600,Agua 600 ml,Bebidas,1,2200,0,,transferencia
+2026-10-18,F-202610-18-001,JUG-1L,Jugo 1 L,Bebidas,4,5600,0,,tarjeta
+2026-10-18,F-202610-18-001,PAN-TAJ,Pan tajado,Panadería,4,6800,0,,tarjeta
+2026-10-18,F-202610-18-001,ARZ-500,Arroz Diana 500 g,Granos,3,3200,0,,tarjeta
+2026-10-18,F-202610-18-002,ARR-1K,Arroz 1 kg,Granos,3,5800,0,,efectivo
+2026-10-18,F-202610-18-002,JAB-250,Jabón de baño,Aseo,4,3900,0,,efectivo
+2026-10-18,F-202610-18-002,PAP-150,Papas fritas 150 g,Snacks,4,5200,0,,efectivo
+2026-10-18,F-202610-18-003,JUG-1L,Jugo 1 L,Bebidas,4,5600,0,C-131,efectivo
+2026-10-18,F-202610-18-003,AGU-600,Agua 600 ml,Bebidas,4,2200,0,C-131,efectivo
+2026-10-18,F-202610-18-003,ATU-170,Atún 170 g,Enlatados,4,7900,0,C-131,efectivo
+2026-10-18,F-202610-18-004,ATU-170,Atún 170 g,Enlatados,3,7900,0,C-028,efectivo
+2026-10-18,F-202610-18-004,FRJ-500,Frijol 500 g,Granos,3,4500,0,C-028,efectivo
+2026-10-18,F-202610-18-004,AGU-600,Agua 600 ml,Bebidas,1,2200,0,C-028,efectivo
+2026-10-18,F-202610-18-005,LEN-500,Lentejas 500 g,Granos,4,3800,0,C-127,efectivo
+2026-10-18,F-202610-18-005,JUG-1L,Jugo 1 L,Bebidas,1,5600,0,C-127,efectivo
+2026-10-18,F-202610-18-005,PAP-150,Papas fritas 150 g,Snacks,3,5200,0,C-127,efectivo
+2026-10-18,F-202610-18-006,QUE-250,Queso 250 g,Lácteos,4,7200,0,,efectivo
+2026-10-18,F-202610-18-006,JUG-1L,Jugo 1 L,Bebidas,2,5600,0,,efectivo
+2026-10-18,F-202610-18-006,ARR-1K,Arroz 1 kg,Granos,2,5800,0,,efectivo
+2026-10-18,F-202610-18-007,ATU-170,Atún 170 g,Enlatados,1,7900,0,C-129,transferencia
+2026-10-18,F-202610-18-007,LEC-1L,Leche entera 1 L,Lácteos,3,4500,0,C-129,transferencia
+2026-10-18,F-202610-18-007,JAB-250,Jabón de baño,Aseo,1,3900,0,C-129,transferencia
+2026-10-18,F-202610-18-008,GAL-PAQ,Galletas paquete,Snacks,1,2800,0,,transferencia
+2026-10-18,F-202610-18-008,ARR-1K,Arroz 1 kg,Granos,4,5800,0,,transferencia
+2026-10-18,F-202610-18-008,PAP-150,Papas fritas 150 g,Snacks,2,5200,0,,transferencia
+2026-10-18,F-202610-18-009,PAP-150,Papas fritas 150 g,Snacks,1,5200,0,,tarjeta
+2026-10-18,F-202610-18-009,ATU-170,Atún 170 g,Enlatados,1,7900,0,,tarjeta
+2026-10-18,F-202610-18-009,ARZ-500,Arroz Diana 500 g,Granos,2,3200,0,,tarjeta
+2026-10-18,F-202610-18-010,JAB-250,Jabón de baño,Aseo,3,3900,0,,tarjeta
+2026-10-19,F-202610-19-001,JUG-1L,Jugo 1 L,Bebidas,3,5600,0,C-070,tarjeta
+2026-10-19,F-202610-19-001,ARZ-500,Arroz Diana 500 g,Granos,2,3200,0,C-070,tarjeta
+2026-10-19,F-202610-19-001,GAL-PAQ,Galletas paquete,Snacks,2,2800,0,C-070,tarjeta
+2026-10-19,F-202610-19-002,GAL-PAQ,Galletas paquete,Snacks,2,2800,0,C-072,tarjeta
+2026-10-19,F-202610-19-002,AGU-600,Agua 600 ml,Bebidas,2,2200,0,C-072,tarjeta
+2026-10-19,F-202610-19-002,ARZ-500,Arroz Diana 500 g,Granos,1,3200,0,C-072,tarjeta
+2026-10-19,F-202610-19-003,PAP-150,Papas fritas 150 g,Snacks,2,5200,0,C-003,transferencia
+2026-10-19,F-202610-19-003,PAN-TAJ,Pan tajado,Panadería,2,6800,0,C-003,transferencia
+2026-10-19,F-202610-19-003,GAL-PAQ,Galletas paquete,Snacks,1,2800,0,C-003,transferencia
+2026-10-19,F-202610-19-004,ATU-170,Atún 170 g,Enlatados,4,7900,0,C-088,transferencia
+2026-10-19,F-202610-19-004,JAB-250,Jabón de baño,Aseo,4,3900,0,C-088,transferencia
+2026-10-19,F-202610-19-004,ARZ-500,Arroz Diana 500 g,Granos,2,3200,0,C-088,transferencia
+2026-10-19,F-202610-19-005,ATU-170,Atún 170 g,Enlatados,4,7900,0,,transferencia
+2026-10-19,F-202610-19-005,AGU-600,Agua 600 ml,Bebidas,2,2200,0,,transferencia
+2026-10-19,F-202610-19-005,JAB-250,Jabón de baño,Aseo,4,3900,0,,transferencia
+2026-10-19,F-202610-19-006,PAP-150,Papas fritas 150 g,Snacks,4,5200,0,,efectivo
+2026-10-19,F-202610-19-006,ARZ-500,Arroz Diana 500 g,Granos,3,3200,0,,efectivo
+2026-10-19,F-202610-19-006,LEN-500,Lentejas 500 g,Granos,1,3800,0,,efectivo
+2026-10-19,F-202610-19-007,ARR-1K,Arroz 1 kg,Granos,4,5800,0,,tarjeta
+2026-10-19,F-202610-19-007,QUE-250,Queso 250 g,Lácteos,4,7200,0,,tarjeta
+2026-10-19,F-202610-19-007,JAB-250,Jabón de baño,Aseo,1,3900,0,,tarjeta
+2026-10-19,F-202610-19-008,ARZ-500,Arroz Diana 500 g,Granos,3,3200,0,C-037,efectivo
+2026-10-19,F-202610-19-008,PAP-150,Papas fritas 150 g,Snacks,1,5200,0,C-037,efectivo
+2026-10-19,F-202610-19-008,JAB-250,Jabón de baño,Aseo,2,3900,0,C-037,efectivo
+2026-10-19,F-202610-19-009,PAN-TAJ,Pan tajado,Panadería,1,6800,0,,transferencia
+2026-10-19,F-202610-19-009,ARZ-500,Arroz Diana 500 g,Granos,1,3200,0,,transferencia
+2026-10-19,F-202610-19-009,GAL-PAQ,Galletas paquete,Snacks,1,2800,0,,transferencia
+2026-10-19,F-202610-19-010,ATU-170,Atún 170 g,Enlatados,1,7900,0,C-134,efectivo
+2026-10-20,F-202610-20-001,QUE-250,Queso 250 g,Lácteos,3,7200,0,C-039,transferencia
+2026-10-20,F-202610-20-001,LEC-1L,Leche entera 1 L,Lácteos,1,4500,0,C-039,transferencia
+2026-10-20,F-202610-20-001,ATU-170,Atún 170 g,Enlatados,4,7900,0,C-039,transferencia
+2026-10-20,F-202610-20-002,JUG-1L,Jugo 1 L,Bebidas,3,5600,0,C-044,transferencia
+2026-10-20,F-202610-20-002,PAN-TAJ,Pan tajado,Panadería,4,6800,0,C-044,transferencia
+2026-10-20,F-202610-20-002,LEN-500,Lentejas 500 g,Granos,1,3800,0,C-044,transferencia
+2026-10-20,F-202610-20-003,AGU-600,Agua 600 ml,Bebidas,4,2200,0,C-131,transferencia
+2026-10-20,F-202610-20-003,ARR-1K,Arroz 1 kg,Granos,4,5800,0,C-131,transferencia
+2026-10-20,F-202610-20-003,ATU-170,Atún 170 g,Enlatados,3,7900,0,C-131,transferencia
+2026-10-20,F-202610-20-004,ARZ-500,Arroz Diana 500 g,Granos,1,3200,0,C-039,efectivo
+2026-10-20,F-202610-20-004,LEC-1L,Leche entera 1 L,Lácteos,4,4500,0,C-039,efectivo
+2026-10-20,F-202610-20-004,ATU-170,Atún 170 g,Enlatados,1,7900,0,C-039,efectivo
+2026-10-20,F-202610-20-005,ATU-170,Atún 170 g,Enlatados,1,7900,0,,tarjeta
+2026-10-20,F-202610-20-005,FRJ-500,Frijol 500 g,Granos,4,4500,0,,tarjeta
+2026-10-20,F-202610-20-005,JUG-1L,Jugo 1 L,Bebidas,1,5600,0,,tarjeta
+2026-10-20,F-202610-20-006,FRJ-500,Frijol 500 g,Granos,4,4500,0,C-066,efectivo
+2026-10-20,F-202610-20-006,PAN-TAJ,Pan tajado,Panadería,1,6800,0,C-066,efectivo
+2026-10-20,F-202610-20-006,ARZ-500,Arroz Diana 500 g,Granos,3,3200,0,C-066,efectivo
+2026-10-20,F-202610-20-007,QUE-250,Queso 250 g,Lácteos,1,7200,0,,transferencia
+2026-10-20,F-202610-20-007,JAB-250,Jabón de baño,Aseo,1,3900,0,,transferencia
+2026-10-20,F-202610-20-007,FRJ-500,Frijol 500 g,Granos,1,4500,0,,transferencia
+2026-10-20,F-202610-20-008,JUG-1L,Jugo 1 L,Bebidas,4,5600,0,C-066,efectivo
+2026-10-20,F-202610-20-008,PAP-150,Papas fritas 150 g,Snacks,4,5200,0,C-066,efectivo
+2026-10-20,F-202610-20-008,PAN-TAJ,Pan tajado,Panadería,3,6800,0,C-066,efectivo
+2026-10-20,F-202610-20-009,LEN-500,Lentejas 500 g,Granos,3,3800,0,C-082,transferencia
+2026-10-20,F-202610-20-009,GAL-PAQ,Galletas paquete,Snacks,4,2800,0,C-082,transferencia
+2026-10-20,F-202610-20-009,QUE-250,Queso 250 g,Lácteos,3,7200,0,C-082,transferencia
+2026-10-20,F-202610-20-010,PAN-TAJ,Pan tajado,Panadería,3,6800,0,C-108,transferencia
+2026-10-21,F-202610-21-001,LEC-1L,Leche entera 1 L,Lácteos,2,4500,0,C-116,efectivo
+2026-10-21,F-202610-21-001,PAN-TAJ,Pan tajado,Panadería,2,6800,0,C-116,efectivo
+2026-10-21,F-202610-21-001,JAB-250,Jabón de baño,Aseo,3,3900,0,C-116,efectivo
+2026-10-21,F-202610-21-002,PAN-TAJ,Pan tajado,Panadería,2,6800,0,C-147,tarjeta
+2026-10-21,F-202610-21-002,ARZ-500,Arroz Diana 500 g,Granos,2,3200,0,C-147,tarjeta
+2026-10-21,F-202610-21-002,GAL-PAQ,Galletas paquete,Snacks,3,2800,0,C-147,tarjeta
+2026-10-21,F-202610-21-003,PAP-150,Papas fritas 150 g,Snacks,1,5200,0,,transferencia
+2026-10-21,F-202610-21-003,LEN-500,Lentejas 500 g,Granos,4,3800,0,,transferencia
+2026-10-21,F-202610-21-003,GAL-PAQ,Galletas paquete,Snacks,2,2800,0,,transferencia
+2026-10-21,F-202610-21-004,JUG-1L,Jugo 1 L,Bebidas,1,5600,0,,efectivo
+2026-10-21,F-202610-21-004,PAP-150,Papas fritas 150 g,Snacks,2,5200,0,,efectivo
+2026-10-21,F-202610-21-004,ARR-1K,Arroz 1 kg,Granos,1,5800,0,,efectivo
+2026-10-21,F-202610-21-005,QUE-250,Queso 250 g,Lácteos,1,7200,0,C-134,transferencia
+2026-10-21,F-202610-21-005,PAN-TAJ,Pan tajado,Panadería,3,6800,0,C-134,transferencia
+2026-10-21,F-202610-21-005,LEC-1L,Leche entera 1 L,Lácteos,3,4500,0,C-134,transferencia
+2026-10-21,F-202610-21-006,PAP-150,Papas fritas 150 g,Snacks,1,5200,0,C-128,transferencia
+2026-10-21,F-202610-21-006,LEN-500,Lentejas 500 g,Granos,4,3800,0,C-128,transferencia
+2026-10-21,F-202610-21-006,GAL-PAQ,Galletas paquete,Snacks,3,2800,0,C-128,transferencia
+2026-10-21,F-202610-21-007,JUG-1L,Jugo 1 L,Bebidas,4,5600,0,C-018,efectivo
+2026-10-21,F-202610-21-007,ATU-170,Atún 170 g,Enlatados,1,7900,0,C-018,efectivo
+2026-10-21,F-202610-21-007,PAN-TAJ,Pan tajado,Panadería,2,6800,0,C-018,efectivo
+2026-10-21,F-202610-21-008,LEC-1L,Leche entera 1 L,Lácteos,2,4500,0,,efectivo
+2026-10-21,F-202610-21-008,ARZ-500,Arroz Diana 500 g,Granos,4,3200,0,,efectivo
+2026-10-21,F-202610-21-008,ARR-1K,Arroz 1 kg,Granos,3,5800,0,,efectivo
+2026-10-21,F-202610-21-009,PAP-150,Papas fritas 150 g,Snacks,3,5200,0,C-101,transferencia
+2026-10-21,F-202610-21-009,AGU-600,Agua 600 ml,Bebidas,4,2200,0,C-101,transferencia
+2026-10-21,F-202610-21-009,GAL-PAQ,Galletas paquete,Snacks,2,2800,0,C-101,transferencia
+2026-10-21,F-202610-21-010,GAL-PAQ,Galletas paquete,Snacks,3,2800,0,C-138,efectivo
+2026-10-22,F-202610-22-001,FRJ-500,Frijol 500 g,Granos,1,4500,0,,efectivo
+2026-10-22,F-202610-22-001,LEN-500,Lentejas 500 g,Granos,1,3800,0,,efectivo
+2026-10-22,F-202610-22-001,JUG-1L,Jugo 1 L,Bebidas,3,5600,0,,efectivo
+2026-10-22,F-202610-22-002,FRJ-500,Frijol 500 g,Granos,1,4500,0,,tarjeta
+2026-10-22,F-202610-22-002,JUG-1L,Jugo 1 L,Bebidas,1,5600,0,,tarjeta
+2026-10-22,F-202610-22-002,ATU-170,Atún 170 g,Enlatados,1,7900,0,,tarjeta
+2026-10-22,F-202610-22-003,PAP-150,Papas fritas 150 g,Snacks,2,5200,0,C-027,transferencia
+2026-10-22,F-202610-22-003,PAN-TAJ,Pan tajado,Panadería,4,6800,0,C-027,transferencia
+2026-10-22,F-202610-22-003,LEC-1L,Leche entera 1 L,Lácteos,4,4500,0,C-027,transferencia
+2026-10-22,F-202610-22-004,FRJ-500,Frijol 500 g,Granos,1,4500,0,,tarjeta
+2026-10-22,F-202610-22-004,ATU-170,Atún 170 g,Enlatados,3,7900,0,,tarjeta
+2026-10-22,F-202610-22-004,PAN-TAJ,Pan tajado,Panadería,4,6800,0,,tarjeta
+2026-10-22,F-202610-22-005,ARR-1K,Arroz 1 kg,Granos,4,5800,0,C-072,tarjeta
+2026-10-22,F-202610-22-005,PAN-TAJ,Pan tajado,Panadería,4,6800,0,C-072,tarjeta
+2026-10-22,F-202610-22-005,ATU-170,Atún 170 g,Enlatados,1,7900,0,C-072,tarjeta
+2026-10-22,F-202610-22-006,ARR-1K,Arroz 1 kg,Granos,1,5800,0,,efectivo
+2026-10-22,F-202610-22-006,JUG-1L,Jugo 1 L,Bebidas,1,5600,0,,efectivo
+2026-10-22,F-202610-22-006,PAP-150,Papas fritas 150 g,Snacks,3,5200,0,,efectivo
+2026-10-22,F-202610-22-007,QUE-250,Queso 250 g,Lácteos,2,7200,0,,efectivo
+2026-10-22,F-202610-22-007,GAL-PAQ,Galletas paquete,Snacks,4,2800,0,,efectivo
+2026-10-22,F-202610-22-007,PAP-150,Papas fritas 150 g,Snacks,2,5200,0,,efectivo
+2026-10-22,F-202610-22-008,ATU-170,Atún 170 g,Enlatados,2,7900,0,,transferencia
+2026-10-22,F-202610-22-008,PAN-TAJ,Pan tajado,Panadería,1,6800,0,,transferencia
+2026-10-22,F-202610-22-008,JAB-250,Jabón de baño,Aseo,4,3900,0,,transferencia
+2026-10-22,F-202610-22-009,JUG-1L,Jugo 1 L,Bebidas,1,5600,0,C-137,tarjeta
+2026-10-22,F-202610-22-009,ARR-1K,Arroz 1 kg,Granos,4,5800,0,C-137,tarjeta
+2026-10-22,F-202610-22-009,JAB-250,Jabón de baño,Aseo,1,3900,0,C-137,tarjeta
+2026-10-22,F-202610-22-010,FRJ-500,Frijol 500 g,Granos,4,4500,0,,transferencia
+2026-10-23,F-202610-23-001,JAB-250,Jabón de baño,Aseo,4,3900,0,C-122,efectivo
+2026-10-23,F-202610-23-001,FRJ-500,Frijol 500 g,Granos,4,4500,0,C-122,efectivo
+2026-10-23,F-202610-23-001,ARR-1K,Arroz 1 kg,Granos,3,5800,0,C-122,efectivo
+2026-10-23,F-202610-23-002,PAN-TAJ,Pan tajado,Panadería,4,6800,0,C-023,efectivo
+2026-10-23,F-202610-23-002,JUG-1L,Jugo 1 L,Bebidas,4,5600,0,C-023,efectivo
+2026-10-23,F-202610-23-002,ATU-170,Atún 170 g,Enlatados,3,7900,0,C-023,efectivo
+2026-10-23,F-202610-23-003,LEC-1L,Leche entera 1 L,Lácteos,1,4500,0,C-107,transferencia
+2026-10-23,F-202610-23-003,AGU-600,Agua 600 ml,Bebidas,3,2200,0,C-107,transferencia
+2026-10-23,F-202610-23-003,GAL-PAQ,Galletas paquete,Snacks,2,2800,0,C-107,transferencia
+2026-10-23,F-202610-23-004,JUG-1L,Jugo 1 L,Bebidas,3,5600,0,,tarjeta
+2026-10-23,F-202610-23-004,PAP-150,Papas fritas 150 g,Snacks,3,5200,0,,tarjeta
+2026-10-23,F-202610-23-004,ARZ-500,Arroz Diana 500 g,Granos,1,3200,0,,tarjeta
+2026-10-23,F-202610-23-005,FRJ-500,Frijol 500 g,Granos,3,4500,0,C-044,tarjeta
+2026-10-23,F-202610-23-005,JUG-1L,Jugo 1 L,Bebidas,3,5600,0,C-044,tarjeta
+2026-10-23,F-202610-23-005,ARR-1K,Arroz 1 kg,Granos,3,5800,0,C-044,tarjeta
+2026-10-23,F-202610-23-006,LEN-500,Lentejas 500 g,Granos,4,3800,0,C-020,efectivo
+2026-10-23,F-202610-23-006,PAN-TAJ,Pan tajado,Panadería,4,6800,0,C-020,efectivo
+2026-10-23,F-202610-23-006,FRJ-500,Frijol 500 g,Granos,1,4500,0,C-020,efectivo
+2026-10-23,F-202610-23-007,PAN-TAJ,Pan tajado,Panadería,1,6800,0,C-103,transferencia
+2026-10-23,F-202610-23-007,ARR-1K,Arroz 1 kg,Granos,4,5800,0,C-103,transferencia
+2026-10-23,F-202610-23-007,PAP-150,Papas fritas 150 g,Snacks,1,5200,0,C-103,transferencia
+2026-10-23,F-202610-23-008,JUG-1L,Jugo 1 L,Bebidas,4,5600,0,C-013,transferencia
+2026-10-23,F-202610-23-008,QUE-250,Queso 250 g,Lácteos,1,7200,0,C-013,transferencia
+2026-10-23,F-202610-23-008,ATU-170,Atún 170 g,Enlatados,3,7900,0,C-013,transferencia
+2026-10-23,F-202610-23-009,GAL-PAQ,Galletas paquete,Snacks,2,2800,0,C-010,transferencia
+2026-10-23,F-202610-23-009,LEN-500,Lentejas 500 g,Granos,4,3800,0,C-010,transferencia
+2026-10-23,F-202610-23-009,JUG-1L,Jugo 1 L,Bebidas,4,5600,0,C-010,transferencia
+2026-10-23,F-202610-23-010,QUE-250,Queso 250 g,Lácteos,2,7200,0,C-113,tarjeta
+2026-10-24,F-202610-24-001,ARZ-500,Arroz Diana 500 g,Granos,1,3200,0,,tarjeta
+2026-10-24,F-202610-24-001,JAB-250,Jabón de baño,Aseo,3,3900,0,,tarjeta
+2026-10-24,F-202610-24-001,ATU-170,Atún 170 g,Enlatados,2,7900,0,,tarjeta
+2026-10-24,F-202610-24-002,FRJ-500,Frijol 500 g,Granos,3,4500,0,,tarjeta
+2026-10-24,F-202610-24-002,AGU-600,Agua 600 ml,Bebidas,1,2200,0,,tarjeta
+2026-10-24,F-202610-24-002,ARZ-500,Arroz Diana 500 g,Granos,4,3200,0,,tarjeta
+2026-10-24,F-202610-24-003,LEN-500,Lentejas 500 g,Granos,2,3800,0,,tarjeta
+2026-10-24,F-202610-24-003,LEC-1L,Leche entera 1 L,Lácteos,4,4500,0,,tarjeta
+2026-10-24,F-202610-24-003,JAB-250,Jabón de baño,Aseo,3,3900,0,,tarjeta
+2026-10-24,F-202610-24-004,GAL-PAQ,Galletas paquete,Snacks,2,2800,0,C-073,transferencia
+2026-10-24,F-202610-24-004,PAN-TAJ,Pan tajado,Panadería,4,6800,0,C-073,transferencia
+2026-10-24,F-202610-24-004,QUE-250,Queso 250 g,Lácteos,3,7200,0,C-073,transferencia
+2026-10-24,F-202610-24-005,JUG-1L,Jugo 1 L,Bebidas,1,5600,0,C-147,transferencia
+2026-10-24,F-202610-24-005,QUE-250,Queso 250 g,Lácteos,1,7200,0,C-147,transferencia
+2026-10-24,F-202610-24-005,ARZ-500,Arroz Diana 500 g,Granos,2,3200,0,C-147,transferencia
+2026-10-24,F-202610-24-006,LEC-1L,Leche entera 1 L,Lácteos,2,4500,0,,transferencia
+2026-10-24,F-202610-24-006,PAP-150,Papas fritas 150 g,Snacks,1,5200,0,,transferencia
+2026-10-24,F-202610-24-006,JUG-1L,Jugo 1 L,Bebidas,3,5600,0,,transferencia
+2026-10-24,F-202610-24-007,JUG-1L,Jugo 1 L,Bebidas,2,5600,0,,efectivo
+2026-10-24,F-202610-24-007,LEN-500,Lentejas 500 g,Granos,4,3800,0,,efectivo
+2026-10-24,F-202610-24-007,ARZ-500,Arroz Diana 500 g,Granos,2,3200,0,,efectivo
+2026-10-24,F-202610-24-008,ARR-1K,Arroz 1 kg,Granos,4,5800,0,,efectivo
+2026-10-24,F-202610-24-008,QUE-250,Queso 250 g,Lácteos,1,7200,0,,efectivo
+2026-10-24,F-202610-24-008,AGU-600,Agua 600 ml,Bebidas,2,2200,0,,efectivo
+2026-10-24,F-202610-24-009,JAB-250,Jabón de baño,Aseo,3,3900,0,,efectivo
+2026-10-24,F-202610-24-009,ARZ-500,Arroz Diana 500 g,Granos,1,3200,0,,efectivo
+2026-10-24,F-202610-24-009,PAN-TAJ,Pan tajado,Panadería,3,6800,0,,efectivo
+2026-10-24,F-202610-24-010,ARZ-500,Arroz Diana 500 g,Granos,4,3200,0,,efectivo
+2026-10-25,F-202610-25-001,ARR-1K,Arroz 1 kg,Granos,2,5800,0,C-110,transferencia
+2026-10-25,F-202610-25-001,LEN-500,Lentejas 500 g,Granos,4,3800,0,C-110,transferencia
+2026-10-25,F-202610-25-001,LEC-1L,Leche entera 1 L,Lácteos,1,4500,0,C-110,transferencia
+2026-10-25,F-202610-25-002,ARR-1K,Arroz 1 kg,Granos,3,5800,0,,tarjeta
+2026-10-25,F-202610-25-002,PAN-TAJ,Pan tajado,Panadería,1,6800,0,,tarjeta
+2026-10-25,F-202610-25-002,PAP-150,Papas fritas 150 g,Snacks,1,5200,0,,tarjeta
+2026-10-25,F-202610-25-003,QUE-250,Queso 250 g,Lácteos,3,7200,0,C-127,transferencia
+2026-10-25,F-202610-25-003,GAL-PAQ,Galletas paquete,Snacks,3,2800,0,C-127,transferencia
+2026-10-25,F-202610-25-003,LEN-500,Lentejas 500 g,Granos,4,3800,0,C-127,transferencia
+2026-10-25,F-202610-25-004,AGU-600,Agua 600 ml,Bebidas,4,2200,0,C-081,tarjeta
+2026-10-25,F-202610-25-004,JAB-250,Jabón de baño,Aseo,4,3900,0,C-081,tarjeta
+2026-10-25,F-202610-25-004,LEC-1L,Leche entera 1 L,Lácteos,1,4500,0,C-081,tarjeta
+2026-10-25,F-202610-25-005,JAB-250,Jabón de baño,Aseo,4,3900,0,,tarjeta
+2026-10-25,F-202610-25-005,LEN-500,Lentejas 500 g,Granos,2,3800,0,,tarjeta
+2026-10-25,F-202610-25-005,ATU-170,Atún 170 g,Enlatados,2,7900,0,,tarjeta
+2026-10-25,F-202610-25-006,ATU-170,Atún 170 g,Enlatados,2,7900,0,C-038,transferencia
+2026-10-25,F-202610-25-006,PAP-150,Papas fritas 150 g,Snacks,1,5200,0,C-038,transferencia
+2026-10-25,F-202610-25-006,ARZ-500,Arroz Diana 500 g,Granos,1,3200,0,C-038,transferencia
+2026-10-25,F-202610-25-007,LEN-500,Lentejas 500 g,Granos,2,3800,0,C-132,efectivo
+2026-10-25,F-202610-25-007,QUE-250,Queso 250 g,Lácteos,3,7200,0,C-132,efectivo
+2026-10-25,F-202610-25-007,AGU-600,Agua 600 ml,Bebidas,4,2200,0,C-132,efectivo
+2026-10-25,F-202610-25-008,ARR-1K,Arroz 1 kg,Granos,3,5800,0,,tarjeta
+2026-10-25,F-202610-25-008,GAL-PAQ,Galletas paquete,Snacks,4,2800,0,,tarjeta
+2026-10-25,F-202610-25-008,ARZ-500,Arroz Diana 500 g,Granos,2,3200,0,,tarjeta
+2026-10-25,F-202610-25-009,GAL-PAQ,Galletas paquete,Snacks,2,2800,0,C-092,transferencia
+2026-10-25,F-202610-25-009,LEN-500,Lentejas 500 g,Granos,1,3800,0,C-092,transferencia
+2026-10-25,F-202610-25-009,JAB-250,Jabón de baño,Aseo,4,3900,0,C-092,transferencia
+2026-10-25,F-202610-25-010,GAL-PAQ,Galletas paquete,Snacks,2,2800,0,C-054,efectivo
+2026-10-26,F-202610-26-001,ARR-1K,Arroz 1 kg,Granos,2,5800,0,,transferencia
+2026-10-26,F-202610-26-001,LEN-500,Lentejas 500 g,Granos,3,3800,0,,transferencia
+2026-10-26,F-202610-26-001,FRJ-500,Frijol 500 g,Granos,4,4500,0,,transferencia
+2026-10-26,F-202610-26-002,PAN-TAJ,Pan tajado,Panadería,4,6800,0,,efectivo
+2026-10-26,F-202610-26-002,AGU-600,Agua 600 ml,Bebidas,1,2200,0,,efectivo
+2026-10-26,F-202610-26-002,LEC-1L,Leche entera 1 L,Lácteos,3,4500,0,,efectivo
+2026-10-26,F-202610-26-003,QUE-250,Queso 250 g,Lácteos,2,7200,0,C-027,transferencia
+2026-10-26,F-202610-26-003,JAB-250,Jabón de baño,Aseo,3,3900,0,C-027,transferencia
+2026-10-26,F-202610-26-003,GAL-PAQ,Galletas paquete,Snacks,3,2800,0,C-027,transferencia
+2026-10-26,F-202610-26-004,PAP-150,Papas fritas 150 g,Snacks,4,5200,0,,transferencia
+2026-10-26,F-202610-26-004,QUE-250,Queso 250 g,Lácteos,4,7200,0,,transferencia
+2026-10-26,F-202610-26-004,FRJ-500,Frijol 500 g,Granos,4,4500,0,,transferencia
+2026-10-26,F-202610-26-005,LEN-500,Lentejas 500 g,Granos,1,3800,0,C-080,transferencia
+2026-10-26,F-202610-26-005,LEC-1L,Leche entera 1 L,Lácteos,2,4500,0,C-080,transferencia
+2026-10-26,F-202610-26-005,JAB-250,Jabón de baño,Aseo,3,3900,0,C-080,transferencia
+2026-10-26,F-202610-26-006,LEN-500,Lentejas 500 g,Granos,3,3800,0,C-117,transferencia
+2026-10-26,F-202610-26-006,FRJ-500,Frijol 500 g,Granos,3,4500,0,C-117,transferencia
+2026-10-26,F-202610-26-006,GAL-PAQ,Galletas paquete,Snacks,1,2800,0,C-117,transferencia
+2026-10-26,F-202610-26-007,PAP-150,Papas fritas 150 g,Snacks,4,5200,0,C-038,transferencia
+2026-10-26,F-202610-26-007,QUE-250,Queso 250 g,Lácteos,3,7200,0,C-038,transferencia
+2026-10-26,F-202610-26-007,ATU-170,Atún 170 g,Enlatados,3,7900,0,C-038,transferencia
+2026-10-26,F-202610-26-008,PAP-150,Papas fritas 150 g,Snacks,1,5200,0,C-136,tarjeta
+2026-10-26,F-202610-26-008,ATU-170,Atún 170 g,Enlatados,3,7900,0,C-136,tarjeta
+2026-10-26,F-202610-26-008,JAB-250,Jabón de baño,Aseo,3,3900,0,C-136,tarjeta
+2026-10-26,F-202610-26-009,ATU-170,Atún 170 g,Enlatados,3,7900,0,,transferencia
+2026-10-26,F-202610-26-009,PAN-TAJ,Pan tajado,Panadería,3,6800,0,,transferencia
+2026-10-26,F-202610-26-009,AGU-600,Agua 600 ml,Bebidas,4,2200,0,,transferencia
+2026-10-26,F-202610-26-010,ATU-170,Atún 170 g,Enlatados,1,7900,0,,efectivo
+2026-10-27,F-202610-27-001,ARZ-500,Arroz Diana 500 g,Granos,4,3200,0,C-070,tarjeta
+2026-10-27,F-202610-27-001,ARR-1K,Arroz 1 kg,Granos,3,5800,0,C-070,tarjeta
+2026-10-27,F-202610-27-001,LEC-1L,Leche entera 1 L,Lácteos,4,4500,0,C-070,tarjeta
+2026-10-27,F-202610-27-002,JUG-1L,Jugo 1 L,Bebidas,3,5600,0,,tarjeta
+2026-10-27,F-202610-27-002,ATU-170,Atún 170 g,Enlatados,1,7900,0,,tarjeta
+2026-10-27,F-202610-27-002,PAP-150,Papas fritas 150 g,Snacks,4,5200,0,,tarjeta
+2026-10-27,F-202610-27-003,FRJ-500,Frijol 500 g,Granos,1,4500,0,C-067,tarjeta
+2026-10-27,F-202610-27-003,PAP-150,Papas fritas 150 g,Snacks,3,5200,0,C-067,tarjeta
+2026-10-27,F-202610-27-003,JAB-250,Jabón de baño,Aseo,3,3900,0,C-067,tarjeta
+2026-10-27,F-202610-27-004,PAP-150,Papas fritas 150 g,Snacks,2,5200,0,C-071,efectivo
+2026-10-27,F-202610-27-004,LEN-500,Lentejas 500 g,Granos,4,3800,0,C-071,efectivo
+2026-10-27,F-202610-27-004,ARZ-500,Arroz Diana 500 g,Granos,3,3200,0,C-071,efectivo
+2026-10-27,F-202610-27-005,PAP-150,Papas fritas 150 g,Snacks,4,5200,0,C-096,tarjeta
+2026-10-27,F-202610-27-005,AGU-600,Agua 600 ml,Bebidas,4,2200,0,C-096,tarjeta
+2026-10-27,F-202610-27-005,JUG-1L,Jugo 1 L,Bebidas,2,5600,0,C-096,tarjeta
+2026-10-27,F-202610-27-006,ARZ-500,Arroz Diana 500 g,Granos,4,3200,0,C-103,efectivo
+2026-10-27,F-202610-27-006,ARR-1K,Arroz 1 kg,Granos,1,5800,0,C-103,efectivo
+2026-10-27,F-202610-27-006,AGU-600,Agua 600 ml,Bebidas,2,2200,0,C-103,efectivo
+2026-10-27,F-202610-27-007,ATU-170,Atún 170 g,Enlatados,4,7900,0,,efectivo
+2026-10-27,F-202610-27-007,ARZ-500,Arroz Diana 500 g,Granos,4,3200,0,,efectivo
+2026-10-27,F-202610-27-007,FRJ-500,Frijol 500 g,Granos,4,4500,0,,efectivo
+2026-10-27,F-202610-27-008,JUG-1L,Jugo 1 L,Bebidas,4,5600,0,C-019,tarjeta
+2026-10-27,F-202610-27-008,ARR-1K,Arroz 1 kg,Granos,1,5800,0,C-019,tarjeta
+2026-10-27,F-202610-27-008,LEC-1L,Leche entera 1 L,Lácteos,3,4500,0,C-019,tarjeta
+2026-10-27,F-202610-27-009,JUG-1L,Jugo 1 L,Bebidas,3,5600,0,C-008,transferencia
+2026-10-27,F-202610-27-009,AGU-600,Agua 600 ml,Bebidas,3,2200,0,C-008,transferencia
+2026-10-27,F-202610-27-009,FRJ-500,Frijol 500 g,Granos,4,4500,0,C-008,transferencia
+2026-10-27,F-202610-27-010,FRJ-500,Frijol 500 g,Granos,1,4500,0,C-123,transferencia
+2026-10-28,F-202610-28-001,QUE-250,Queso 250 g,Lácteos,3,7200,0,C-002,tarjeta
+2026-10-28,F-202610-28-001,PAP-150,Papas fritas 150 g,Snacks,2,5200,0,C-002,tarjeta
+2026-10-28,F-202610-28-001,LEC-1L,Leche entera 1 L,Lácteos,2,4500,0,C-002,tarjeta
+2026-10-28,F-202610-28-002,ATU-170,Atún 170 g,Enlatados,4,7900,0,C-051,efectivo
+2026-10-28,F-202610-28-002,ARR-1K,Arroz 1 kg,Granos,1,5800,0,C-051,efectivo
+2026-10-28,F-202610-28-002,LEC-1L,Leche entera 1 L,Lácteos,4,4500,0,C-051,efectivo
+2026-10-28,F-202610-28-003,JUG-1L,Jugo 1 L,Bebidas,4,5600,0,C-049,tarjeta
+2026-10-28,F-202610-28-003,PAP-150,Papas fritas 150 g,Snacks,1,5200,0,C-049,tarjeta
+2026-10-28,F-202610-28-003,ARZ-500,Arroz Diana 500 g,Granos,1,3200,0,C-049,tarjeta
+2026-10-28,F-202610-28-004,ARZ-500,Arroz Diana 500 g,Granos,1,3200,0,,efectivo
+2026-10-28,F-202610-28-004,PAN-TAJ,Pan tajado,Panadería,4,6800,0,,efectivo
+2026-10-28,F-202610-28-004,GAL-PAQ,Galletas paquete,Snacks,4,2800,0,,efectivo
+2026-10-28,F-202610-28-005,FRJ-500,Frijol 500 g,Granos,4,4500,0,C-085,tarjeta
+2026-10-28,F-202610-28-005,LEN-500,Lentejas 500 g,Granos,3,3800,0,C-085,tarjeta
+2026-10-28,F-202610-28-005,ARR-1K,Arroz 1 kg,Granos,3,5800,0,C-085,tarjeta
+2026-10-28,F-202610-28-006,GAL-PAQ,Galletas paquete,Snacks,2,2800,0,,transferencia
+2026-10-28,F-202610-28-006,ATU-170,Atún 170 g,Enlatados,2,7900,0,,transferencia
+2026-10-28,F-202610-28-006,LEN-500,Lentejas 500 g,Granos,4,3800,0,,transferencia
+2026-10-28,F-202610-28-007,GAL-PAQ,Galletas paquete,Snacks,1,2800,0,C-052,transferencia
+2026-10-28,F-202610-28-007,LEN-500,Lentejas 500 g,Granos,2,3800,0,C-052,transferencia
+2026-10-28,F-202610-28-007,JAB-250,Jabón de baño,Aseo,2,3900,0,C-052,transferencia
+2026-10-28,F-202610-28-008,JAB-250,Jabón de baño,Aseo,1,3900,0,C-148,tarjeta
+2026-10-28,F-202610-28-008,ARZ-500,Arroz Diana 500 g,Granos,1,3200,0,C-148,tarjeta
+2026-10-28,F-202610-28-008,PAN-TAJ,Pan tajado,Panadería,1,6800,0,C-148,tarjeta
+2026-10-28,F-202610-28-009,JUG-1L,Jugo 1 L,Bebidas,2,5600,0,,transferencia
+2026-10-28,F-202610-28-009,QUE-250,Queso 250 g,Lácteos,2,7200,0,,transferencia
+2026-10-28,F-202610-28-009,ARZ-500,Arroz Diana 500 g,Granos,2,3200,0,,transferencia
+2026-10-28,F-202610-28-010,AGU-600,Agua 600 ml,Bebidas,4,2200,0,,transferencia
+2026-10-29,F-202610-29-001,ARR-1K,Arroz 1 kg,Granos,2,5800,0,C-084,efectivo
+2026-10-29,F-202610-29-001,GAL-PAQ,Galletas paquete,Snacks,2,2800,0,C-084,efectivo
+2026-10-29,F-202610-29-001,AGU-600,Agua 600 ml,Bebidas,4,2200,0,C-084,efectivo
+2026-10-29,F-202610-29-002,FRJ-500,Frijol 500 g,Granos,3,4500,0,,efectivo
+2026-10-29,F-202610-29-002,PAN-TAJ,Pan tajado,Panadería,1,6800,0,,efectivo
+2026-10-29,F-202610-29-002,JUG-1L,Jugo 1 L,Bebidas,2,5600,0,,efectivo
+2026-10-29,F-202610-29-003,PAP-150,Papas fritas 150 g,Snacks,4,5200,0,C-124,transferencia
+2026-10-29,F-202610-29-003,LEC-1L,Leche entera 1 L,Lácteos,2,4500,0,C-124,transferencia
+2026-10-29,F-202610-29-003,JUG-1L,Jugo 1 L,Bebidas,3,5600,0,C-124,transferencia
+2026-10-29,F-202610-29-004,ARZ-500,Arroz Diana 500 g,Granos,3,3200,0,C-096,efectivo
+2026-10-29,F-202610-29-004,GAL-PAQ,Galletas paquete,Snacks,4,2800,0,C-096,efectivo
+2026-10-29,F-202610-29-004,LEC-1L,Leche entera 1 L,Lácteos,3,4500,0,C-096,efectivo
+2026-10-29,F-202610-29-005,LEC-1L,Leche entera 1 L,Lácteos,1,4500,0,C-140,efectivo
+2026-10-29,F-202610-29-005,GAL-PAQ,Galletas paquete,Snacks,2,2800,0,C-140,efectivo
+2026-10-29,F-202610-29-005,LEN-500,Lentejas 500 g,Granos,2,3800,0,C-140,efectivo
+2026-10-29,F-202610-29-006,JUG-1L,Jugo 1 L,Bebidas,3,5600,0,,transferencia
+2026-10-29,F-202610-29-006,GAL-PAQ,Galletas paquete,Snacks,4,2800,0,,transferencia
+2026-10-29,F-202610-29-006,ARZ-500,Arroz Diana 500 g,Granos,2,3200,0,,transferencia
+2026-10-29,F-202610-29-007,FRJ-500,Frijol 500 g,Granos,4,4500,0,,transferencia
+2026-10-29,F-202610-29-007,LEN-500,Lentejas 500 g,Granos,2,3800,0,,transferencia
+2026-10-29,F-202610-29-007,GAL-PAQ,Galletas paquete,Snacks,4,2800,0,,transferencia
+2026-10-29,F-202610-29-008,GAL-PAQ,Galletas paquete,Snacks,4,2800,0,C-007,transferencia
+2026-10-29,F-202610-29-008,ARZ-500,Arroz Diana 500 g,Granos,2,3200,0,C-007,transferencia
+2026-10-29,F-202610-29-008,LEN-500,Lentejas 500 g,Granos,3,3800,0,C-007,transferencia
+2026-10-29,F-202610-29-009,JAB-250,Jabón de baño,Aseo,2,3900,0,,tarjeta
+2026-10-29,F-202610-29-009,LEN-500,Lentejas 500 g,Granos,2,3800,0,,tarjeta
+2026-10-29,F-202610-29-009,JUG-1L,Jugo 1 L,Bebidas,3,5600,0,,tarjeta
+2026-10-29,F-202610-29-010,PAP-150,Papas fritas 150 g,Snacks,4,5200,0,C-133,efectivo
+2026-10-30,F-202610-30-001,LEN-500,Lentejas 500 g,Granos,3,3800,0,C-113,tarjeta
+2026-10-30,F-202610-30-001,QUE-250,Queso 250 g,Lácteos,2,7200,0,C-113,tarjeta
+2026-10-30,F-202610-30-001,AGU-600,Agua 600 ml,Bebidas,4,2200,0,C-113,tarjeta
+2026-10-30,F-202610-30-002,GAL-PAQ,Galletas paquete,Snacks,2,2800,0,C-008,transferencia
+2026-10-30,F-202610-30-002,LEC-1L,Leche entera 1 L,Lácteos,3,4500,0,C-008,transferencia
+2026-10-30,F-202610-30-002,PAP-150,Papas fritas 150 g,Snacks,1,5200,0,C-008,transferencia
+2026-10-30,F-202610-30-003,FRJ-500,Frijol 500 g,Granos,3,4500,0,C-114,tarjeta
+2026-10-30,F-202610-30-003,JUG-1L,Jugo 1 L,Bebidas,4,5600,0,C-114,tarjeta
+2026-10-30,F-202610-30-003,QUE-250,Queso 250 g,Lácteos,1,7200,0,C-114,tarjeta
+2026-10-30,F-202610-30-004,QUE-250,Queso 250 g,Lácteos,2,7200,0,C-137,transferencia
+2026-10-30,F-202610-30-004,LEC-1L,Leche entera 1 L,Lácteos,4,4500,0,C-137,transferencia
+2026-10-30,F-202610-30-004,PAN-TAJ,Pan tajado,Panadería,4,6800,0,C-137,transferencia
+2026-10-30,F-202610-30-005,LEC-1L,Leche entera 1 L,Lácteos,1,4500,0,,efectivo
+2026-10-30,F-202610-30-005,FRJ-500,Frijol 500 g,Granos,3,4500,0,,efectivo
+2026-10-30,F-202610-30-005,LEN-500,Lentejas 500 g,Granos,2,3800,0,,efectivo
+2026-10-30,F-202610-30-006,FRJ-500,Frijol 500 g,Granos,1,4500,0,C-080,tarjeta
+2026-10-30,F-202610-30-006,AGU-600,Agua 600 ml,Bebidas,3,2200,0,C-080,tarjeta
+2026-10-30,F-202610-30-006,JAB-250,Jabón de baño,Aseo,1,3900,0,C-080,tarjeta
+2026-10-30,F-202610-30-007,QUE-250,Queso 250 g,Lácteos,2,7200,0,C-033,tarjeta
+2026-10-30,F-202610-30-007,LEN-500,Lentejas 500 g,Granos,2,3800,0,C-033,tarjeta
+2026-10-30,F-202610-30-007,FRJ-500,Frijol 500 g,Granos,2,4500,0,C-033,tarjeta
+2026-10-30,F-202610-30-008,PAP-150,Papas fritas 150 g,Snacks,2,5200,0,,transferencia
+2026-10-30,F-202610-30-008,GAL-PAQ,Galletas paquete,Snacks,4,2800,0,,transferencia
+2026-10-30,F-202610-30-008,AGU-600,Agua 600 ml,Bebidas,3,2200,0,,transferencia
+2026-10-30,F-202610-30-009,JUG-1L,Jugo 1 L,Bebidas,2,5600,0,,tarjeta
+2026-10-30,F-202610-30-009,ARZ-500,Arroz Diana 500 g,Granos,3,3200,0,,tarjeta
+2026-10-30,F-202610-30-009,PAP-150,Papas fritas 150 g,Snacks,2,5200,0,,tarjeta
+2026-10-30,F-202610-30-010,LEC-1L,Leche entera 1 L,Lácteos,3,4500,0,C-022,efectivo
+2026-10-31,F-202610-31-001,GAL-PAQ,Galletas paquete,Snacks,2,2800,0,C-142,efectivo
+2026-10-31,F-202610-31-001,FRJ-500,Frijol 500 g,Granos,3,4500,0,C-142,efectivo
+2026-10-31,F-202610-31-001,ARZ-500,Arroz Diana 500 g,Granos,1,3200,0,C-142,efectivo
+2026-10-31,F-202610-31-002,ARZ-500,Arroz Diana 500 g,Granos,1,3200,0,,tarjeta
+2026-10-31,F-202610-31-002,PAP-150,Papas fritas 150 g,Snacks,1,5200,0,,tarjeta
+2026-10-31,F-202610-31-002,JUG-1L,Jugo 1 L,Bebidas,2,5600,0,,tarjeta
+2026-10-31,F-202610-31-003,LEC-1L,Leche entera 1 L,Lácteos,3,4500,0,,efectivo
+2026-10-31,F-202610-31-003,PAP-150,Papas fritas 150 g,Snacks,1,5200,0,,efectivo
+2026-10-31,F-202610-31-003,LEN-500,Lentejas 500 g,Granos,2,3800,0,,efectivo
+2026-10-31,F-202610-31-004,ATU-170,Atún 170 g,Enlatados,2,7900,0,C-014,tarjeta
+2026-10-31,F-202610-31-004,JUG-1L,Jugo 1 L,Bebidas,3,5600,0,C-014,tarjeta
+2026-10-31,F-202610-31-004,JAB-250,Jabón de baño,Aseo,3,3900,0,C-014,tarjeta
+2026-10-31,F-202610-31-005,ARR-1K,Arroz 1 kg,Granos,2,5800,0,C-063,transferencia
+2026-10-31,F-202610-31-005,PAN-TAJ,Pan tajado,Panadería,2,6800,0,C-063,transferencia
+2026-10-31,F-202610-31-005,GAL-PAQ,Galletas paquete,Snacks,2,2800,0,C-063,transferencia
+2026-10-31,F-202610-31-006,AGU-600,Agua 600 ml,Bebidas,1,2200,0,C-081,tarjeta
+2026-10-31,F-202610-31-006,ATU-170,Atún 170 g,Enlatados,2,7900,0,C-081,tarjeta
+2026-10-31,F-202610-31-006,GAL-PAQ,Galletas paquete,Snacks,4,2800,0,C-081,tarjeta
+2026-10-31,F-202610-31-007,GAL-PAQ,Galletas paquete,Snacks,4,2800,0,,efectivo
+2026-10-31,F-202610-31-007,JAB-250,Jabón de baño,Aseo,4,3900,0,,efectivo
+2026-10-31,F-202610-31-007,LEN-500,Lentejas 500 g,Granos,1,3800,0,,efectivo
+2026-10-31,F-202610-31-008,GAL-PAQ,Galletas paquete,Snacks,4,2800,0,C-127,transferencia
+2026-10-31,F-202610-31-008,FRJ-500,Frijol 500 g,Granos,4,4500,0,C-127,transferencia
+2026-10-31,F-202610-31-008,JUG-1L,Jugo 1 L,Bebidas,4,5600,0,C-127,transferencia
+2026-10-31,F-202610-31-009,PAN-TAJ,Pan tajado,Panadería,1,6800,0,C-015,tarjeta
+2026-10-31,F-202610-31-009,QUE-250,Queso 250 g,Lácteos,3,7200,0,C-015,tarjeta
+2026-10-31,F-202610-31-009,LEN-500,Lentejas 500 g,Granos,3,3800,0,C-015,tarjeta
+2026-10-31,F-202610-31-010,ARZ-500,Arroz Diana 500 g,Granos,1,3200,0,C-024,tarjeta
+2026-10-31,F-202610-31-010,AGU-600,Agua 600 ml,Bebidas,1,2200,0,C-024,tarjeta
+2026-10-31,F-202610-31-010,LEC-1L,Leche entera 1 L,Lácteos,4,4500,0,C-024,tarjeta
+2026-10-31,F-202610-31-011,JAB-250,Jabón de baño,Aseo,1,3900,0,C-109,transferencia
+2026-10-31,F-202610-31-011,AGU-600,Agua 600 ml,Bebidas,3,2200,0,C-109,transferencia
+2026-10-31,F-202610-31-011,PAN-TAJ,Pan tajado,Panadería,4,6800,0,C-109,transferencia
+2026-10-31,F-202610-31-012,QUE-250,Queso 250 g,Lácteos,2,7200,0,C-008,tarjeta
+2026-10-31,F-202610-31-012,PAN-TAJ,Pan tajado,Panadería,3,6800,0,C-008,tarjeta
+2026-10-31,F-202610-31-012,LEC-1L,Leche entera 1 L,Lácteos,1,4500,0,C-008,tarjeta
+2026-10-31,F-202610-31-013,LEN-500,Lentejas 500 g,Granos,3,3800,0,,transferencia
+2026-10-31,F-202610-31-013,PAN-TAJ,Pan tajado,Panadería,1,6800,0,,transferencia
+2026-10-31,F-202610-31-013,AGU-600,Agua 600 ml,Bebidas,3,2200,0,,transferencia
+2026-10-31,F-202610-31-014,ARZ-500,Arroz Diana 500 g,Granos,3,3200,0,,efectivo
